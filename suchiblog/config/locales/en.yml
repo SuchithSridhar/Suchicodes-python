@@ -1,0 +1,23 @@
+common:
+  okay: "Okay"
+  done: "Done"
+  unb: "UNB"
+  close: "Close"
+  domain: "suchicodes.com"
+  domain_name: "suchicodes"
+
+navbar:
+  title: "SuchiCodes"
+  contact: "Contact"
+  home: "Home"
+  about: "About"
+  projects: "Projects"
+  docs: "Resources"
+
+home:
+  pre_title: "Hello, I'm"
+  title: "Suchith Sridhar!"
+  subtitle: "A developer. An avid learner. A tech head."
+  about: "About me:"
+  skill: "Skills Set:"
+  footer_text: "© 2021 Suchith Sridhar. All rights reserved."
