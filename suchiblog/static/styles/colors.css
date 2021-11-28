@@ -1,0 +1,9 @@
+:root {
+  --color-light: white;
+  --color-dark: black;
+  --color-code-highlight-background: #3b3a36;
+  --color-code-highlight-foreground: #e08a18;
+
+  --font-primary: "Montserrat";
+  --font-secondary: "Ubuntu";
+}

@@ -4,7 +4,7 @@ main_blueprint = f.Blueprint('main', __name__)
 
 @main_blueprint.route("/session/get")
 def get_session():
-    return f'Value set in session {f.session.get("value")}'
+    return f'{f.session.get("value")}'
 
 @main_blueprint.route("/session/set/<value>")
 def set_session(value):
@@ -13,4 +13,4 @@ def set_session(value):
 
 @main_blueprint.route("/")
 def index():
-    return "Set up"
+    return f.render_template('main/index.jinja', title="Home | Suchicodes")

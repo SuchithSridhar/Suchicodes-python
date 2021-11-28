@@ -1,0 +1,31 @@
+@import "/static/styles/components/navbar.css";
+@import "/static/styles/colors.css";
+
+body {
+  font-family: var(--font-primary), sans-serif;
+  background-color: var(--color-light);
+  transition: background 0.2s linear;
+}
+
+/* Used to keep footer at the bottom */
+.min-page-size {
+    min-height: calc(100vh - 175px);
+}
+
+footer {
+  text-align: center;
+}
+
+footer a {
+  padding: 4% 1% 1%;
+  color: var(--color-dark);
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+footer p {
+  color: var(--color-dark);
+  padding: 0 0 3%;
+  margin-bottom: 0;
+}
+

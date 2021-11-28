@@ -1,0 +1,30 @@
+@import "mode-toggler.css";
+
+.navbar-brand {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 10px;
+  margin-left: 10px;
+  color: var(--color-dark) !important;
+}
+
+button .navbar-toggler {
+  border: 1px solid var(--color-dark);
+}
+
+.navbar ul {
+  margin-left: auto;
+  margin-right: 0;
+  font-size: 20px;
+}
+
+.nav-item a {
+  color: var(--color-dark) !important;
+}
+
+hr.navbarhr {
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-dark);
+  border-radius: 5px;
+  margin-bottom: 0;
+}

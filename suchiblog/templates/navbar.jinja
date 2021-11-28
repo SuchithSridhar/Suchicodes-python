@@ -1,0 +1,40 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"> {{ ln.navbar.title }} </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#suchicodesnav" aria-controls="suchicodesnav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="suchicodesnav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">{{ ln.navbar.home }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects/">{{ ln.navbar.projects }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">{{ ln.navbar.contact }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">{{ ln.navbar.about }}</a>
+            </li>
+            <li class="nav-item">
+                <!-- TODO: Add the docs link once the page is built -->
+                <a class="nav-link" href="#">{{ ln.navbar.docs }}</a>
+            </li>
+            <li class="nav-item">
+                <div class="dark-mode-div nav-link align-middle">
+                    <input type="checkbox" class="checkbox" id="chk" />
+                    <label class="label" for="chk">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <div class="ball"></div>
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script src="/static/js/mode-toggler.js"></script>
