@@ -1,0 +1,29 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/projects.css">
+{% endblock headers %}
+
+{% block content %}
+    <hr>
+  <section id="projects" >
+  <div class=container>
+    <div class='row wrap-border'>
+      {% for project in projects %}
+        <div class="item col-lg-4 col-md-6">
+          <a href="{{project.url}}" class="card hover-shadow">
+            <h2 class='card-header'>
+              {{project.title}}
+
+              <img class='ra icon-img' src='/static/assets/programming-languages/{{ project.img }}'>
+            </h2>
+            <p class='card-text'>
+              {{project.brief}}
+            </p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  </section>
+{% endblock content %}

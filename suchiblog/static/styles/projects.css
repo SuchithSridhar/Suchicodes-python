@@ -1,0 +1,68 @@
+a {
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
+a:hover {
+  color: var(--color-foreground);
+}
+
+hr {
+    width: 40%;
+    margin: 40px auto;
+}
+
+#projects {
+    margin-top: 40px;
+}
+
+.fa-star {
+  font-size: 0.8em;
+}
+
+.icon-img {
+  width: 1.2em;
+  display: inline-block;
+}
+
+.ra {
+  float: right;
+}
+
+.item {
+  padding-top: 3%;
+}
+
+.card {
+    border: 1px solid var(--color-foreground);
+    border-radius: 0;
+    background-color: transparent;
+    color: var(--color-foreground);
+  height: 100%;
+}
+
+.card h2 {
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-foreground);
+    font-size: 1.4em;
+    padding: 0.5em 0.5em;
+    box-shadow: inset 0 0 0 0.09px transparent;
+    -webkit-transition: ease-out 0.7s;
+    -moz-transition: ease-out 0.7s;
+    transition: ease-out 0.7s;
+}
+
+.card p {
+  font-size: 1.2em;
+  padding: 0.7em 0.7em;
+  padding-bottom: 40px;
+}
+
+.card:hover h2 {
+    color: var(--color-background);
+    box-shadow: inset 1000px 0 0.09px var(--color-foreground);
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 0.5px 1.5px 0 gray, 0 6px 15px 0 gray;
+}

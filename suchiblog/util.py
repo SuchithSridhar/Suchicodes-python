@@ -2,6 +2,7 @@ import hashlib
 import base64
 import yaml
 import json
+import uuid
 
 class Util:
     def hash_password(password):
@@ -23,3 +24,6 @@ class Util:
             data = {}
         
         return data
+
+    def create_uuid():
+        return str(uuid.uuid4())

@@ -12,6 +12,7 @@ def create_app(config_class=Config):
 
     from .util import Util
     from .controllers.main.routes import main_blueprint
+    from .controllers.projects.routes import projects_blueprint
 
     LOCALE = Util.get_locale_data()
 
@@ -26,5 +27,6 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(projects_blueprint)
 
     return app

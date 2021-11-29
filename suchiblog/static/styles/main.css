@@ -78,11 +78,6 @@
     color: var(--color-foreground);
 }
 
-.default-button:hover {
-    color: var(--color-background);
-    box-shadow: inset 150px 0 0 0 var(--color-foreground);
-}
-
 .end-buttons {
     margin-top: 100px;
     margin-bottom: 100px;
@@ -93,11 +88,6 @@
     text-align: center;
     display: block;
     margin: auto;
-}
-
-.end-buttons .default-button:hover {
-    color: var(--color-background);
-    box-shadow: inset 700px 0 0 0 var(--color-foreground);
 }
 
 .btn-about {
