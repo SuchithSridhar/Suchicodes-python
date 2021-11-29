@@ -97,7 +97,7 @@
 
 .end-buttons .default-button:hover {
     color: var(--color-background);
-    box-shadow: inset 400px 0 0 0 var(--color-foreground);
+    box-shadow: inset 700px 0 0 0 var(--color-foreground);
 }
 
 .btn-about {
