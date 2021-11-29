@@ -5,6 +5,7 @@ common:
   close: "Close"
   domain: "suchicodes.com"
   domain_name: "suchicodes"
+  resume: "Resume"
 
 navbar:
   title: "SuchiCodes"
@@ -16,8 +17,13 @@ navbar:
 
 home:
   pre_title: "Hello, I'm"
-  title: "Suchith Sridhar!"
-  subtitle: "A developer. An avid learner. A tech head."
-  about: "About me:"
-  skill: "Skills Set:"
+  title: "Suchith Sridhar"
+  sub_title_1: "A Developer"
+  sub_title_2: "A Student"
+  sub_title_3: "An Avid Learner"
   footer_text: "© 2021 Suchith Sridhar. All rights reserved."
+
+  about_title: "A little about me"
+  about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my undergraduate degree in computer science at the University of New Brunswick, Canada. <br><br>
+  I'm a Full-Stack programmer who also specializes in GUI and CLI (Command-line interface) based application programming for Windows and Linux. I am passionate about computers and servers and intrigued about operating systems and their workings. <br>
+  "

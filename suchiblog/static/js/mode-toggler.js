@@ -1,19 +1,32 @@
 const chk = document.getElementById('chk');
 
 function toggle_mode() {
-    let light = getComputedStyle(document.documentElement).getPropertyValue('--color-light');
-    let dark = getComputedStyle(document.documentElement).getPropertyValue('--color-dark');
+    let light = getComputedStyle(document.documentElement).getPropertyValue('--color-background');
+    let dark = getComputedStyle(document.documentElement).getPropertyValue('--color-foreground');
 
-    document.documentElement.style.setProperty('--color-light', dark);
-    document.documentElement.style.setProperty('--color-dark', light);
+    document.documentElement.style.setProperty('--color-background', dark);
+    document.documentElement.style.setProperty('--color-foreground', light);
 
+    let mode = "light";
     if ($('nav').hasClass('navbar-light')) {
         $('nav').removeClass('navbar-light');
         $('nav').addClass('navbar-dark');
+
+        let dots_dark = getComputedStyle(document.documentElement).getPropertyValue('--dots-image-dark');
+        document.documentElement.style.setProperty('--dots-image', dots_dark);
+
+        mode = "dark";
     } else {
         $('nav').removeClass('navbar-dark');
         $('nav').addClass('navbar-light');
+
+        let dots_light = getComputedStyle(document.documentElement).getPropertyValue('--dots-image-light');
+        document.documentElement.style.setProperty('--dots-image', dots_light);
     }
+
+    $.ajax({
+        url: `/session/set/${mode}`,
+    }); 
 }
 
 chk.addEventListener('change', () => {

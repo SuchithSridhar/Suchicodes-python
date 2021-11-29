@@ -1,0 +1,207 @@
+@import "/static/styles/components/skills-tabs.css";
+
+.full-height{
+    height: 95vh;
+}
+
+.full-height > * {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#suchi-image-container{
+    padding-left: 10%;
+    width: 85%;
+    border-radius: 10px;
+    display: block;
+}
+
+#suchi-image {
+    width: 100%;
+    display: block;
+}
+
+.landing ul {
+    list-style: none;
+}
+
+.stripes {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22.93 22.93'%3E%3Cpolygon fill='%23aadcec' points='0 8.18 14.75 22.93 22.74 22.93 0 0.19 0 8.18'/%3E%3Cpolygon fill='%23aadcec' points='22.93 8.37 22.93 0.38 22.56 0 14.56 0 22.93 8.37'/%3E%3C/svg%3E");
+    background-size: 10px;
+    opacity: .5;
+    filter: grayscale(1);
+}
+
+.bar {
+  top: 37vh;
+  left: 60vw;
+  position: absolute;
+  width: 50vw;
+  height: 30vh;
+  z-index: -2;
+}
+
+.seperator {
+    border-bottom: var(--color-foreground) dotted 15px;
+    height: 0px;
+    width: 10vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.landing h1 {
+    font-weight: 900;
+    font-size: 3.5rem;
+    letter-spacing: 0.5rem;
+    color: var(--color-foreground);
+}
+
+.landing h6 {
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--color-foreground);
+}
+
+.landing span {
+    padding-left: 10px;
+    padding-right: 20px;
+    border-left: var(--color-foreground) solid 1.5px;
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-foreground);
+}
+
+.landing .resume {
+    margin-top: 40px;
+    border: 1px solid var(--color-foreground);
+    color: var(--color-foreground);
+}
+
+.landing .resume:hover {
+    color: var(--color-background);
+    box-shadow: inset 150px 0 0 0 var(--color-foreground);
+}
+
+.skills {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.about {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.about h2 {
+    max-width: 400px;
+    margin: auto;
+    font-weight: 500;
+    font-size: 3.0rem;
+    font-family: var(--font-secondary);
+    line-height: 6rem;
+    letter-spacing: 1.0rem;
+    color: var(--color-foreground);
+    text-transform: uppercase;
+    border-right: solid var(--color-foreground) 2px;
+}
+
+.about p {
+    margin-top: 100px;
+    color: var(--color-foreground);
+    font-weight: 400;
+    line-height: 2rem;
+    font-size: 1.3rem;
+}
+
+.above-about {
+    display: none;
+}
+
+.below-about {
+    display: flex;
+}
+
+.about-text {
+    display: flex;
+}
+
+.dots-image {
+    position: absolute;
+    background-image: var(--dots-image);
+    background-size: 150px 150px;
+    height: 315px;
+    width: 409px;
+    left: 48vw;
+    top: 120vh;
+    z-index: -1;
+}
+
+/* Navbar convert size */
+@media screen and (max-width: 1000px) {
+    .full-height{
+        height: 55vh;
+    }
+    .above-about {
+        display: block;
+    }
+
+    .below-about {
+        display: none;
+    }
+
+    .landing{
+        text-align: center;
+    }
+
+    #suchi-image {
+        display: none;
+    }
+
+    .landing .resume {
+        margin-left: 0;
+    }
+
+    .dots-image {
+        top: 80vh;
+        left: 20vw;
+        width: 300px;
+    }
+
+    .bar {
+        top: 24vh;
+        left: 50vw;
+        position: absolute;
+        width: 60vw;
+        height: 25vh;
+        z-index: -2;
+    }
+
+    .about {
+        text-align: center;
+    }
+
+    .about h2 {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 460px;
+    }
+
+}
+
+@media screen and (max-width: 520px) {
+
+    .landing h1 {
+        font-size: 3.5rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .landing h6 {
+        font-size: 1.5rem;
+    }
+
+    .landing span {
+        font-size: 1rem;
+        padding-left: 5px;
+        padding-right: 10px;
+    }
+}

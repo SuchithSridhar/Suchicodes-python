@@ -1,9 +1,13 @@
 :root {
-  --color-light: white;
-  --color-dark: black;
+  --color-background: white;
+  --color-foreground: black;
   --color-code-highlight-background: #3b3a36;
   --color-code-highlight-foreground: #e08a18;
 
   --font-primary: "Montserrat";
   --font-secondary: "Ubuntu";
+
+  --dots-image: url('/static/assets/dots-light.svg');
+  --dots-image-dark: url('/static/assets/dots-dark.svg');
+  --dots-image-light: url('/static/assets/dots-light.svg');
 }

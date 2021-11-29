@@ -22,11 +22,12 @@
 	height: 18px;
 	width: 32px;
 	transform: scale(1.5);
-    border: var(--color-dark) solid 0.5px;
+    border: var(--color-foreground) solid 0.5px;
 }
 
 .dark-mode-div .label .ball {
 	background-color: #fff;
+	border: 1px black solid;
 	border-radius: 50%;
 	position: absolute;
 	top: 1px;

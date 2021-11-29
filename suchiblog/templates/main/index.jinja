@@ -1,1 +1,53 @@
 {% extends "layout.jinja" %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/main.css">
+{% endblock headers %}
+
+{% block content %}
+    <div class="bar stripes" data-drift-center="x" data-drift="-10 -10" style="transform: translateX(-50%) translate(-5.36585px, 0.426759px);"></div>
+    <div class="container">
+        <section class="landing">
+        <div class="row full-height">
+            <div class="s-col col-lg-6">
+                <h6 class="animate__animated animate__fadeInUp">{{ ln.home.pre_title }}</h6>
+                <h1 class="animate__animated animate__fadeInUp animate__delay-1s">{{ ln.home.title }}</h1>
+                <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                    <span>{{ ln.home.sub_title_1 }}</span>
+                    <span>{{ ln.home.sub_title_2 }}</span>
+                    <span>{{ ln.home.sub_title_3 }}</span>
+                </div>
+                <div class="btn-custom resume slide-left animate__animated animate__fadeInUp animate__delay-3s">{{ ln.common.resume }}</div>
+            </div>
+            <div class="s-col col-lg-6">
+                <div id="suchi-image-container">
+                <img class="animate__animated animate__fadeIn" id="suchi-image" src="/static/assets/suchi.png" alt="Suchtih Sridar Image">
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="seperator"></div>
+        <section class="about">
+            <div class="dots-image"></div>
+            <div class="row">
+                <div class="col-lg-6 above-about">
+                    <h2>
+                        {{ ln.home.about_title }}
+                    </h2>
+                </div>
+                <div class="col-lg-6 about-text">
+                    <p class="align-self-center">
+                        {{ ln.home.about_text }}
+                    </p>
+                </div>
+                <div class="col-lg-6 below-about">
+                    <h2 class="align-self-center">
+                        {{ ln.home.about_title }}
+                    </h2>
+                </div>
+            </div>
+        </section>
+        <div class="seperator"></div>
+        {% include "main/skills-tabs.jinja" %}
+    </div>
+{% endblock content %}

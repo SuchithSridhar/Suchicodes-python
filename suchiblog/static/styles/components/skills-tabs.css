@@ -1,0 +1,57 @@
+.skills ul.skills-list {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  font-weight: 400;
+  font-size: 1.4rem;
+  padding-left: 10%;
+  color: var(--color-foreground);
+}
+
+.skills .title {
+  padding-bottom: 5px;
+  border-bottom: dashed var(--color-foreground) 1px;
+  color: var(--color-foreground);
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid var(--color-foreground);
+  height: 100%;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  color: var(--color-foreground);
+}
+
+.tab button:hover {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.tab button.active {
+  background-color: gray;
+}
+
+.tabcontent {
+    height: 100%;
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid var(--color-foreground);
+}
+
+.tabcontent {
+  animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

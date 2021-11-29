@@ -1,15 +1,19 @@
 @import "mode-toggler.css";
 
+.navbar {
+  padding-top: 20px;
+}
+
 .navbar-brand {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 700;
   letter-spacing: 10px;
   margin-left: 10px;
-  color: var(--color-dark) !important;
+  color: var(--color-foreground) !important;
 }
 
 button .navbar-toggler {
-  border: 1px solid var(--color-dark);
+  border: 1px solid var(--color-foreground);
 }
 
 .navbar ul {
@@ -19,12 +23,32 @@ button .navbar-toggler {
 }
 
 .nav-item a {
-  color: var(--color-dark) !important;
+  color: var(--color-foreground) !important;
 }
 
 hr.navbarhr {
-  background-color: var(--color-dark);
-  border: 2px solid var(--color-dark);
+  background-color: var(--color-foreground);
+  border: 2px solid var(--color-foreground);
   border-radius: 5px;
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .nav-item {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .navbar-brand {
+    font-size: 30px;
+    letter-spacing: 5px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navbar-brand {
+    font-size: 20px;
+    letter-spacing: 5px;
+  }
 }

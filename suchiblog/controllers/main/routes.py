@@ -1,4 +1,5 @@
 import flask as f
+from ...util import Util
 
 main_blueprint = f.Blueprint('main', __name__)
 
@@ -13,4 +14,4 @@ def set_session(value):
 
 @main_blueprint.route("/")
 def index():
-    return f.render_template('main/index.jinja', title="Home | Suchicodes")
+    return f.render_template('main/index.jinja', title="Home | Suchicodes", skills=Util.get_skill_list())

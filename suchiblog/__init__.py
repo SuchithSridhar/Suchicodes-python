@@ -13,7 +13,7 @@ def create_app(config_class=Config):
     from .util import Util
     from .controllers.main.routes import main_blueprint
 
-    LOCALE = Util.read_locale_data()
+    LOCALE = Util.get_locale_data()
 
     app = f.Flask(__name__)
     app.config.from_object(Config)
@@ -21,6 +21,7 @@ def create_app(config_class=Config):
 
     @app.context_processor
     def locale_context():
+        LOCALE = Util.get_locale_data()
         return LOCALE
 
     db.init_app(app)
