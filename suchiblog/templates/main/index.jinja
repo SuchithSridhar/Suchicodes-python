@@ -17,7 +17,7 @@
                     <span>{{ ln.home.sub_title_2 }}</span>
                     <span>{{ ln.home.sub_title_3 }}</span>
                 </div>
-                <div class="btn-custom resume slide-left animate__animated animate__fadeInUp animate__delay-3s">{{ ln.common.resume }}</div>
+                <div class="btn-custom resume default-button slide-left animate__animated animate__fadeInUp animate__delay-3s">{{ ln.common.resume }}</div>
             </div>
             <div class="s-col col-lg-6">
                 <div id="suchi-image-container">
@@ -46,8 +46,29 @@
                     </h2>
                 </div>
             </div>
+            <div class="row">
+                <a href="/about" class="btn-custom default-button btn-about">About</a>
+            </div>
         </section>
         <div class="seperator"></div>
+
         {% include "main/skills-tabs.jinja" %}
+
+        <div class="seperator"></div>
+
+        <section class="end-buttons">
+            <div class="row">
+                <div class="col-md-4">
+                <a href="/projects" class="btn-custom default-button btn-projects">Projects</a>
+                </div>
+                <div class="col-md-4">
+                <a href="/contact" class="btn-custom default-button btn-contact">Contact</a>
+                </div>
+                <div class="col-md-4">
+                <a href="/documents" class="btn-custom default-button btn-documents">Documents</a>
+                </div>
+            </div>
+        </section>
+
     </div>
 {% endblock content %}

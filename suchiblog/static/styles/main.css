@@ -71,15 +71,37 @@
     color: var(--color-foreground);
 }
 
-.landing .resume {
+.default-button {
+    text-decoration: none;
     margin-top: 40px;
     border: 1px solid var(--color-foreground);
     color: var(--color-foreground);
 }
 
-.landing .resume:hover {
+.default-button:hover {
     color: var(--color-background);
     box-shadow: inset 150px 0 0 0 var(--color-foreground);
+}
+
+.end-buttons {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.end-buttons .btn-custom {
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.end-buttons .default-button:hover {
+    color: var(--color-background);
+    box-shadow: inset 400px 0 0 0 var(--color-foreground);
+}
+
+.btn-about {
+    margin: 40px auto;
 }
 
 .skills {
@@ -186,6 +208,12 @@
         max-width: 460px;
     }
 
+}
+
+@media screen and (max-width: 768px) {
+    .end-buttons .btn-custom {
+        margin: 20px 0;
+    }
 }
 
 @media screen and (max-width: 520px) {

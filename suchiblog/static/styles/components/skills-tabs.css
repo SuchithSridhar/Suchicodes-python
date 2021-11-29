@@ -3,30 +3,37 @@
   -webkit-columns: 2;
   -moz-columns: 2;
   font-weight: 400;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   padding-left: 10%;
+  padding-top: 20px;
   color: var(--color-foreground);
 }
 
+.skills .skills-list li {
+  margin-top: 15px;
+}
+
 .skills .title {
-  padding-bottom: 5px;
+  font-size: 2rem;
+  padding: 10px 10px 10px 0px;
   border-bottom: dashed var(--color-foreground) 1px;
   color: var(--color-foreground);
 }
 
 .tab {
-  overflow: hidden;
   border: 1px solid var(--color-foreground);
   height: 100%;
+  display: block;
 }
 
 .tab button {
+  width: 100%;
   background-color: inherit;
-  float: left;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 30px 10%;
+  font-size: 1.2rem;
   transition: 0.3s;
   color: var(--color-foreground);
 }
@@ -42,8 +49,8 @@
 
 .tabcontent {
     height: 100%;
-    display: none;
-    padding: 6px 12px;
+    display: block;
+    padding: 0px 12px;
     border: 1px solid var(--color-foreground);
 }
 
@@ -54,4 +61,35 @@
 @keyframes fadeEffect {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+@media screen and (max-width: 1000px) {
+
+  #tab-list {
+    padding: 0;
+  }
+
+  .tab {
+    padding-left: 0;
+    display: block;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  .tab button {
+    display: inline;
+    width: fit-content;
+  }
+
+  .skills ul.skills-list {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    font-weight: 400;
+    font-size: 1.4rem;
+    padding-left: 10%;
+    padding-top: 20px;
+    color: var(--color-foreground);
+  }
+
 }

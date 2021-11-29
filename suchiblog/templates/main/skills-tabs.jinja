@@ -1,21 +1,21 @@
 <section class="skills">
     <!-- Tab links -->
     <div class="row">
-        <div class="col-sm-2">
-            <div class="tab row">
+        <div id="tab-list" class="col-sm-2">
+            <div class="tab">
                 {% set flag = true %}
                 {% for category in skills %}
                     {% if flag %}
-                        <button id="defaultOpen" class="row tablinks" onclick="openSkill(event, '{{ category }}')">{{ category }}</button>
+                        <button id="defaultOpen" class="tablinks" onclick="openSkill(event, '{{ category }}')">{{ category }}</button>
                         {% set flag = false %}
                     {% else %}
-                        <button class="row tablinks" onclick="openSkill(event, '{{ category }}')">{{ category }}</button>
+                        <button class="tablinks" onclick="openSkill(event, '{{ category }}')">{{ category }}</button>
                     {% endif %}
                 
                 {% endfor %}
             </div>
         </div>
-        <div class="col-sm-10">
+        <div id="tab-container" class="col-sm-10">
             <!-- Tab content -->
             {% for category in skills %}
                 
@@ -32,6 +32,7 @@
         </div>
     </div>
     <script src="/static/js/skills-tabs.js"></script>
+    <script src="/static/js/responsive-main.js"></script>
     <script>
         $( document ).ready(function() {
             $("#defaultOpen").click();

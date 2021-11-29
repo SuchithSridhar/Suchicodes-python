@@ -3,13 +3,34 @@
         "Python",
         "Ruby",
         "Java",
-        "C Programming",
+        "C",
         "C++",
         "Javascript"
     ],
-    "Soft Skills":[],
-    "Computer Science":[],
-    "FrameWorks": [],
-    "Other":[]
+    "Soft Skills":[
+        "Problem Solving",
+        "Teamwork",
+        "Leadership",
+        "Passionate",
+        "Critical Thinking",
+        "Communication",
+        "Openness to criticism"
+    ],
+    "Frameworks": [
+        "Ruby on Rails",
+        "Nodejs",
+        "ReactJS",
+        "Django",
+        "Flask",
+        "Tkinter"
+    ],
+    "Other":[
+        "Linux",
+        "MacOS",
+        "Windows",
+        "Sys Admin",
+        "Nginx",
+        "Apache"
+    ]
 
 }
