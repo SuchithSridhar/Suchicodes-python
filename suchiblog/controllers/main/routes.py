@@ -2,6 +2,7 @@ import flask as f
 from ...util import Util
 
 main_blueprint = f.Blueprint('main', __name__)
+contact_alert = False
 
 @main_blueprint.route("/session/get")
 def get_session():
@@ -20,9 +21,18 @@ def index():
 def about():
     return f.render_template('main/about.jinja', title="About | Suchicodes")
 
-@main_blueprint.route("/contact")
+@main_blueprint.route("/contact", methods=['get','post'])
 def contact():
-    return f.render_template('main/contact.jinja', title="Contact | Suchicodes")
+    alert = False
+    if f.request.method == 'POST':
+        sub = f.escape(f.request.form['subject'])
+        message = f.escape(f.request.form['message'])
+        with open('./suchiblog/data/message-data.txt', 'a') as file:
+            file.write(f"{sub} , {message}")
+        
+        alert = True
+
+    return f.render_template('main/contact.jinja', title="Contact | Suchicodes", alert=alert)
 
 @main_blueprint.route('/resume.pdf')
 @main_blueprint.route('/resume')
