@@ -21,7 +21,10 @@
             </div>
             <div class="s-col col-lg-6">
                 <div id="suchi-image-container">
-                <img class="animate__animated animate__fadeIn" id="suchi-image" src="/static/assets/suchi.png" alt="Suchtih Sridar Image">
+                    <picture>
+                        <source srcset="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" media="(max-width: 1000px)"> 
+                        <img class="animate__animated animate__fadeIn" id="suchi-image" src="/static/assets/suchi.png" alt="Suchtih Sridar Image">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -47,7 +50,7 @@
                 </div>
             </div>
             <div class="row">
-                <a href="/about" class="btn-custom default-button btn-about">About</a>
+                <a href="/about" class="btn-custom default-button btn-about">{{ln.navbar.about}}</a>
             </div>
         </section>
         <div class="seperator"></div>
@@ -59,13 +62,13 @@
         <section class="end-buttons">
             <div class="row">
                 <div class="col-md-4">
-                <a href="/projects" class="btn-custom default-button btn-projects">Projects</a>
+                <a href="/projects" class="btn-custom default-button btn-projects">{{ln.navbar.projects}}</a>
                 </div>
                 <div class="col-md-4">
-                <a href="/contact" class="btn-custom default-button btn-contact">Contact</a>
+                <a href="/contact" class="btn-custom default-button btn-contact">{{ln.navbar.contact}}</a>
                 </div>
                 <div class="col-md-4">
-                <a href="/documents" class="btn-custom default-button btn-documents">Documents</a>
+                <a href="/documents" class="btn-custom default-button btn-documents">{{ln.navbar.docs}}</a>
                 </div>
             </div>
         </section>

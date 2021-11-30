@@ -1,0 +1,29 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/single-project.css">
+{% endblock headers %}
+
+{% block content %}
+<hr>
+  <section id=projects>
+  <div class=container>
+    <div id="project-container">
+      {{ project_html }}
+    </div>
+  </div>
+  </section>
+
+{% endblock content %}
+
+{% block js %}
+<script>
+  let images = $('img');
+  let img = "";
+  for(let i=0; i<images.length; i++){
+    img = $(images[i]);
+    if (!img.attr('src').includes('static'))
+      img.attr('src', '/static/uploaded-data/' + img.attr('src'));
+  }
+</script>
+{% endblock js %}

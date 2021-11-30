@@ -2,7 +2,7 @@ import os
 import markdown
 
 def get_images():
-    items = os.listdir('./suchiblog/static/res/programming-languages')
+    items = os.listdir('./suchiblog/static/assets/programming-languages')
     return [ os.path.basename(item) for item in items if '.svg' in item ]
 
 def to_html(md):

@@ -20,7 +20,12 @@ def index():
 def about():
     return f.render_template('main/about.jinja', title="About | Suchicodes")
 
+@main_blueprint.route("/contact")
+def contact():
+    return f.render_template('main/contact.jinja', title="Contact | Suchicodes")
+
 @main_blueprint.route('/resume.pdf')
 @main_blueprint.route('/resume')
 def send_pdf():
     return f.send_from_directory(f.current_app.config['RESOURCES_DIR'], 'resume.pdf')
+

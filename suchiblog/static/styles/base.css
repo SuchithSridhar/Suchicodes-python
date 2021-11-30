@@ -1,5 +1,6 @@
 @import "/static/styles/components/navbar.css";
 @import "/static/styles/colors.css";
+@import "/static/styles/footer.css";
 
 body {
   font-family: var(--font-primary), sans-serif;
@@ -25,21 +26,4 @@ body {
 .btn-custom:hover {
   color: var(--color-background);
   box-shadow: inset 1000px 0 0.09px var(--color-foreground);
-}
-
-footer {
-  text-align: center;
-}
-
-footer a {
-  padding: 4% 1% 1%;
-  color: var(--color-foreground);
-  font-size: 1.5em;
-  text-decoration: none;
-}
-
-footer p {
-  color: var(--color-foreground);
-  padding: 0 0 3%;
-  margin-bottom: 0;
 }

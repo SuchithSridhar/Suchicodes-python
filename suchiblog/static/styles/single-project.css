@@ -1,0 +1,45 @@
+hr {
+    width: 40%;
+    margin: 40px auto 100px;
+    color: var(--color-foreground);
+}
+
+#project-container {
+    padding: 2%;
+    margin-top: 5%;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-foreground);
+}
+
+#project-container :is(h1, h2, h3){
+    margin-top: 2%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-foreground);
+}
+
+#project-container img {
+    display: block;
+    margin: 1% auto;
+    max-width: 90%;
+    border-radius: 5px;
+}
+
+#project-container :is(p, li) {
+    font-size: 1.1em;
+}
+
+#project-container .code-block {
+    border-radius: 5px;
+    padding: 2%;
+    font-family: monospace;
+    background-color: var(--color-light-gray);
+    color: var(--color-foreground);
+}
+
+#project-container .highlight-block {
+    border-radius: 5px;
+    font-family: monospace;
+    background-color: var(--color-code-highlight-background);
+    color: var(--color-code-highlight-foreground)
+}

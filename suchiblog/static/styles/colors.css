@@ -1,6 +1,8 @@
 :root {
   --color-background: white;
   --color-foreground: black;
+  --color-light-gray: #ddd;
+  --color-dark-gray: #333;
   --color-code-highlight-background: #3b3a36;
   --color-code-highlight-foreground: #e08a18;
 
@@ -10,4 +12,8 @@
   --dots-image: url('/static/assets/dots-light.svg');
   --dots-image-dark: url('/static/assets/dots-dark.svg');
   --dots-image-light: url('/static/assets/dots-light.svg');
+
+  --hex-image: url('/static/assets/hex-light.svg');
+  --hex-image-dark: url('/static/assets/hex-dark.svg');
+  --hex-image-light: url('/static/assets/hex-light.svg');
 }

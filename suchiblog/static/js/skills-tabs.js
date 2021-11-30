@@ -9,6 +9,6 @@ function openSkill(evt, category) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
   document.getElementById(category).style.display = "block";
-  evt.currentTarget.className += " active";
+  if (evt.currentTarget) evt.currentTarget.className += " active";
 }
 

@@ -49,3 +49,9 @@ about:
     Psychology, Theoretical Physics, and the rest of the sciences (fill in the blanks!).
     <br><br>
   "
+
+contact:
+  message_title: "Send me a message:"
+  send: "Send"
+  message: "Message"
+  subject: "Subject"

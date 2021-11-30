@@ -1,0 +1,83 @@
+{% extends "layout.jinja" %}
+
+{% block metatags %}
+    <meta
+      name="description"
+      content="Contact details"
+    />
+    <meta property="og:title" content="Contact" />
+    <meta property="og:url" content="https://suchicodes.com/contact" />
+    <meta
+      property="og:description"
+      content="Contact details"
+    />
+{% endblock metatags %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/contact.css">
+{% endblock headers %}
+
+{% block content %}
+<hr>
+<section id="contact" class="container">
+  <div class="dots-image"></div>
+  <div class="row">
+    <div class="col-lg-6 buttons-col">
+      <div class="row">
+          <a
+          href="https://github.com/SuchithSridhar"
+          target="_blank"
+          class="btn btn-link btn-custom hover-shadow"
+          >
+          <i class="fab fa-github"></i>
+          <span>Github</span>
+          </a>
+      </div>
+      <div class="row">
+          <a
+          href=""
+          target="_blank"
+          class="btn btn-link btn-custom hover-shadow"
+          >
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+          </a>
+      </div>
+      <div class="row">
+          <a
+          href="mailto:suchithsridhar@gmail.com"
+          target="_blank"
+          class="btn btn-link btn-custom hover-shadow"
+          >
+          <i class="fas fa-envelope"></i>
+          <span>suchithsridhar@gmail.com</span>
+          </a>
+      </div>
+      <div class="row">
+          <a
+          href="mailto:suchith.sridahr@unb.ca"
+          target="_blank"
+          class="btn btn-link btn-custom hover-shadow"
+          >
+          <i class="fas fa-envelope"></i>
+          <span>suchith.sridhar@unb.ca</span>
+          </a>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="send-message">
+        <h5>{{ln.contact.message_title}}</h5>
+        <form class="" id="message-form" action="" method="post" enctype="multipart/form-data">
+          <input class="form-control mt-4 subject" type="text" name="subject" id="subject-input" placeholder="{{ln.contact.subject}}"><br>
+          <div class="col-lg-3">
+          
+          </div>
+          <div class="col-lg-3"></div>
+          <textarea class="form-control message" name="message" id="message" rows=7 placeholder="{{ln.contact.message}}"></textarea><br>
+          <button class="btn btn-custom btn-send" type="submit">{{ln.contact.send}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
