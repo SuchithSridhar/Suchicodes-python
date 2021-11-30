@@ -10,7 +10,7 @@ body {
 
 /* Used to keep footer at the bottom */
 .min-page-size {
-    min-height: calc(100vh - 175px);
+    min-height: calc(100vh - 350px);
 }
 
 .btn-custom {
@@ -26,4 +26,10 @@ body {
 .btn-custom:hover {
   color: var(--color-background);
   box-shadow: inset 1000px 0 0.09px var(--color-foreground);
+}
+
+.nav-separator {
+    width: 40%;
+    margin: 40px auto 100px;
+    color: var(--color-foreground);
 }

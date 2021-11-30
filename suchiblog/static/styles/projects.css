@@ -7,14 +7,8 @@ a:hover {
   color: var(--color-foreground);
 }
 
-hr {
-    width: 40%;
-    margin: 40px auto;
-    color: var(--color-foreground);
-}
-
-#projects {
-    margin-top: 40px;
+.nav-separator {
+  margin-bottom: 30px;
 }
 
 .fa-star {

@@ -26,13 +26,6 @@ button .navbar-toggler {
   color: var(--color-foreground) !important;
 }
 
-hr.navbarhr {
-  background-color: var(--color-foreground);
-  border: 2px solid var(--color-foreground);
-  border-radius: 5px;
-  margin-bottom: 0;
-}
-
 @media screen and (max-width: 1000px) {
   .nav-item {
     margin-left: 20px;
@@ -46,9 +39,21 @@ hr.navbarhr {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 350px) {
   .navbar-brand {
     font-size: 20px;
     letter-spacing: 5px;
+  }
+  .navbar-toggler {
+    width: 15%;
+  }
+  .navbar-toggler-icon {
+    width: 20px;
+  }
+}
+
+@media screen and (max-width: 270px) {
+  .navbar-brand{
+    display: none;
   }
 }

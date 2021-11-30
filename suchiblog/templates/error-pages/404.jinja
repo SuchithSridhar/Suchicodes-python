@@ -1,0 +1,21 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/404.css">
+{% endblock headers %}
+
+{% block content %}
+
+<hr class="nav-separator ">
+<section id="error">
+<div class="container">
+    <h1>Oops!</h1>
+    <h4>Looks like the page you were looking for was not found!</h4>
+    <p>
+        404 Error. If you manually typed out the URL double check the spelling or you may have clicked on an invalid URL.
+        Or it may have been removed or moved.
+    </p>
+</div>
+</section>
+
+{% endblock content %}

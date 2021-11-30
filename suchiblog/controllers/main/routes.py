@@ -28,14 +28,22 @@ def contact():
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
         with open('./suchiblog/data/message-data.txt', 'a') as file:
-            file.write(f"{sub} , {message}")
+            file.write(f"{sub} \n {message}\n\n")
         
         alert = True
 
     return f.render_template('main/contact.jinja', title="Contact | Suchicodes", alert=alert)
+
+#TODO: This is just a placeholder until the real one is built.
+@main_blueprint.route("/resources")
+def resources():
+    return f.render_template('main/work-in-progress.jinja')
 
 @main_blueprint.route('/resume.pdf')
 @main_blueprint.route('/resume')
 def send_pdf():
     return f.send_from_directory(f.current_app.config['RESOURCES_DIR'], 'resume.pdf')
 
+@main_blueprint.app_errorhandler(404)
+def page_not_found(e):
+    return f.render_template('error-pages/404.jinja'), 404
