@@ -1,0 +1,29 @@
+b {
+    font-weight: 500;
+}
+
+b:hover {
+    font-weight: 700;
+}
+
+hr {
+    width: 40%;
+    margin: 40px auto;
+    color: var(--color-foreground);
+}
+
+#about .title {
+    margin-top: 100px;
+    margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 3rem;
+  color: var(--color-foreground);
+}
+
+#about .text {
+  padding: 2% 0;
+  font-weight: 300;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--color-foreground);
+}

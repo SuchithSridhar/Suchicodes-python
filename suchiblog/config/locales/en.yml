@@ -27,3 +27,25 @@ home:
   about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my undergraduate degree in computer science at the University of New Brunswick, Canada. <br><br>
   I'm a Full-Stack programmer who also specializes in GUI and CLI (Command-line interface) based application programming for Windows and Linux. I am passionate about computers and servers and intrigued about operating systems and their workings. <br>
   "
+
+about:
+  title: "A Little About Me"
+  text: "
+    Hello there! My name is <b>Suchith</b> and I'm a <b>Developer</b> (I enjoy building stuff on the web and otherwise :)).
+    I am currently pursuing my <b>undergraduate degree in computer science</b> at the University of New Brunswick, Canada. 
+    <br><br>
+    I'm a <b>Full-Stack programmer</b> who also specializes in <b>GUI and CLI</b> (Command-line interface) based application
+    programming for Windows and Linux. I am passionate about computers and servers and intrigued about operating systems and
+    their workings.
+    <br><br>
+    My specialties include setting up an environment for hosting a web app including coding <b>both frontend and backend</b>
+    while simultaneously setting up a Linux server for hosting the app. 
+    <br><br>
+    What started out as an obsession to learn everything (I know it's not possible!!) ended up becoming one of my <b>biggest
+    skill</b>. I am now an <b>intentional & passionate learner</b> who learns almost anything <em>quickly</em> and
+    <em>effectively</em>.
+    <br><br>
+    My hobbies include (Not that anyone asked, but hey this is my website!) studying Astrophysics, Philosophy, Economics,
+    Psychology, Theoretical Physics, and the rest of the sciences (fill in the blanks!).
+    <br><br>
+  "

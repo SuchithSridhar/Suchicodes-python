@@ -10,6 +10,7 @@ a:hover {
 hr {
     width: 40%;
     margin: 40px auto;
+    color: var(--color-foreground);
 }
 
 #projects {

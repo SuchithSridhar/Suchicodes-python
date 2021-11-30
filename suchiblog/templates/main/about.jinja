@@ -1,0 +1,35 @@
+{% extends "layout.jinja" %}
+
+{% block metatags %}
+    <meta
+      name="description"
+      content="Information about Suchith Sridhar"
+    />
+    <meta property="og:title" content="About" />
+    <meta property="og:url" content="https://suchicodes.com/about" />
+    <meta
+      property="og:description"
+      content="Information about Suchith Sridhar"
+    />
+{% endblock metatags %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/about.css">
+{% endblock headers %}
+
+
+{% block content %}
+  <section id="about" class="">
+    <hr>
+    <div class=container>
+        <div class="row">
+        <div class="col-lg-8 col-md-10">
+        <h1 class="title">{{ln.about.title}}</h1>
+        <p class="text">
+          {{ ln.about.text }}
+        </p>
+        </div>
+        </div>
+    </div>
+  </section>
+{% endblock content %}

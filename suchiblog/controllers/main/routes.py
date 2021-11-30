@@ -15,3 +15,12 @@ def set_session(value):
 @main_blueprint.route("/")
 def index():
     return f.render_template('main/index.jinja', title="Home | Suchicodes", skills=Util.get_skill_list())
+
+@main_blueprint.route("/about")
+def about():
+    return f.render_template('main/about.jinja', title="About | Suchicodes")
+
+@main_blueprint.route('/resume.pdf')
+@main_blueprint.route('/resume')
+def send_pdf():
+    return f.send_from_directory(f.current_app.config['RESOURCES_DIR'], 'resume.pdf')
