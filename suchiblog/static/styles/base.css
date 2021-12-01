@@ -5,6 +5,7 @@
 body {
   font-family: var(--font-primary), sans-serif;
   background-color: var(--color-background);
+  color: var(--color-foreground);
   transition: background 0.2s linear;
 }
 

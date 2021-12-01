@@ -63,12 +63,6 @@ a:hover {
 }
 
 .hex-image {
-    position: absolute;
     background-image: var(--hex-image);
-    background-size: 60vh 60vh;
-    height: 100vh;
-    width: 90vw;
-    left: 5vw;
-    top: 15vh;
-    z-index: -1;
+    background-size: 50vh 50vh;
 }
