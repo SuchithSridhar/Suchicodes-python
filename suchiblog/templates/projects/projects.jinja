@@ -8,19 +8,28 @@
     <hr class="nav-separator">
   <section id="projects" class="hex-image" >
   <div class="container">
+    {% if admin %}
+      <a href="/admin/create_project" class="btn-custom btn-custom-sm create-button">Create</a>
+    {% endif %}
     <div class='row wrap-border'>
       {% for project in projects %}
         <div class="item col-lg-4 col-md-6">
-          <a href="{{project.url}}" class="card hover-shadow">
-            <h2 class='card-header'>
-              {{project.title}}
+          <div class="card hover-shadow">
+            <a href="{{project.url}}" class="">
+              <h2 class='card-header'>
+                {{project.title}}
 
-              <img class='ra icon-img' src='/static/assets/programming-languages/{{ project.img }}'>
-            </h2>
+                <img class='ra icon-img' src='/static/assets/programming-languages/{{ project.img }}'>
+              </h2>
+            </a>
             <p class='card-text'>
               {{project.brief}}
             </p>
-          </a>
+            {% if admin %}
+              <a class="" href="/admin/edit_project/{{project.id}}">Edit</a> 
+              <a class="" href="/admin/delete_project/{{project.id}}">Delete</a> 
+            {% endif %}
+          </div>
         </div>
       {% endfor %}
     </div>

@@ -35,9 +35,9 @@ def contact():
     return f.render_template('main/contact.jinja', title="Contact | Suchicodes", alert=alert)
 
 #TODO: This is just a placeholder until the real one is built.
-@main_blueprint.route("/resources")
-def resources():
-    return f.render_template('main/work-in-progress.jinja')
+# @main_blueprint.route("/resources")
+# def resources():
+#     return f.render_template('main/work-in-progress.jinja')
 
 @main_blueprint.route('/resume.pdf')
 @main_blueprint.route('/resume')

@@ -1,0 +1,48 @@
+function make_id(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+    charactersLength));
+  }
+  return result;
+};
+
+function get_uuid(table, filename){
+  rows = table.find('tr');
+  for (let i=0; i<rows.length; i++){
+      row = $(rows[i]);
+      if ($(row.find('.data-filename')[0]).text() == filename) return($(row.find('.data-uuid')[0]).text());
+  };
+};
+
+$('#submit-btn').on('click', ()=>{
+    $('#category-input').val($('#select-group').val());
+    let data = "";
+    let tbody = $("#table-body");
+    let rows = tbody.find('tr');
+    for(let r=0; r<rows.length; r++){
+      data+= $(rows[r]).find('.data-filename').text();
+      data+= "###";
+      data+= $(rows[r]).find('.data-uuid').text();
+      data+= ",";
+    };
+    data = data.slice(0, -1);
+    $('#uuids-input').val(data);
+    $('#create-form').submit();
+});
+
+$('#process-btn').on('click', (e)=>{
+  e.preventDefault();
+  let files = $('#fileinput').prop('files');
+  let tbody = $('#table-body');
+  let content = tbody.html();
+  let html = "";
+  for(let i=0; i<files.length; i++){
+    html += `<tr><td class='data-filename'>${files[i].name}</td>`;
+    if (content.includes(files[i].name)) html += `<td class='data-uuid'>${get_uuid(tbody, files[i].name)}</td></tr>`; 
+    else html += `<td class='data-uuid'>${make_id(8)}</td></tr>`; 
+  };
+  tbody.html(html);
+});

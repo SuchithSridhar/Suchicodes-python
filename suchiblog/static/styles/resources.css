@@ -1,0 +1,129 @@
+.list-container ul {
+  list-style: none;
+}
+
+#top-level-list {
+    margin: 0 20vw;
+}
+
+#top-level-list li {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.list li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.upper-list-header {
+    text-decoration: none;
+    font-size: 2.2rem;
+    color: var(--color-foreground);
+}
+
+.list-header {
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: var(--color-foreground);
+}
+
+.list-blog {
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: var(--color-foreground);
+}
+
+.upper-list-header:hover {
+    color: var(--color-foreground);
+}
+
+.upper-list-header .list-style {
+    margin-right: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.list-header .list-style {
+    margin-right: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.list-blog .list-style {
+    margin-right: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.upper-list-header:hover .list-style {
+    margin-right: 2rem;
+}
+
+.list-header:hover .list-style {
+    margin-right: 2rem;
+}
+
+.list-blog:hover .list-style {
+    margin-right: 2rem;
+}
+
+.list-blog:hover {
+    color: var(--color-foreground);
+}
+
+.list-header:hover {
+    color: var(--color-foreground);
+}
+
+@media screen and (max-width: 1050px) {
+    #top-level-list {
+        margin: 0 15vw;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    #top-level-list {
+        margin: 0 10vw;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #top-level-list {
+        left: 0;
+        margin: auto 10px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #top-level-list {
+        left: -10vw;
+        margin: auto 10vw;
+    }
+
+    .upper-list-header {
+        font-size: 1.8rem;
+    }
+    .list-header {
+        font-size: 1.0rem;
+    }
+    
+    .list-blog {
+        font-size: 1.0rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #top-level-list {
+        margin: auto 2vw;
+    }
+
+    .upper-list-header {
+        font-size: 8vw;
+    }
+
+    .list-header {
+        font-size: 5vw;
+    }
+
+    .list-blog {
+        font-size: 5vw;
+    }
+}

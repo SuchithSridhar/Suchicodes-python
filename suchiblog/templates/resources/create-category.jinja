@@ -1,0 +1,62 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/resources/create.css">
+{% endblock headers %}
+
+{% block content %}
+  <section id=category class=''>
+
+  <div class=container>
+    <form class="mt-5" id="create-form" action="" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <div class="row m-3">
+          <div class="col-1 text-right">
+            <span>Id: </span>
+          </div>
+          <div class="col">
+            {% if category %}
+                <input class="form-control" type="text" name="id" id="id-input" value="{{category.id}}"> <br>
+            {% else %}
+                <input class="form-control" type="text" name="id" id="id-input"> <br>
+            {% endif %}
+          </div>
+        </div>
+        <div class="row m-3">
+          <div class="col-1 text-right">
+            <span>Title: </span>
+          </div>
+          <div class="col">
+            {% if category %}
+                <input class="form-control" type="text" name="title" id="title-input" value="{{category.category}}"> <br>
+            {% else %}
+                <input class="form-control" type="text" name="title" id="title-input"> <br>
+            {% endif %}
+          </div>
+        </div>
+        {% if category %}
+            <select class="custom-select form-control form-control-lg" id="select-group"> <option selected>Choose...</option>
+                {% for cat in categories %}
+                    <option value="{{categories[cat]}}">{{cat}}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            <select class="custom-select form-control form-control-lg" id="select-group">
+                <option selected>Choose...</option>
+                {% for cat in categories %}
+                    <option value="{{categories[cat]}}">{{cat}}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+        <input style="display:none;" type="text" name="category" id="category-input">
+      </div>
+    </form>
+    <button class="btn btn-lg btn-primary mt-4" id='submit-btn'>Submit</button>
+  </div>
+  </section>
+{% endblock content %}
+
+{% block js %}
+<script type='text/javascript' src="/static/js/category-create.js">
+</script>
+{% endblock js %}

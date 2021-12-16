@@ -1,6 +1,7 @@
 footer {
-    margin-top: 40px;
+  margin-top: 40px;
   text-align: center;
+  transition: var(--transition);
   background-color: var(--color-background);
 }
 

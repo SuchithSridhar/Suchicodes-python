@@ -6,6 +6,8 @@
   --color-code-highlight-background: #3b3a36;
   --color-code-highlight-foreground: #e08a18;
 
+  --transition: background 0.2s linear;
+
   --font-primary: "Montserrat";
   --font-secondary: "Ubuntu";
 

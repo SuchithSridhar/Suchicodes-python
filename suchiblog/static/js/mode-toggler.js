@@ -50,7 +50,10 @@ $.ajax({
     url: "/session/get",
     success: function(result){
         if (result == "dark") {
+            let transition = getComputedStyle(document.documentElement).getPropertyValue('--transition');
+            document.documentElement.style.setProperty('--transition', 'none');
             $(".dark-mode-div .ball").click();
+            document.documentElement.style.setProperty('--transition', transition);
         }
     }
 }); 

@@ -1,0 +1,28 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Parent</th>
+      <th scope="col">Title</th>
+      <th scope="col">UUID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cat in categories %}
+        <tr>
+        <th scope="row">{{cat.id}}</th>
+        <td>{{cat.parent_id}}</td>
+        <td>{{cat.category}}</td>
+        <td>{{cat.uuid}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock content %}

@@ -1,8 +1,11 @@
 import flask as f
+import flask_login as fl
 from flask_sqlalchemy import SQLAlchemy
 from .config import Config
 
 db = SQLAlchemy()
+login_manager = fl.LoginManager()
+login_manager.login_view = 'admin.login'
 
 def initialize_database(db, app):
     db.create_all(app=app)
@@ -13,6 +16,8 @@ def create_app(config_class=Config):
     from .util import Util
     from .controllers.main.routes import main_blueprint
     from .controllers.projects.routes import projects_blueprint
+    from .controllers.admin.routes import admin_blueprint
+    from .controllers.resources.routes import resources_blueprint
 
     LOCALE = Util.get_locale_data()
 
@@ -26,7 +31,10 @@ def create_app(config_class=Config):
         return LOCALE
 
     db.init_app(app)
+    login_manager.init_app(app)
     app.register_blueprint(main_blueprint)
     app.register_blueprint(projects_blueprint)
+    app.register_blueprint(admin_blueprint)
+    app.register_blueprint(resources_blueprint)
 
     return app
