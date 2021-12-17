@@ -8,6 +8,11 @@ class ResUtil:
         cats_dict = { x.category : x.uuid for x in cats }
         return cats_dict
 
+    def get_categories_with_id():
+        cats = Category.query.all()
+        cats_dict = { x.category : x.id for x in cats }
+        return cats_dict
+
     def create_categories(db):
         cats = []
         Category.query.delete()

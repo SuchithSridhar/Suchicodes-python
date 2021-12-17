@@ -33,8 +33,10 @@
 }
 
 #markdown-container .highlight-block {
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    padding: 0.1rem 0.4rem;
     font-family: monospace;
-    background-color: var(--color-code-highlight-background);
-    color: var(--color-code-highlight-foreground)
+    background-color: var(--color-light-gray);
+    color: var(--color-foreground)
 }
