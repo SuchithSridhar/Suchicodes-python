@@ -42,7 +42,6 @@ def index():
 
 
 @resources_blueprint.route("/resources/blog/<uuid>")
-@fl.login_required
 def view_blog(uuid):
     blog = Blog.query.filter_by(id=uuid).first()
     if not blog:
@@ -122,12 +121,12 @@ def create_category():
         id = f.request.form['id']
         title = f.request.form['title']
         parent = int(f.request.form.get('category'))
-        uuid = Util.create_uuid[0:6]
+        uuid = Util.create_uuid()[0:6]
         item = Category(id=int(id), parent_id=parent, category=title, uuid=uuid)
         db.session.add(item)
         db.session.commit()
 
-    return f.render_template('resources/create-category.jinja', title="Create Category", categories=ResUtil.get_categories())
+    return f.render_template('resources/create-category.jinja', title="Create Category", categories=ResUtil.get_categories_with_id())
 
 
 
@@ -153,7 +152,7 @@ def edit_category(id):
 
         db.session.commit()
 
-    return f.render_template('resources/create-category.jinja', title="Edit Category", categories=ResUtil.get_categories(), category=category)
+    return f.render_template('resources/create-category.jinja', title="Edit Category", categories=ResUtil.get_categories_with_id(), category=category)
 
 
 

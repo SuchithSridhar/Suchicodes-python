@@ -28,5 +28,5 @@ class ProjectUtil:
         
         md = markdown.markdown(md)
         md = md.replace('<code>', '<span class="highlight-block">')
-        md = md.replace('</code>', '</span>"')
+        md = md.replace('</code>', '</span>')
         return md

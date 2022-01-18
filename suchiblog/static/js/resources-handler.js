@@ -14,7 +14,7 @@ function setCategories(categories){
                         <i class="list-style fas fa-angle-right"></i>
                         ${item.category}
                     </a>
-                    <ul id='category-${item.id}' class="list collapse"></ul>
+                    <ul id='category-${item.id}' data-uuid='${item.uuid}' class="list collapse"></ul>
                 </li>`);
         }
     });
@@ -29,7 +29,7 @@ function setCategories(categories){
                     <i class="list-style fas fa-angle-right"></i>
                     ${item.category}
                 </a>
-                <ul class="collapse list" id='category-${item.id}'></ul>
+                <ul class="collapse list" data-uuid='${item.uuid}' id='category-${item.id}'></ul>
             </li>`);
         }
     });
@@ -41,7 +41,7 @@ function setBlogs(blogs){
 
     console.log(blogs);
     blogs.forEach(item => {
-        parent = $(`#category-${item.category}`);
+        parent = $('ul').find(`[data-uuid='${item.category}']`);
         html = parent.html();
         parent.html(html + 
         `<li>
