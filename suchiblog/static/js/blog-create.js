@@ -1,3 +1,25 @@
+// how to use function:
+// addTabListner(document.getElementById('textbox'))
+// This converts all tabs to 4 spaces
+function tabListner (input_field) {
+    input_field.addEventListener('keydown', function(e){
+        if (e.key == 'Tab') {
+            convertValue = "    ";
+            e.preventDefault();
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+
+            // set textarea value to: text before caret + tab + text after caret
+            this.value = this.value.substring(0, start) +
+              convertValue + this.value.substring(end);
+
+            // put caret at right position again
+            this.selectionStart =
+            this.selectionEnd = start + 1;
+        }
+    });
+}
+
 function make_id(length) {
   var result           = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -16,6 +38,8 @@ function get_uuid(table, filename){
       if ($(row.find('.data-filename')[0]).text() == filename) return($(row.find('.data-uuid')[0]).text());
   };
 };
+
+tabListner(document.getElementById('markdown-input'));
 
 $('#submit-btn').on('click', ()=>{
     $('#category-input').val($('#select-group').val());
