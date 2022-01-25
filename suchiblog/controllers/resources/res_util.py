@@ -1,4 +1,5 @@
 import markdown
+from markdown.extensions.toc import TocExtension
 from ...models import Category, Blog
 from ...util import Util
 
@@ -47,7 +48,7 @@ class ResUtil:
         db.session.commit()
     
     def to_html(md):
-        md = md.replace('\r\n', '\n')
+        md = md.replace('\r\n', '\n') + "\n[TOC]"
         ending = False
         while md.count('```'):
             if ending:
@@ -65,7 +66,7 @@ class ResUtil:
                     md = md.replace('```', '<pre class="code-block">', 1)
 
         
-        md = markdown.markdown(md)
+        md = markdown.markdown(md, extensions=[TocExtension()])
         md = md.replace('<code>', '<span class="highlight-block">')
         md = md.replace('</code>', '</span>')
         return md

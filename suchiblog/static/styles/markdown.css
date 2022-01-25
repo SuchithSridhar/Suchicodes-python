@@ -40,3 +40,80 @@
     background-color: var(--color-light-gray);
     color: var(--color-foreground)
 }
+
+#markdown-container .toc {
+    display: none;
+}
+
+.index-container ul {
+    list-style: none;
+}
+
+.index-container a {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--color-foreground);
+}
+
+.index-container a:hover{
+    font-weight: 700;
+}
+
+.index-container a::before {
+    content: "- ";
+}
+
+.index-container {
+    border: solid var(--color-foreground) 1px;
+    padding-top: 20px;
+    border-radius: 0 10px 10px 0;
+    position: fixed;
+    z-index: 2;
+    height: 80%;
+    top: 10%;
+    left: 0;
+    background-color: var(--color-light-gray);
+    color: var(--color-foreground);
+    overflow: auto;
+    transition: 1s;
+}
+
+.index-container.close {
+    width: 0;
+}
+.index-container.open {
+    width: 500px;
+}
+
+.arrow {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    padding: 5px;
+    padding-left: 20px;
+    text-align: right;
+    border-radius: 100%;
+    transition: 1s;
+    position: fixed;
+    top: 50%;
+    z-index: 1;
+
+}
+
+.arrow.close {
+    left: -15px;
+}
+
+.arrow.open {
+    left: 485px;
+}
+
+@media screen and (max-width: 800px){
+    .index-container.open {
+        width: 90%;
+    }
+
+    .arrow.open {
+        left: calc(90% - 15px);
+    }
+
+}

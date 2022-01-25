@@ -6,6 +6,11 @@
 
 {% block content %}
 <hr class="nav-separator">
+  <section id=index>
+      <div class="index-container close">
+      </div>
+      <span class='arrow close'>&#8250;</span>
+  </section>
   <section id=blog>
   <div class=container>
     <div id="markdown-container">
@@ -26,5 +31,7 @@
       img.attr('src', '/static/uploaded-data/' + img.attr('src'));
   }
 </script>
+<script src="/static/js/extract-index.js"></script>
+<script src="/static/js/toggle-index.js"></script>
 {% endblock js %}
 
