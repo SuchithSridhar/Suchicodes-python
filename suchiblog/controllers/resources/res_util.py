@@ -48,7 +48,7 @@ class ResUtil:
         db.session.commit()
     
     def to_html(md):
-        md = md.replace('\r\n', '\n') + "\n[TOC]"
+        md = md.replace('\r\n', '\n') + "\n\n\n[TOC]"
         ending = False
         while md.count('```'):
             if ending:
