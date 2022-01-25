@@ -1,7 +1,9 @@
 import flask as f
 import flask_login as fl
+from .adminUtil import re_compute_markdowns
 from ...models import Admin
 from ...util import Util
+from ... import db
 
 admin_blueprint = f.Blueprint('admin', __name__)
 
@@ -57,3 +59,10 @@ def server_public_ip_set():
 @fl.login_required
 def server_public_ip_get():
     return open('server-ip-address.txt').read()
+
+@admin_blueprint.route("/admin/re_compute_markdowns")
+@fl.login_required
+def re_compute_markdowns_endpoint():
+    re_compute_markdowns(f.current_app, db)
+    return "Markdowns will be recomputed."
+
