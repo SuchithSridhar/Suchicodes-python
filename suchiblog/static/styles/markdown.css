@@ -24,21 +24,19 @@
     font-size: 1.1em;
 }
 
-#markdown-container .code-block {
+#markdown-container .codehilite {
     border-radius: 5px;
     padding: 2%;
     font-family: monospace;
-    background-color: var(--color-light-gray);
-    color: var(--color-foreground);
 }
 
-#markdown-container .highlight-block {
+#markdown-container :not(.codehilite) code {
     border-radius: 4px;
     font-size: 0.9rem;
     padding: 0.1rem 0.4rem;
     font-family: monospace;
     background-color: var(--color-light-gray);
-    color: var(--color-foreground)
+    color: var(--color-dark-gray)
 }
 
 #markdown-container .toc {

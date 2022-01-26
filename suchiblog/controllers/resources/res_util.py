@@ -1,5 +1,7 @@
 import markdown
 from markdown.extensions.toc import TocExtension
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.fenced_code import FencedCodeExtension
 from ...models import Category, Blog
 from ...util import Util
 
@@ -49,24 +51,5 @@ class ResUtil:
     
     def to_html(md):
         md = md.replace('\r\n', '\n') + "\n\n\n[TOC]"
-        ending = False
-        while md.count('```'):
-            if ending:
-                md = md.replace('```', '</pre>', 1)
-                ending = False
-            else:
-                ending = True
-                pos = int(md.find('```'))+3
-                newline = int(md.find('\n', pos))
-                prog = md[pos:newline].strip()
-                if prog != '':
-                    md = md[0:pos] + md[newline::]
-                    md = md.replace('```', f'<pre class="code-block code-{prog}">', 1)
-                else:
-                    md = md.replace('```', '<pre class="code-block">', 1)
-
-        
-        md = markdown.markdown(md, extensions=[TocExtension()])
-        md = md.replace('<code>', '<span class="highlight-block">')
-        md = md.replace('</code>', '</span>')
-        return md
+        html = markdown.markdown(md, extensions=[TocExtension(), CodeHiliteExtension(), FencedCodeExtension()])
+        return html

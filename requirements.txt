@@ -6,3 +6,4 @@ Flask-Mail==0.9.1
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==0.15.1
 Pillow==8.2.0
+Pygments==2.11.2
