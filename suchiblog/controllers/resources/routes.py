@@ -41,9 +41,11 @@ def index():
     )
 
 
-@resources_blueprint.route("/resources/blog/<uuid>")
-def view_blog(uuid):
-    blog = Blog.query.filter_by(id=uuid).first()
+@resources_blueprint.route("/resources/blog/<selector>")
+def view_blog(selector):
+    blog = Blog.query.filter_by(id=selector).first()
+    if not blog:
+        blog = Blog.query.filter_by(title=selector).first()
     if not blog:
         f.abort(404)
         return
