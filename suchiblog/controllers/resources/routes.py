@@ -45,7 +45,9 @@ def index():
 def view_blog(selector):
     blog = Blog.query.filter_by(id=selector).first()
     if not blog:
-        blog = Blog.query.filter_by(title=selector).first()
+        for b in Blog.query.all():
+            if b.title.lower().replace(' ', '-').replace("'", '') == selector.lower():
+                blog = b
     if not blog:
         f.abort(404)
         return
