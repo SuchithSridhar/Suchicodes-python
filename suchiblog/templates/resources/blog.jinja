@@ -28,7 +28,7 @@
   let img = "";
   for(let i=0; i<images.length; i++){
     img = $(images[i]);
-    if (!img.attr('src').includes('static'))
+    if (!img.attr('src').includes('static') && !img.attr('src').includes('https'))
       img.attr('src', '/static/uploaded-data/' + img.attr('src'));
   }
 </script>
