@@ -2,6 +2,7 @@ import markdown
 from markdown.extensions.toc import TocExtension
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
+from numpy import False_
 from ...models import Category, Blog
 from ...util import Util
 
@@ -51,5 +52,5 @@ class ResUtil:
     
     def to_html(md):
         md = md.replace('\r\n', '\n') + "\n\n\n[TOC]"
-        html = markdown.markdown(md, extensions=[TocExtension(), CodeHiliteExtension(), FencedCodeExtension()])
+        html = markdown.markdown(md, extensions=[TocExtension(), CodeHiliteExtension(guess_lang=False), FencedCodeExtension()])
         return html
