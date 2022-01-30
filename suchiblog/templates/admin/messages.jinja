@@ -1,0 +1,27 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+  <div class="container">
+
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Date</th>
+        <th scope="col">IP</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key in messages %}
+            <tr>
+            <td>{{key}}</td>
+            <td>{{messages[key]["IP"]}}</td>
+            <td>{{messages[key]["Subject"]}}</td>
+            <td>{{messages[key]["Message"]}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+  </div>
+{% endblock content %}

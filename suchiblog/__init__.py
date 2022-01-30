@@ -18,6 +18,7 @@ def create_app(config_class=Config):
     from .controllers.projects.routes import projects_blueprint
     from .controllers.admin.routes import admin_blueprint
     from .controllers.resources.routes import resources_blueprint
+    from .models import IP_Logs
 
     LOCALE = Util.get_locale_data()
 
@@ -25,13 +26,21 @@ def create_app(config_class=Config):
     app.config.from_object(Config)
     app.config['SQLALCHEMY_TRACK_MODIFICATION'] = True
 
+
     @app.context_processor
     def locale_context():
         LOCALE = Util.get_locale_data()
         return LOCALE
 
+    @app.before_request
+    def log_ip_address():
+        Util.log_ip_access(f.request.remote_addr, f.request.url, db, app, IP_Logs)
+
     db.init_app(app)
     login_manager.init_app(app)
+
+    initialize_database(db=db, app=app)
+
     app.register_blueprint(main_blueprint)
     app.register_blueprint(projects_blueprint)
     app.register_blueprint(admin_blueprint)

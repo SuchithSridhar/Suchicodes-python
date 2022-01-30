@@ -48,3 +48,7 @@ body {
     margin: 40px auto 100px;
     color: var(--color-foreground);
 }
+
+.table {
+  color: var(--color-foreground);
+}

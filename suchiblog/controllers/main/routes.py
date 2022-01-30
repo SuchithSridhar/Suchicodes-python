@@ -27,7 +27,7 @@ def contact():
     if f.request.method == 'POST':
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
-        Util.log_contact_message(sub, message)
+        Util.log_contact_message(sub, message, f.request.remote_addr)
         alert = True
 
     return f.render_template('main/contact.jinja', title="Contact | Suchicodes", alert=alert)

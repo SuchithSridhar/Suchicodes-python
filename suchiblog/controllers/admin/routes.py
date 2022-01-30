@@ -1,7 +1,8 @@
+import json
 import flask as f
 import flask_login as fl
 from .adminUtil import re_compute_markdowns
-from ...models import Admin
+from ...models import Admin, IP_Logs
 from ...util import Util
 from ...config import Config
 from ... import db
@@ -71,4 +72,15 @@ def re_compute_markdowns_endpoint():
 @admin_blueprint.route("/admin/messages")
 @fl.login_required
 def messages():
-    return open(Config.MESSAGE_FILE).read()
+    try:
+        data = json.loads(open(Config.MESSAGE_FILE).read())
+    except FileNotFoundError:
+        data = {}
+
+    return f.render_template('admin/messages.jinja', title='Messages', messages=data)
+
+@admin_blueprint.route("/admin/ip-logs")
+@fl.login_required
+def ip_logs():
+    logs = IP_Logs.query.order_by(IP_Logs.date.desc()).paginate(per_page=20)
+    return f.render_template('admin/ip-logs.jinja', title='IP-logs', logs=logs)

@@ -40,3 +40,9 @@ class Blog(db.Model):
     markdown = db.Column(db.Text) # This is markdown content
     brief = db.Column(db.String)
     category = db.Column(db.String)
+
+class IP_Logs(db.Model):
+    id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
+    date = db.Column(db.DateTime)
+    url = db.Column(db.String)
+    ip = db.Column(db.String)
