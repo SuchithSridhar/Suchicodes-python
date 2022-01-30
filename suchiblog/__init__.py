@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import flask as f
 import flask_login as fl
 from flask_sqlalchemy import SQLAlchemy
@@ -37,7 +38,13 @@ def create_app(config_class=Config):
         ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
         if ip is None:
             ip = f.request.remote_addr
-        Util.log_ip_access(ip[:ip.index(',')], f.request.url, db, app, IP_Logs)
+        else:
+            try:
+                index = ip.index(',')
+                ip = ip[:index]
+            except ValueError:
+                pass
+        Util.log_ip_access(ip, f.request.url, db, app, IP_Logs)
 
     db.init_app(app)
     login_manager.init_app(app)

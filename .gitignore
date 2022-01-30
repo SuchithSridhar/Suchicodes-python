@@ -2,5 +2,6 @@
 site.db
 *message-data.txt*
 *message-data.json*
+*ip-logs-csv*
 *uploaded-data*
 server-ip-address.txt

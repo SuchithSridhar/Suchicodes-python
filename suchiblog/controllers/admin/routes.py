@@ -1,6 +1,7 @@
 import json
 import flask as f
 import flask_login as fl
+import datetime
 from .adminUtil import re_compute_markdowns
 from ...models import Admin, IP_Logs
 from ...util import Util
@@ -84,3 +85,18 @@ def messages():
 def ip_logs():
     logs = IP_Logs.query.order_by(IP_Logs.date.desc()).paginate(per_page=20)
     return f.render_template('admin/ip-logs.jinja', title='IP-logs', logs=logs)
+
+@admin_blueprint.route("/admin/delete-logs")
+@fl.login_required
+def delete_ip_logs():
+    date = datetime.datetime.now().strftime('%y-%m-%d')
+    with open(Config.IP_LOGS_FILE_BASE.format(date), 'a') as f:
+        for log in IP_Logs.query.all():
+            f.write(f"{log.date}, {log.ip}, {log.url}\n")
+
+    try:
+        num_rows_deleted = db.session.query(IP_Logs).delete()
+        db.session.commit()
+    except:
+        db.session.rollback()
+    return "Ip logs have been deleted."
