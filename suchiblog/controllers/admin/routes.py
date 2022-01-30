@@ -3,6 +3,7 @@ import flask_login as fl
 from .adminUtil import re_compute_markdowns
 from ...models import Admin
 from ...util import Util
+from ...config import Config
 from ... import db
 
 admin_blueprint = f.Blueprint('admin', __name__)
@@ -66,3 +67,8 @@ def re_compute_markdowns_endpoint():
     re_compute_markdowns(f.current_app, db)
     return "Markdowns will be recomputed."
 
+
+@admin_blueprint.route("/admin/messages")
+@fl.login_required
+def messages():
+    return open(Config.MESSAGE_FILE).read()

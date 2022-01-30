@@ -3,6 +3,9 @@ import base64
 import yaml
 import json
 import uuid
+import datetime
+import requests
+from config import Config
 
 class Util:
     def hash_password(password):
@@ -27,3 +30,19 @@ class Util:
 
     def create_uuid():
         return str(uuid.uuid4())
+
+    def log_contact_message(subject, message):
+        d = datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+        complete_message = f"{d}:\n{subject}\n{message}\n\n"
+        with open(Config.MESSAGE_FILE, 'a') as f:
+            f.write(complete_message)
+
+        url = f"https://maker.ifttt.com/trigger/notify/with/key/{Config.NOTIFY_KEY}"
+        data = {
+            'value1': f"{d}:\n{subject}\n{message}"[:50]
+        }
+        requests.post(url, data=data)
+
+
+        
+        
