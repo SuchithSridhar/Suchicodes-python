@@ -62,7 +62,9 @@ class Util:
         ignore = [
             '/session/get',
             '.css',
-            '.js'
+            '.js',
+            '.ico',
+            '.png'
         ]
 
         for i in ignore:
