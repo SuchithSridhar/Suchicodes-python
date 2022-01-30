@@ -34,10 +34,10 @@ def create_app(config_class=Config):
 
     @app.before_request
     def log_ip_address():
-        ip = f.request.remote_addr
+        ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
         if ip is None:
-            ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
-        Util.log_ip_access(ip, f.request.url, db, app, IP_Logs)
+            ip = f.request.remote_addr
+        Util.log_ip_access(ip[:ip.index(',')], f.request.url, db, app, IP_Logs)
 
     db.init_app(app)
     login_manager.init_app(app)
