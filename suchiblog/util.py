@@ -64,6 +64,9 @@ class Util:
             '.css',
             '.js',
             '.ico',
+            '.svg',
+            '.gif',
+            '.mp4',
             '.png'
         ]
 
