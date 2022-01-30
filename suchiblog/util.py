@@ -59,6 +59,16 @@ class Util:
             db.session.commit()
 
     def log_ip_access(ip, url, db, app, IP_Logs):
+        ignore = [
+            '/session/get',
+            '.css',
+            '.js'
+        ]
+
+        for i in ignore:
+            if ignore in url:
+                return None
+
         date=datetime.datetime.now()
         threading.Thread(target=Util.log_ip_access_process, name='log-ip', args=[
             ip,
