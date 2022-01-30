@@ -5,7 +5,7 @@ import json
 import uuid
 import datetime
 import requests
-from config import Config
+from .config import Config
 
 class Util:
     def hash_password(password):
