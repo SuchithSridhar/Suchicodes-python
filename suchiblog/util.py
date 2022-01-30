@@ -66,7 +66,7 @@ class Util:
         ]
 
         for i in ignore:
-            if ignore in url:
+            if i in url:
                 return None
 
         date=datetime.datetime.now()
