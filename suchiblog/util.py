@@ -61,6 +61,7 @@ class Util:
     def log_ip_access(ip, url, db, app, IP_Logs):
         ignore = [
             '/session/get',
+            'suchicodes.com/admin',
             '.css',
             '.js',
             '.ico',
