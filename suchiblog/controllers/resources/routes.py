@@ -125,7 +125,7 @@ def create_category():
         id = f.request.form['id']
         title = f.request.form['title']
         parent = int(f.request.form.get('category'))
-        uuid = Util.create_uuid()[0:6], db
+        uuid = Util.create_uuid()[0:6]
         item = Category(id=int(id), parent_id=parent, category=title, uuid=uuid)
         db.session.add(item)
         db.session.commit()
