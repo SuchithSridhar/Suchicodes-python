@@ -52,3 +52,15 @@ body {
 .table {
   color: var(--color-foreground);
 }
+
+.spinner {
+  height: 30px;
+  width: 30px;
+  animation: spinner 0.7s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
