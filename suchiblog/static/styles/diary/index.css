@@ -1,0 +1,27 @@
+#diary {
+    margin: 2%;
+}
+
+.calendar {
+    background-color:cadetblue;
+}
+
+.viewer {
+    margin-left: 1%;
+    background-color:darkgoldenrod;
+}
+
+.entry {
+    margin-left: 1%;
+    background-color: aquamarine;
+}
+
+.calendar-container {
+}
+
+.viewer-container {
+}
+
+.entry-container {
+    display: none;
+}

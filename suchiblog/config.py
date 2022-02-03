@@ -2,6 +2,8 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('FLASK_SECRET_KEY')
+    SECRET_ADMIN_KEY = os.environ.get('FLASK_ADMIN_KEY')
+    ADMIN_ROLE = "ADMIN"
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESOURCES_DIR = 'data'

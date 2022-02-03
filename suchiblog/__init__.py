@@ -6,7 +6,7 @@ from .config import Config
 
 db = SQLAlchemy()
 login_manager = fl.LoginManager()
-login_manager.login_view = 'admin.login'
+login_manager.login_view = 'users.login'
 
 def initialize_database(db, app):
     db.create_all(app=app)
@@ -16,8 +16,10 @@ def create_app(config_class=Config):
 
     from .util import Util
     from .controllers.main.routes import main_blueprint
+    from .controllers.users.routes import users_blueprint
     from .controllers.projects.routes import projects_blueprint
     from .controllers.admin.routes import admin_blueprint
+    from .controllers.diary.routes import diary_blueprint
     from .controllers.resources.routes import resources_blueprint
     from .models import IP_Logs
 
@@ -51,7 +53,11 @@ def create_app(config_class=Config):
 
     initialize_database(db=db, app=app)
 
+    app.config['SERVER_NAME'] = 'localhost:5000'
+
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(users_blueprint)
+    app.register_blueprint(diary_blueprint)
     app.register_blueprint(projects_blueprint)
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(resources_blueprint)

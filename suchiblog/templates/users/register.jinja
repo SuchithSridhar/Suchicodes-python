@@ -1,0 +1,16 @@
+{% extends "layout.jinja" %}
+{% block headers %}
+    <link rel="stylesheet" href="static/styles/admin/login-form.css">
+{% endblock headers %}
+{% block content %}
+    <hr class="nav-separator">
+    <div class="container">
+        <form action="" method="post">
+            <label class="form-label mt-3">Email: </label><input class="form-control" type="text" name='email'>
+            <label class="form-label mt-3">Password: </label><input class="form-control" type="password" name='password'>
+            <label class="form-label mt-3">Confirm: </label><input class="form-control" type="password" name='confirm'>
+            <label class="form-label mt-3">Admin Control: </label><input class="form-control" type="password" name='admin_password'>
+            <input class="btn-custom btn-custom-sm mt-3" type="submit">
+        </form>
+    </div>
+{% endblock content %}

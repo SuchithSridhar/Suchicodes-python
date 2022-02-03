@@ -3,7 +3,7 @@ import flask as f
 import flask_login as fl
 import datetime
 from .adminUtil import re_compute_markdowns
-from ...models import Admin, IP_Logs
+from ...models import IP_Logs
 from ...util import Util
 from ...config import Config
 from ... import db
@@ -16,31 +16,6 @@ admin_blueprint = f.Blueprint('admin', __name__)
 @fl.login_required
 def index():
     return f.render_template('admin/index.jinja')
-
-
-@admin_blueprint.route("/admin/login", methods=['get', 'post'])
-def login():
-    if fl.current_user.is_authenticated:
-        return f.redirect(f.url_for('main.index'))
-
-    if f.request.method == 'POST':
-        email = f.request.form['email']
-        unhashed_password = f.request.form['password']
-        password = Util.hash_password(unhashed_password)
-        user = Admin.query.filter_by(email=email).first()
-        if user and user.password == password or user.password == unhashed_password:
-            fl.login_user(user)
-            next_page = f.request.args.get('next')
-            return f.redirect(next_page) if next_page else f.redirect(f.url_for('main.index'))
-
-    return f.render_template('admin/login.jinja', title='Login')
-
-
-@admin_blueprint.route("/admin/logout")
-@fl.login_required
-def logout():
-    fl.logout_user()
-    return f.redirect(f.url_for('main.index'))
 
 
 @admin_blueprint.route("/admin/server-set-ip", methods=['post'])
