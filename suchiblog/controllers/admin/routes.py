@@ -86,6 +86,14 @@ def ip_logs():
     logs = IP_Logs.query.order_by(IP_Logs.date.desc()).paginate(per_page=20)
     return f.render_template('admin/ip-logs.jinja', title='IP-logs', logs=logs)
 
+@admin_blueprint.route("/admin/delete-messages")
+@fl.login_required
+def delete_messages():
+    date = datetime.datetime.now().strftime('%y-%m-%d')
+    with open(Config.MESSAGE_FILE, 'w') as f:
+        f.write(json.dumps({}))
+    return "Ip logs have been deleted."
+
 @admin_blueprint.route("/admin/delete-logs")
 @fl.login_required
 def delete_ip_logs():

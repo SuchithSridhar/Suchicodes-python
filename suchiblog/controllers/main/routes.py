@@ -25,6 +25,9 @@ def about():
 def contact():
     alert = False
     if f.request.method == 'POST':
+        exceptions = [
+            'jumboleadmagnet'
+        ]
         ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
         if ip is None:
             ip = f.request.remote_addr
@@ -37,6 +40,9 @@ def contact():
 
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
+        for exception in exceptions:
+            if exception in message:
+                return 'no'
         Util.log_contact_message(sub, message, ip)
         alert = True
 
