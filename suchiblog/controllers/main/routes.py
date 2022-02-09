@@ -25,9 +25,19 @@ def about():
 def contact():
     alert = False
     if f.request.method == 'POST':
+        ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
+        if ip is None:
+            ip = f.request.remote_addr
+        else:
+            try:
+                index = ip.index(',')
+                ip = ip[:index]
+            except ValueError:
+                pass
+
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
-        Util.log_contact_message(sub, message, f.request.remote_addr)
+        Util.log_contact_message(sub, message, ip)
         alert = True
 
     return f.render_template('main/contact.jinja', title="Contact | Suchicodes", alert=alert)
