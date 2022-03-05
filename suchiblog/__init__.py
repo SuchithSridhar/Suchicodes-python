@@ -25,7 +25,6 @@ def create_app(config_class=Config):
 
     app = f.Flask(__name__)
     app.config.from_object(Config)
-    app.config['SQLALCHEMY_TRACK_MODIFICATION'] = True
 
 
     @app.context_processor
