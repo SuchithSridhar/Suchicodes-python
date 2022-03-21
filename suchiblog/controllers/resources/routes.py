@@ -51,8 +51,10 @@ def view_blog(selector):
     if not blog:
         f.abort(404)
         return
-
-    return f.render_template('resources/blog.jinja', title=f"{blog.title} | Suchicodes", blog_html=blog.html)
+    
+    return f.render_template('resources/blog.jinja',
+            title=f"{blog.title} | Suchicodes", blog_html=blog.html,
+            admin=fl.current_user.is_authenticated, blog=blog)
 
 
 @resources_blueprint.route("/admin/create_blog", methods=['get','post'])

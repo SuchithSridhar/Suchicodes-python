@@ -12,7 +12,7 @@ class Admin(db.Model, fl.UserMixin):
     email = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     def __repr__(self):
-        return f"User('{self.id}, {self.username}'"
+        return f"User('{self.id}, {self.email}')"
 
 class Projects(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
