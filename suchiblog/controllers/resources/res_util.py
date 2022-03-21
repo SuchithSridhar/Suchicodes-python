@@ -54,3 +54,9 @@ class ResUtil:
         md = md.replace('\r\n', '\n') + "\n\n\n[TOC]"
         html = markdown.markdown(md, extensions=[TocExtension(), CodeHiliteExtension(guess_lang=False), FencedCodeExtension()])
         return html
+
+    def find_open_brace(md, start):
+        if md[start] == "(":
+            return start
+        else:
+            return ResUtil.find_open_brace(md, start-1)

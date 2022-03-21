@@ -61,21 +61,31 @@ def create_blog():
     if f.request.method == 'POST':
         uploaded_files = f.request.files.getlist("file[]")
         uuids = f.request.form['uuids'].split(',')
+        md = f.request.form['markdown']
+        md_edited = md
         for file in uploaded_files:
             if not file.filename:
                 continue
             uuid = [x for x in uuids if file.filename in x][0].split('###')[1]
+            new_file_name = uuid+f"{os.path.splitext(file.filename)[1]}"
             file.save(
                 os.path.join(f.current_app.config['PROJECTS_UPLOAD_FOLDER'],
-                uuid+f"{os.path.splitext(file.filename)[1]}")
+                new_file_name
+                )
             )
+
+            start = md_edited.find(file.filename)
+            open_brace = ResUtil.find_open_brace(md_edited, start)
+            close_brace = md_edited.find(")", start)
+            md_edited = md_edited[:open_brace+1] + new_file_name + md_edited[close_brace:]
+
         title = f.request.form['title']
         brief = f.request.form['brief']
         date = datetime.now()
         category = (f.request.form.get('category'))
-        md = f.request.form['markdown']
-        html = ResUtil.to_html(md)
-        item = Blog(title=title, date=date, brief=brief, category=category, markdown=md, html=html)
+        html = ResUtil.to_html(md_edited)
+        item = Blog(title=title, date=date, brief=brief,
+                category=category, markdown=md_edited, html=html)
         db.session.add(item)
         db.session.commit()
 
@@ -92,25 +102,34 @@ def edit(uuid):
     if f.request.method == 'POST':
         uploaded_files = f.request.files.getlist("file[]")
         uuids = f.request.form['uuids'].split(',')
+        md = f.request.form['markdown']
+        md_edited = md
         for file in uploaded_files:
             if not file.filename:
                 continue
             file_uuid = [x for x in uuids if file.filename in x][0].split('###')[1]
+            new_file_name = uuid+f"{os.path.splitext(file.filename)[1]}"
             file.save(
                 os.path.join(f.current_app.config['PROJECTS_UPLOAD_FOLDER'],
-                file_uuid+f"{os.path.splitext(file.filename)[1]}")
+                new_file_name
+                )
             )
+
+            start = md_edited.find(file.filename)
+            open_brace = ResUtil.find_open_brace(md_edited, start)
+            close_brace = md_edited.find(")", start)
+            md_edited = md_edited[:open_brace+1] + new_file_name + md_edited[close_brace:]
+
         title = f.request.form['title']
         brief = f.request.form['brief']
         category = (f.request.form.get('category'))
-        md = f.request.form['markdown']
         html = ResUtil.to_html(md)
 
         blog.title=title
         blog.brief=brief
         if category in ResUtil.get_categories().values():
             blog.category=category
-        blog.markdown=md
+        blog.markdown=md_edited
         blog.html=html
 
         db.session.commit()
