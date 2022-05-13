@@ -72,6 +72,7 @@ class Util:
             '/session/get',
             'suchicodes.com/admin',
             '/session/set/dark',
+            '/session/set/light',
             '.css',
             '.js',
             '.ico',
