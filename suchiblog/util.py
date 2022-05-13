@@ -34,6 +34,15 @@ class Util:
 
     def log_contact_message(subject, message, ip):
         d = datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+        ignore_ips = [
+                '77.51.27.234'
+        ]
+
+        for i in ignore_ips:
+            if str(ip) == i:
+                return None
+
+
         try:
             json_data = json.loads(open(Config.MESSAGE_FILE).read())
         except FileNotFoundError:
@@ -62,7 +71,7 @@ class Util:
         ignore = [
             '/session/get',
             'suchicodes.com/admin',
-            '/session/'
+            '/session/set/dark',
             '.css',
             '.js',
             '.ico',
