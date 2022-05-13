@@ -62,6 +62,7 @@ class Util:
         ignore = [
             '/session/get',
             'suchicodes.com/admin',
+            '/session/'
             '.css',
             '.js',
             '.ico',
@@ -71,8 +72,16 @@ class Util:
             '.png'
         ]
 
+        ignore_ips = [
+                '77.51.27.234'
+        ]
+
         for i in ignore:
             if i in url:
+                return None
+
+        for i in ignore_ips:
+            if str(ip) == i:
                 return None
 
         date=datetime.datetime.now()
