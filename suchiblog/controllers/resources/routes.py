@@ -66,10 +66,6 @@ def create_blog():
         md = f.request.form['markdown']
         md_edited = md
 
-        f.current_app.logger.info("Processing new blog")
-        f.current_app.logger.info(f" = Files in new blog {uploaded_files}")
-        f.current_app.logger.info(f" = UUIDs in new blog {uuids}")
-
         for file in uploaded_files:
             if not file.filename:
                 continue
@@ -115,7 +111,7 @@ def edit(uuid):
             if not file.filename:
                 continue
             file_uuid = [x for x in uuids if file.filename in x][0].split('###')[1]
-            new_file_name = uuid+f"{os.path.splitext(file.filename)[1]}"
+            new_file_name = file_uuid+f"{os.path.splitext(file.filename)[1]}"
             file.save(
                 os.path.join(f.current_app.config['PROJECTS_UPLOAD_FOLDER'],
                 new_file_name
