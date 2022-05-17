@@ -65,6 +65,11 @@ def create_blog():
         uuids = f.request.form['uuids'].split(',')
         md = f.request.form['markdown']
         md_edited = md
+
+        f.current_app.logger.info("Processing new blog")
+        f.current_app.logger.info(f" = Files in new blog {uploaded_files}")
+        f.current_app.logger.info(f" = UUIDs in new blog {uuids}")
+
         for file in uploaded_files:
             if not file.filename:
                 continue
