@@ -132,7 +132,7 @@ def edit(uuid):
         title = f.request.form['title']
         brief = f.request.form['brief']
         category = (f.request.form.get('category'))
-        html = ResUtil.to_html(md)
+        html = ResUtil.to_html(md_edited)
 
         blog.title=title
         blog.brief=brief
