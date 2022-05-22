@@ -48,6 +48,12 @@ def view_blog(selector):
         for b in Blog.query.all():
             if b.title.lower().replace(' ', '-').replace("'", '') == selector.lower():
                 blog = b
+                break
+
+            if b.id[0:len(selector)] == selector:
+                blog = b
+                break
+
     if not blog:
         f.abort(404)
         return

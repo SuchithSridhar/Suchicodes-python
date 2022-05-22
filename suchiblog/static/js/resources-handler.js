@@ -46,7 +46,7 @@ function setBlogs(blogs){
         parent.html(html + 
         `<li>
             <a class='list-blog'
-                href="/resources/blog/${item.id}">
+                href="/resources/blog/${item.id.slice(0, 8)}">
                 <i class="list-style fas fa-caret-right"></i>
                 ${item.title}
             </a>
