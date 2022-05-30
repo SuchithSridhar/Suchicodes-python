@@ -89,9 +89,23 @@ def url_redirects():
         u = URL_Redirection(keyword_in=keyword, url_out=url)
         db.session.add(u)
         db.session.commit()
+        return f.redirect("/admin/url-redirects")
 
-    urls = URL_Redirection.query.paginate(per_page=20)
-    return f.render_template('admin/url-redirects.jinja', title='URL Redirects', urls=urls)
+    if f.request.method == 'GET':
+        urls = URL_Redirection.query.paginate(per_page=20)
+        return f.render_template('admin/url-redirects.jinja', title='URL Redirects', urls=urls)
+
+@admin_blueprint.route("/admin/url-redirects/delete/<id>")
+@fl.login_required
+def url_redirects_delete(id):
+    url = URL_Redirection.query.filter_by(id=id).first()
+    if not url:
+        f.abort(404)
+        return
+
+    db.session.delete(url)
+    db.session.commit()
+    return "URL Redirect deleted."
 
 @admin_blueprint.route("/admin/ip-logs")
 @fl.login_required
@@ -105,7 +119,7 @@ def delete_messages():
     date = datetime.datetime.now().strftime('%y-%m-%d')
     with open(Config.MESSAGE_FILE, 'w') as f:
         f.write(json.dumps({}))
-    return "Ip logs have been deleted."
+    return "All messages have been deleted."
 
 @admin_blueprint.route("/admin/delete-logs")
 @fl.login_required

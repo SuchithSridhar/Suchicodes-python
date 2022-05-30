@@ -9,14 +9,16 @@
         <th scope="col">ID</th>
         <th scope="col">Keyword</th>
         <th scope="col">URL</th>
+        <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         {% for url in urls.items %}
-            <tr>
+            <tr url-id='{{url.id}}'>
             <td>{{url.id}}</td>
             <td>{{url.keyword_in}}</td>
             <td>{{url.url_out}}</td>
+            <td><button class='delete-redirect btn btn-danger' url-id='{{url.id}}'>Delete</button></td>
             </tr>
         {% endfor %}
     </tbody>
@@ -28,7 +30,7 @@
           {% if page != urls.page %}
             <a class="btn m-1 btn-primary" href="{{ url_for('admin.ip_logs', page=page) }}">{{ page }}</a>
           {% else %}
-            <a class="btn m-1 btn-dark">{{ page }}</strong>
+            <a class="btn m-1 btn-dark">{{ page }}</a>
           {% endif %}
         {% else %}
           <span class=ellipsis>…</span>
@@ -45,3 +47,17 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block js %}
+<script>
+$('.delete-redirect').click(e => {
+  console.log("clicked delete");
+  id = $(e.currentTarget).attr('url-id');
+  $.ajax({
+      url: `/admin/url-redirects/delete/${id}`,
+  }); 
+  $(e.currentTarget).parents('tr').remove();
+  
+})
+</script>
+{% endblock js %}

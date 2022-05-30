@@ -28,7 +28,7 @@
           {% if page != logs.page %}
             <a class="btn m-1 btn-primary" href="{{ url_for('admin.ip_logs', page=page) }}">{{ page }}</a>
           {% else %}
-            <a class="btn m-1 btn-dark">{{ page }}</strong>
+            <a class="btn m-1 btn-dark">{{ page }}</a>
           {% endif %}
         {% else %}
           <span class=ellipsis>…</span>
