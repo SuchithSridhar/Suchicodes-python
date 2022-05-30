@@ -1,5 +1,6 @@
 import flask as f
 from ...util import Util
+from ...models import URL_Redirection
 
 main_blueprint = f.Blueprint('main', __name__)
 contact_alert = False
@@ -20,6 +21,16 @@ def index():
 @main_blueprint.route("/about")
 def about():
     return f.render_template('main/about.jinja', title="About | Suchicodes")
+
+@main_blueprint.route("/url/<keyword>")
+def url_redirection(keyword):
+    url = URL_Redirection.query.filter_by(keyword_in=keyword).first()
+    if not url:
+        f.abort(404)
+        return
+    
+    return f.redirect(url.url_out)
+
 
 @main_blueprint.route("/contact", methods=['get','post'])
 def contact():

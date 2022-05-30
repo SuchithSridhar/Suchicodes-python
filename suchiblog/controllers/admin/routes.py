@@ -3,7 +3,7 @@ import flask as f
 import flask_login as fl
 import datetime
 from .adminUtil import re_compute_markdowns
-from ...models import Admin, IP_Logs
+from ...models import Admin, IP_Logs, URL_Redirection
 from ...util import Util
 from ...config import Config
 from ... import db
@@ -79,6 +79,19 @@ def messages():
         data = {}
 
     return f.render_template('admin/messages.jinja', title='Messages', messages=data)
+
+@admin_blueprint.route("/admin/url-redirects", methods=['GET', 'POST'])
+@fl.login_required
+def url_redirects():
+    if f.request.method == 'POST':
+        keyword = f.request.form['keyword_in']
+        url = f.request.form['url_out']
+        u = URL_Redirection(keyword_in=keyword, url_out=url)
+        db.session.add(u)
+        db.session.commit()
+
+    urls = URL_Redirection.query.paginate(per_page=20)
+    return f.render_template('admin/url-redirects.jinja', title='URL Redirects', urls=urls)
 
 @admin_blueprint.route("/admin/ip-logs")
 @fl.login_required

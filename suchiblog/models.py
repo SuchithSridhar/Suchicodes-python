@@ -46,3 +46,10 @@ class IP_Logs(db.Model):
     date = db.Column(db.DateTime)
     url = db.Column(db.String)
     ip = db.Column(db.String)
+
+
+class URL_Redirection(db.Model):
+    id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
+    keyword_in = db.Column(db.String)
+    url_out = db.Column(db.String)
+
