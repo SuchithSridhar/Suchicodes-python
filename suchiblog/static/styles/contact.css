@@ -50,6 +50,11 @@
   border-bottom: 1px solid var(--color-foreground);
 }
 
+.send-message .message-subtext {
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
 .message {
   border-radius: 0;
   border: 1px solid var(--color-foreground);
