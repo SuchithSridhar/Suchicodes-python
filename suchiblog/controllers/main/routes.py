@@ -32,7 +32,7 @@ def url_redirection(keyword):
     return f.redirect(url.url_out)
 
 
-@main_blueprint.route("/contact", methods=['get','post'])
+@main_blueprint.route("/contact-me", methods=['get','post'])
 def contact():
     alert = False
     if f.request.method == 'POST':
