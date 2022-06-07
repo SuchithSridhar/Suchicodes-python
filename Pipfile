@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+email-validator = ">=1.1"
+flask-login = ">=0.5"
+Flask = ">=1.1"
+Flask-Bcrypt = ">=0.7"
+Flask-Mail = ">=0.9"
+Flask-SQLAlchemy = ">=2.5"
+Flask-WTF = ">=0.15"
+Pillow = ">=8.2"
+Pygments = ">=2.11"
+pyyaml = ">=6.0"
+requests = ">=2.27"
+markdown = ">=3.3.0"
+numpy = ">=1.22.0"
+
+
+[dev-packages]
+
+[requires]
+python_version = ">=3.7"
