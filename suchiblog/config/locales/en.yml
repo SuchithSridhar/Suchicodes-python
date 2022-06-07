@@ -55,3 +55,5 @@ contact:
   send: "Send"
   message: "Message"
   subject: "Subject"
+  message-subtext: "Please do not include a complete URL in the message, this will cause it to be filtered out. 
+                    Please include your email if you wish to reach out."
