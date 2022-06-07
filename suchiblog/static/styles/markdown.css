@@ -99,12 +99,13 @@
 }
 
 .arrow {
+    writing-mode: tb-rl;
+    text-orientation: upright;
     background-color: var(--color-foreground);
     color: var(--color-background);
-    padding: 5px;
-    padding-left: 20px;
+    padding: 5px 2px 5px 15px;
     text-align: right;
-    border-radius: 100%;
+    border-radius: 7%;
     transition: 1s;
     position: fixed;
     top: 50%;
