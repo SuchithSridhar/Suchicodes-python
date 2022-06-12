@@ -91,6 +91,13 @@
     transition: 1s;
 }
 
+.math {
+    white-space: pre-line;
+    font-size: 1.3rem;
+    background-color: var(--color-light-gray);
+    font-family: monospace;
+}
+
 .index-container.close {
     width: 0;
 }
@@ -109,6 +116,7 @@
     transition: 1s;
     position: fixed;
     top: 50%;
+    cursor: pointer;
     z-index: 1;
 
 }
