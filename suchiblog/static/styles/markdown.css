@@ -98,6 +98,7 @@
     font-family: monospace;
     padding-left: 2%;
     padding-bottom: 1.2em;
+    overflow-x: auto;
 }
 
 .index-container.close {
