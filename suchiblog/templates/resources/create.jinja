@@ -54,7 +54,7 @@
                 </table>
             </div>
         {% if blog %}
-            <span>Markdown: </span><br><textarea class="form-control" name="markdown" id="markdown-input" cols="50" rows="30">{{blog.markdown}}</textarea> <br>
+            <span>Markdown: </span><br><textarea class="form-control" name="markdown" id="markdown-input" cols="50" rows="30">{{blog.markdown.replace("&", "&amp;")}}</textarea> <br>
         {% else %}
             <span>Markdown: </span><br><textarea class="form-control" name="markdown" id="markdown-input" cols="50" rows="30"></textarea> <br>
         {% endif %}
