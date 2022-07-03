@@ -92,7 +92,7 @@
 }
 
 .math {
-    white-space: pre-line;
+    white-space: pre;
     font-size: 1.3rem;
     background-color: var(--color-light-gray);
     font-family: monospace;
