@@ -1,7 +1,7 @@
 common:
   okay: "Okay"
   done: "Done"
-  unb: "UNB"
+  unb: "DAL"
   close: "Close"
   domain: "suchicodes.com"
   domain_name: "suchicodes"
@@ -24,7 +24,7 @@ home:
   footer_text: "© 2021 Suchith Sridhar. All rights reserved."
 
   about_title: "A little about me"
-  about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my undergraduate degree in computer science at the University of New Brunswick, Canada. <br><br>
+  about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my undergraduate degree in computer science at the Dalhousie University, Canada. <br><br>
   I'm a Full-Stack programmer who also specializes in GUI and CLI (Command-line interface) based application programming for Windows and Linux. I am passionate about computers and servers and intrigued about operating systems and their workings. <br>
   "
 
@@ -32,7 +32,7 @@ about:
   title: "A Little About Me"
   text: "
     Hello there! My name is <b>Suchith</b> and I'm a <b>Developer</b> (I enjoy building stuff on the web and otherwise :)).
-    I am currently pursuing my <b>undergraduate degree in computer science</b> at the University of New Brunswick, Canada. 
+    I am currently pursuing my <b>undergraduate degree in computer science</b> at the Dalhousie University, Canada. 
     <br><br>
     I'm a <b>Full-Stack programmer</b> who also specializes in <b>GUI and CLI</b> (Command-line interface) based application
     programming for Windows and Linux. I am passionate about computers and servers and intrigued about operating systems and
