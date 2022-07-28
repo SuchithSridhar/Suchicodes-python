@@ -47,6 +47,13 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <link rel="icon" href="/static/assets/icon.svg" />
+    
+    {% if mode == 'dark' %}
+      <link class='color-styles' rel="stylesheet" href="/static/styles/colors-dark.css">
+    {% else %}
+      <link class='color-styles' rel="stylesheet" href="/static/styles/colors.css">
+    {% endif %}
+
     <link rel="stylesheet" href="/static/styles/base.css">
 
     {% block headers %}

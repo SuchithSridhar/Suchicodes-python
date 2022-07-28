@@ -14,10 +14,18 @@ class Util:
         hasher.update(password.encode())
         return base64.urlsafe_b64encode(hasher.digest())
 
-    def get_locale_data(lang="en"):
+    def get_pre_render_data(flask, lang="en"):
         stream = open(f'suchiblog/config/locales/{lang}.yml')
-        data = yaml.load(stream, Loader=yaml.Loader)
-        data = {'ln': data}
+        lang = yaml.load(stream, Loader=yaml.Loader)
+        if flask is None:
+            mode = 'light'
+        else:
+            mode = f'{flask.session.get("value")}'
+
+        data = {
+            'ln': lang,
+            'mode': mode
+        }
         return data
 
     def get_skill_list():

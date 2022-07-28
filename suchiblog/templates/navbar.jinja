@@ -1,5 +1,10 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light">
+
+{% if mode == 'dark' %}
+    <nav class="navbar navbar-expand-lg navbar-dark">
+{% else %}
+    <nav class="navbar navbar-expand-lg navbar-light">
+{% endif %}
   <div class="container">
     <a class="navbar-brand" href="/"> {{ ln.navbar.title }} </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#suchicodesnav" aria-controls="suchicodesnav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +29,11 @@
             </li>
             <li class="nav-item">
                 <div class="dark-mode-div nav-link align-middle">
-                    <input type="checkbox" class="checkbox" id="chk" />
+                    {% if mode == 'dark' %}
+                        <input type="checkbox" class="checkbox" id="chk" checked />
+                    {% else %}
+                        <input type="checkbox" class="checkbox" id="chk" />
+                    {% endif %}
                     <label class="label" for="chk">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>

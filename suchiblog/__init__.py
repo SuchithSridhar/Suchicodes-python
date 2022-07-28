@@ -21,16 +21,16 @@ def create_app(config_class=Config):
     from .controllers.resources.routes import resources_blueprint
     from .models import IP_Logs
 
-    LOCALE = Util.get_locale_data()
+    GLOBAL_DATA = Util.get_pre_render_data(flask=None, lang='en')
 
     app = f.Flask(__name__)
     app.config.from_object(Config)
 
 
     @app.context_processor
-    def locale_context():
-        LOCALE = Util.get_locale_data()
-        return LOCALE
+    def pre_render():
+        GLOBAL_DATA = Util.get_pre_render_data(flask=f, lang='en')
+        return GLOBAL_DATA
 
     @app.before_request
     def log_ip_address():

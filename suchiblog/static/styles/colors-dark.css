@@ -1,0 +1,21 @@
+:root {
+  --color-background: #181a1b;
+  --color-foreground: white;
+  --color-light-gray: #333;
+  --color-dark-gray: #ddd;
+  --color-code-highlight-background: #3b3a36;
+  --color-code-highlight-foreground: #e08a18;
+
+  --transition: background 0.2s linear;
+
+  --font-primary: "Montserrat";
+  --font-secondary: "Ubuntu";
+
+  --dots-image: url('/static/assets/dots-dark.svg');
+  --dots-image-dark: url('/static/assets/dots-light.svg');
+  --dots-image-light: url('/static/assets/dots-dark.svg');
+
+  --hex-image: url('/static/assets/hex-light.svg');
+  --hex-image-dark: url('/static/assets/hex-dark.svg');
+  --hex-image-light: url('/static/assets/hex-light.svg');
+}
