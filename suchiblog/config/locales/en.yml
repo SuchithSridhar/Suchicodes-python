@@ -24,9 +24,12 @@ home:
   footer_text: "© 2021 Suchith Sridhar. All rights reserved."
 
   about_title: "A little about me"
-  about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my undergraduate degree in computer science at the Dalhousie University, Canada. <br><br>
-  I'm a Full-Stack programmer who also specializes in GUI and CLI (Command-line interface) based application programming for Windows and Linux. I am passionate about computers and servers and intrigued about operating systems and their workings. <br>
-  "
+  about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my
+                undergraduate degree in computer science at the Dalhousie University, Canada. <br><br> I'm a Full-Stack
+                programmer who also specializes in GUI and CLI (Command-line interface) based application programming
+                for Windows and Linux. I am passionate about computers and servers and intrigued about operating
+                systems and their workings. <br>"
+  
 
 about:
   title: "A Little About Me"
@@ -47,8 +50,7 @@ about:
     <br><br>
     My hobbies include (Not that anyone asked, but hey this is my website!) studying Astrophysics, Philosophy, Economics,
     Psychology, Theoretical Physics, and the rest of the sciences (fill in the blanks!).
-    <br><br>
-  "
+    <br><br>"
 
 contact:
   message_title: "Send me a message:"
