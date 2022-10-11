@@ -10,3 +10,5 @@ class Config:
     NOTIFY_KEY = os.environ.get('FLASK_NOTIFY_KEY')
     MESSAGE_FILE = './suchiblog/data/message-data.json'
     IP_LOGS_FILE_BASE = './suchiblog/data/ip-logs-csv-{}.csv'
+    IP_BLACKLIST = './suchiblog/config/ip_blacklist'
+    MESSAGE_BLACKLIST = './suchiblog/config/message_blacklist'

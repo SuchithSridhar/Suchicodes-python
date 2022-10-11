@@ -16,7 +16,7 @@
         {% for key in messages %}
             <tr>
             <td>{{key}}</td>
-            <td>{{messages[key]["IP"]}}</td>
+            <td>{{messages[key]["IP"]}}<button data-ip="{{messages[key]['IP']}}" class="block-button btn btn-salmon">Block</button></td>
             <td>{{messages[key]["Subject"]}}</td>
             <td>{{messages[key]["Message"]}}</td>
             </tr>
@@ -25,3 +25,31 @@
     </table>
   </div>
 {% endblock content %}
+
+
+{% block js %}
+
+<script>
+function initialize() {
+  $('.block-button').click(e => {
+    let target = $(e.currentTarget);
+    let id = target.attr('data-ip');
+    let url = `/admin/blacklist?type=ip&ip=${ip}`;
+
+    if (confirm("Are you sure you want to black list the this IP?")){
+      $.ajax({
+        url: url,
+        success: (result) => {
+          alert(result);
+        },
+      });
+    }
+  });
+}
+
+$(document).ready(() => {
+  initialize();
+});
+</script>
+
+{% endblock js %}

@@ -80,6 +80,40 @@ def messages():
 
     return f.render_template('admin/messages.jinja', title='Messages', messages=data)
 
+
+@admin_blueprint.route("/admin/blacklist")
+@fl.login_required
+def blacklist():
+    block = f.request.args.get('type')
+
+    if block == 'ip':
+        ip = f.request.args.get('ip')
+        with open(Config.IP_BLACKLIST) as f:
+            if ip in f.read():
+                return f"{ip} already present in the blacklist"
+
+        with open(Config.IP_BLACKLIST, 'a') as f:
+            f.write("\n" + ip)
+
+        return f"{ip} has been added to the blacklist"
+    
+    elif block == 'message':
+        message = f.request.get('message')
+
+        with open(Config.MESSAGE_BLACKLIST) as f:
+            for line in f.readlines():
+                if message in line:
+                    return f"Message already present in the blacklist"
+
+        with open(Config.MESSAGE_BLACKLIST, 'a') as f:
+            f.write("\n" + message)
+
+        return "Message has been added to blacklist"
+
+
+
+    return "Invalid type for blacklist"
+
 @admin_blueprint.route("/admin/url-redirects", methods=['GET', 'POST'])
 @fl.login_required
 def url_redirects():

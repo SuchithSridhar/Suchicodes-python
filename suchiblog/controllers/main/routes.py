@@ -1,6 +1,7 @@
 import flask as f
 from ...util import Util
 from ...models import URL_Redirection
+from ...config import Config
 
 main_blueprint = f.Blueprint('main', __name__)
 contact_alert = False
@@ -36,11 +37,6 @@ def url_redirection(keyword):
 def contact():
     alert = False
     if f.request.method == 'POST':
-        exceptions = [
-            'jumboleadmagnet',
-            'https://',
-            'http://'
-        ]
         ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
         if ip is None:
             ip = f.request.remote_addr
@@ -51,11 +47,22 @@ def contact():
             except ValueError:
                 pass
 
+
+        # Check blacklist of ip addresses
+
+        with open(Config.IP_BLACKLIST) as f:
+            if str(ip).strip() in f.read():
+                return "No"
+
+        # Check blacklist of messages
+
+        with open(Config.MESSAGE_BLACKLIST) as f:
+            for line in f.readlines():
+                if line.strip() in message:
+                    return "No"
+
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
-        for exception in exceptions:
-            if exception in message:
-                return 'no'
         Util.log_contact_message(sub, message, ip)
         alert = True
 
