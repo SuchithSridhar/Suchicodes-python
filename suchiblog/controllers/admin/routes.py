@@ -88,25 +88,46 @@ def blacklist():
 
     if block == 'ip':
         ip = f.request.args.get('ip')
-        with open(Config.IP_BLACKLIST) as fin:
-            if ip in fin.read():
-                return f"{ip} already present in the blacklist"
+        has_data_flag = False
+        try:
+            with open(Config.IP_BLACKLIST) as fin:
+                data = fin.read()
+                if ip in data:
+                    return f"{ip} already present in the blacklist"
+                if len(data.strip()) > 0:
+                    has_data_flag = True
+
+        except FileNotFoundError:
+            pass
 
         with open(Config.IP_BLACKLIST, 'a') as fin:
-            fin.write("\n" + ip)
+            if has_data_flag:
+                fin.write("\n" + ip)
+            else:
+                fin.write(ip)
 
         return f"{ip} has been added to the blacklist"
     
     elif block == 'message':
-        message = f.request.get('message')
+        message = f.request.args.get('message')
+        has_data_flag = False
 
-        with open(Config.MESSAGE_BLACKLIST) as fin:
-            for line in fin.readlines():
-                if message in line:
-                    return f"Message already present in the blacklist"
+        try:
+            with open(Config.MESSAGE_BLACKLIST) as fin:
+                for line in fin.readlines():
+                    if (not has_data_flag) and len(line.strip()) > 0:
+                        has_data_flag = True
+                    if message in line:
+                        return f"Message already present in the blacklist"
+
+        except FileNotFoundError:
+            pass
 
         with open(Config.MESSAGE_BLACKLIST, 'a') as fin:
-            fin.write("\n" + message)
+            if has_data_flag:
+                fin.write("\n" + message)
+            else:
+                fin.write(message)
 
         return "Message has been added to blacklist"
 

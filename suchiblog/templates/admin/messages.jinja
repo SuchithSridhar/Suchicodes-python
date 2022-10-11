@@ -16,13 +16,19 @@
         {% for key in messages %}
             <tr>
             <td>{{key}}</td>
-            <td>{{messages[key]["IP"]}}<button data-ip="{{messages[key]['IP']}}" class="block-button btn btn-salmon">Block</button></td>
+            <td>{{messages[key]["IP"]}}<br><button data-ip="{{messages[key]['IP']}}" class="block-button btn btn-secondary">Block</button></td>
             <td>{{messages[key]["Subject"]}}</td>
             <td>{{messages[key]["Message"]}}</td>
             </tr>
         {% endfor %}
     </tbody>
     </table>
+
+    <center>
+      <label for="block-message">Block Message:</label>
+      <input id='block-message' type="text">
+      <button class="block-message btn btn-secondary">Block</button>
+    </center>
   </div>
 {% endblock content %}
 
@@ -37,6 +43,25 @@ function initialize() {
     let url = `/admin/blacklist?type=ip&ip=${ip}`;
 
     if (confirm("Are you sure you want to black list the this IP?")){
+      $.ajax({
+        url: url,
+        success: (result) => {
+          alert(result);
+        },
+      });
+    }
+  });
+
+  $('.block-message').click(e => {
+    let target = $(e.currentTarget);
+    let message = $("#block-message").val().trim();
+    let url = `/admin/blacklist?type=message&message=${message}`;
+
+    if (message === ""){
+      return;
+    }
+
+    if (confirm("Are you sure you want to black list the this message?")){
       $.ajax({
         url: url,
         success: (result) => {

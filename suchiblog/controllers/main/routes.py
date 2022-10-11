@@ -50,16 +50,23 @@ def contact():
 
         # Check blacklist of ip addresses
 
-        with open(Config.IP_BLACKLIST) as fin:
-            if str(ip).strip() in fin.read():
-                return "No"
+        try:
+            with open(Config.IP_BLACKLIST) as fin:
+                if str(ip).strip() in fin.read():
+                    return "No"
+        except FileNotFoundError:
+            pass
 
         # Check blacklist of messages
 
-        with open(Config.MESSAGE_BLACKLIST) as fin:
-            for line in fin.readlines():
-                if line.strip() in message:
-                    return "No"
+        try:
+            with open(Config.MESSAGE_BLACKLIST) as fin:
+                for line in fin.readlines():
+                    if line.strip() in message:
+                        return "No"
+        except FileNotFoundError:
+            pass
+
 
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
