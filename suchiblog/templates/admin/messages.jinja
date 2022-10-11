@@ -33,7 +33,7 @@
 function initialize() {
   $('.block-button').click(e => {
     let target = $(e.currentTarget);
-    let id = target.attr('data-ip');
+    let ip = target.attr('data-ip');
     let url = `/admin/blacklist?type=ip&ip=${ip}`;
 
     if (confirm("Are you sure you want to black list the this IP?")){
