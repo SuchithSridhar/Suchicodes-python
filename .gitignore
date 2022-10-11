@@ -6,3 +6,5 @@ site.db
 *uploaded-data*
 server-ip-address.txt
 *logs*
+suchiblog/config/ip_blacklist                                                                                                       
+suchiblog/config/message_blacklist   
