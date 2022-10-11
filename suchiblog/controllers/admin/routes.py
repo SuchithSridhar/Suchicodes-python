@@ -88,25 +88,25 @@ def blacklist():
 
     if block == 'ip':
         ip = f.request.args.get('ip')
-        with open(Config.IP_BLACKLIST) as f:
-            if ip in f.read():
+        with open(Config.IP_BLACKLIST) as fin:
+            if ip in fin.read():
                 return f"{ip} already present in the blacklist"
 
-        with open(Config.IP_BLACKLIST, 'a') as f:
-            f.write("\n" + ip)
+        with open(Config.IP_BLACKLIST, 'a') as fin:
+            fin.write("\n" + ip)
 
         return f"{ip} has been added to the blacklist"
     
     elif block == 'message':
         message = f.request.get('message')
 
-        with open(Config.MESSAGE_BLACKLIST) as f:
-            for line in f.readlines():
+        with open(Config.MESSAGE_BLACKLIST) as fin:
+            for line in fin.readlines():
                 if message in line:
                     return f"Message already present in the blacklist"
 
-        with open(Config.MESSAGE_BLACKLIST, 'a') as f:
-            f.write("\n" + message)
+        with open(Config.MESSAGE_BLACKLIST, 'a') as fin:
+            fin.write("\n" + message)
 
         return "Message has been added to blacklist"
 
@@ -151,17 +151,17 @@ def ip_logs():
 @fl.login_required
 def delete_messages():
     date = datetime.datetime.now().strftime('%y-%m-%d')
-    with open(Config.MESSAGE_FILE, 'w') as f:
-        f.write(json.dumps({}))
+    with open(Config.MESSAGE_FILE, 'w') as fin:
+        fin.write(json.dumps({}))
     return "All messages have been deleted."
 
 @admin_blueprint.route("/admin/delete-logs")
 @fl.login_required
 def delete_ip_logs():
     date = datetime.datetime.now().strftime('%y-%m-%d')
-    with open(Config.IP_LOGS_FILE_BASE.format(date), 'a') as f:
+    with open(Config.IP_LOGS_FILE_BASE.format(date), 'a') as fin:
         for log in IP_Logs.query.all():
-            f.write(f"{log.date}, {log.ip}, {log.url}\n")
+            fin.write(f"{log.date}, {log.ip}, {log.url}\n")
 
     try:
         num_rows_deleted = db.session.query(IP_Logs).delete()

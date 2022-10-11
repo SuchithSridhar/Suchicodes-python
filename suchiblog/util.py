@@ -60,8 +60,8 @@ class Util:
             'Subject': subject,
             'Message': message
         }
-        with open(Config.MESSAGE_FILE, 'w') as f:
-            f.write(json.dumps(json_data))
+        with open(Config.MESSAGE_FILE, 'w') as fin:
+            fin.write(json.dumps(json_data))
 
         url = f"https://maker.ifttt.com/trigger/notify/with/key/{Config.NOTIFY_KEY}"
         data = {

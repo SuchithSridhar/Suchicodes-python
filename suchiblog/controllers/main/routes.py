@@ -50,14 +50,14 @@ def contact():
 
         # Check blacklist of ip addresses
 
-        with open(Config.IP_BLACKLIST) as f:
-            if str(ip).strip() in f.read():
+        with open(Config.IP_BLACKLIST) as fin:
+            if str(ip).strip() in fin.read():
                 return "No"
 
         # Check blacklist of messages
 
-        with open(Config.MESSAGE_BLACKLIST) as f:
-            for line in f.readlines():
+        with open(Config.MESSAGE_BLACKLIST) as fin:
+            for line in fin.readlines():
                 if line.strip() in message:
                     return "No"
 
