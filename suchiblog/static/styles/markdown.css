@@ -98,9 +98,12 @@
     font-family: monospace;
     padding-left: 2%;
     padding-bottom: 1em;
-    line-height: 100%;
     margin-bottom: 15px;
     overflow-x: auto;
+}
+
+.math::first-line {
+    line-height: 95%;
 }
 
 .index-container.close {
