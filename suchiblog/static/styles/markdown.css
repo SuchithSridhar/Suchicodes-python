@@ -97,7 +97,9 @@
     background-color: var(--color-light-gray);
     font-family: monospace;
     padding-left: 2%;
-    padding-bottom: 1.2em;
+    padding-bottom: 1em;
+    line-height: 95%;
+    margin-bottom: 15px;
     overflow-x: auto;
 }
 
