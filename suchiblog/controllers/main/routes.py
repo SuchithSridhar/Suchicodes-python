@@ -46,7 +46,9 @@ def contact():
                 ip = ip[:index]
             except ValueError:
                 pass
-
+        
+        sub = f.escape(f.request.form['subject'])
+        message = f.escape(f.request.form['message'])
 
         # Check blacklist of ip addresses
 
@@ -68,8 +70,6 @@ def contact():
             pass
 
 
-        sub = f.escape(f.request.form['subject'])
-        message = f.escape(f.request.form['message'])
         Util.log_contact_message(sub, message, ip)
         alert = True
 
