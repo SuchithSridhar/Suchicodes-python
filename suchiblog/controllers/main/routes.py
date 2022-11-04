@@ -116,4 +116,7 @@ def send_pdf():
 
 @main_blueprint.app_errorhandler(404)
 def page_not_found(e):
+    if f.request.path.startswith("/api/"):
+        return "Error 404, page not found. Invalid call to API.\n"
+
     return f.render_template('error-pages/404.jinja'), 404

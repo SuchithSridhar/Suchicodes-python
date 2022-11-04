@@ -23,6 +23,7 @@ def create_app(config_class=Config):
     from .controllers.projects.routes import projects_blueprint
     from .controllers.admin.routes import admin_blueprint
     from .controllers.resources.routes import resources_blueprint
+    from .controllers.api.routes import api_blueprint
     from .models import IP_Logs
     from .commands.scheduled_tasks import cli_blueprint
 
@@ -67,5 +68,6 @@ def create_app(config_class=Config):
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(resources_blueprint)
     app.register_blueprint(cli_blueprint)
+    app.register_blueprint(api_blueprint)
 
     return app
