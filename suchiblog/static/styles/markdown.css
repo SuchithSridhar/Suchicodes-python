@@ -137,6 +137,10 @@
     left: 485px;
 }
 
+.MJXc-display {
+    overflow-y: scroll;
+}
+
 @media screen and (max-width: 800px){
     .index-container.open {
         width: 90%;
