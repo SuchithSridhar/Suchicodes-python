@@ -149,6 +149,11 @@ mjx-container[jax="CHTML"][display="true"] {
     overflow-x: auto;
 }
 
+.math-jax mjx-container {
+    text-align: left !important;
+    padding-left: 2%;
+}
+
 @media screen and (max-width: 800px){
     .index-container.open {
         width: 90%;
