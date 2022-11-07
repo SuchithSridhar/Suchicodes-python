@@ -26,9 +26,13 @@
 {% endblock content %}
 
 {% block js %}
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$$','$$']]}});
-  MathJax.Hub.Config({tex2jax: {displayMath: [['$$$','$$$']]}});
+<script>
+MathJax = {
+  tex: {
+  inlineMath: [['$$', '$$']],
+  displayMath: [['$$$','$$$']]
+  }
+};
 </script>
 
 <script id="MathJax-script" async
