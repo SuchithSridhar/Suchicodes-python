@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for key in messages %}
+        {% for key in dates %}
             <tr>
             <td>{{key}}</td>
             <td>{{messages[key]["IP"]}}<br><button data-ip="{{messages[key]['IP']}}" class="block-button btn btn-secondary">Block</button></td>

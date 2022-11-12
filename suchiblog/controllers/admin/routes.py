@@ -75,10 +75,13 @@ def re_compute_markdowns_endpoint():
 def messages():
     try:
         data = json.loads(open(Config.MESSAGE_FILE).read())
+        dates = data.keys()
+        dates = reversed(sorted(dates))
     except FileNotFoundError:
         data = {}
+        dates = []
 
-    return f.render_template('admin/messages.jinja', title='Messages', messages=data)
+    return f.render_template('admin/messages.jinja', title='Messages', messages=data, dates=dates)
 
 
 @admin_blueprint.route("/admin/blacklist")
