@@ -3,7 +3,7 @@ import flask as f
 import flask_login as fl
 import datetime
 from .adminUtil import re_compute_markdowns
-from ...models import Admin, IP_Logs, URL_Redirection
+from ...models import Admin, IP_Logs, URL_Redirection, Contact
 from ...util import Util
 from ...config import Config
 from ... import db
@@ -73,15 +73,8 @@ def re_compute_markdowns_endpoint():
 @admin_blueprint.route("/admin/messages")
 @fl.login_required
 def messages():
-    try:
-        data = json.loads(open(Config.MESSAGE_FILE).read())
-        dates = data.keys()
-        dates = reversed(sorted(dates))
-    except FileNotFoundError:
-        data = {}
-        dates = []
-
-    return f.render_template('admin/messages.jinja', title='Messages', messages=data, dates=dates)
+    data = Contact.query.order_by(Contact.date.desc()).paginate(per_page=20)
+    return f.render_template('admin/messages.jinja', title='Messages', data=data)
 
 
 @admin_blueprint.route("/admin/blacklist")
@@ -176,14 +169,6 @@ def ip_logs():
 def ip_log_details(uuid):
     details = IP_Logs.query.filter_by(id=uuid).first()
     return f.render_template('admin/ip-logs-details.jinja', data=details)
-
-@admin_blueprint.route("/admin/delete-messages")
-@fl.login_required
-def delete_messages():
-    date = datetime.datetime.now().strftime('%y-%m-%d')
-    with open(Config.MESSAGE_FILE, 'w') as fin:
-        fin.write(json.dumps({}))
-    return "All messages have been deleted."
 
 @admin_blueprint.route("/admin/delete-logs")
 @fl.login_required

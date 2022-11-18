@@ -4,3 +4,4 @@ site.db
 server-ip-address.txt
 suchiblog/config/ip_blacklist                                                                                                       
 suchiblog/config/message_blacklist   
+suchiblog/logs

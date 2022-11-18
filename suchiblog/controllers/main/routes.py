@@ -1,7 +1,8 @@
 import flask as f
 from ...util import Util
-from ...models import URL_Redirection
+from ...models import URL_Redirection, Contact
 from ...config import Config
+from ... import db
 
 main_blueprint = f.Blueprint('main', __name__)
 contact_alert = False
@@ -70,7 +71,14 @@ def contact():
             pass
 
 
-        Util.log_contact_message(sub, message, ip)
+        Util.log_contact_message(
+            message=message,
+            subject=sub,
+            ip=ip,
+            ContactModel=Contact,
+            db=db,
+            app=f.current_app
+        )
         alert = True
 
     return f.render_template('main/contact.jinja', title="Contact | Suchicodes", alert=alert)

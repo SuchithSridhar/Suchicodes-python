@@ -40,32 +40,22 @@ class Util:
     def create_uuid():
         return str(uuid.uuid4())
 
-    def log_contact_message(subject, message, ip):
-        d = datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
-        ignore_ips = [
-                '77.51.27.234'
-        ]
+    def log_contact_message(subject, message, ip, app, db, ContactModel):
+        d = datetime.datetime.now()
 
-        for i in ignore_ips:
-            if str(ip) == i:
-                return None
-
-
-        try:
-            json_data = json.loads(open(Config.MESSAGE_FILE).read())
-        except FileNotFoundError:
-            json_data = {}
-        json_data[d] = {
-            'IP': ip,
-            'Subject': subject,
-            'Message': message
-        }
-        with open(Config.MESSAGE_FILE, 'w') as fin:
-            fin.write(json.dumps(json_data))
+        item = ContactModel(
+            date=d,
+            subject=subject,
+            message=message,
+            ip=ip,
+        )
+        with app.app_context():
+            db.session.add(item)
+            db.session.commit()
 
         url = f"https://maker.ifttt.com/trigger/notify/with/key/{Config.NOTIFY_KEY}"
         data = {
-            'value1': f"New message on suchicodes.com"
+            'value1': f"New message on suchicodes.com - {subject[:10]}"
         }
         requests.post(url, data=data)
 

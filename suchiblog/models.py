@@ -55,6 +55,13 @@ class IP_Logs(db.Model):
     reference = db.Column(db.String)
     user_agent = db.Column(db.String)
 
+class Contact(db.Model):
+    id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
+    date = db.Column(db.DateTime)
+    subject = db.Column(db.String)
+    message = db.Column(db.String)
+    ip = db.Column(db.String)
+
 
 class URL_Redirection(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
