@@ -2,6 +2,7 @@ from . import db, login_manager;
 from .util import Util
 import flask_login as fl
 
+
 @login_manager.user_loader
 def load_user(admin_id):
     return Admin.query.get(str(admin_id))
@@ -13,6 +14,7 @@ class Admin(db.Model, fl.UserMixin):
     password = db.Column(db.String(60), nullable=False)
     def __repr__(self):
         return f"User('{self.id}, {self.email}')"
+
 
 class Projects(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
@@ -41,15 +43,20 @@ class Blog(db.Model):
     brief = db.Column(db.String)
     category = db.Column(db.String)
 
+
 class IP_Logs(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     date = db.Column(db.DateTime)
     url = db.Column(db.String)
     ip = db.Column(db.String)
+    sec_ch_ua = db.Column(db.String)
+    mobile = db.Column(db.String)
+    platform = db.Column(db.String)
+    reference = db.Column(db.String)
+    user_agent = db.Column(db.String)
 
 
 class URL_Redirection(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     keyword_in = db.Column(db.String)
     url_out = db.Column(db.String)
-

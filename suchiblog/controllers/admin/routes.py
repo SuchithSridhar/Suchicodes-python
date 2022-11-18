@@ -171,6 +171,12 @@ def ip_logs():
     logs = IP_Logs.query.order_by(IP_Logs.date.desc()).paginate(per_page=20)
     return f.render_template('admin/ip-logs.jinja', title='IP-logs', logs=logs)
 
+@admin_blueprint.route("/admin/ip-logs-details/<uuid>")
+@fl.login_required
+def ip_log_details(uuid):
+    details = IP_Logs.query.filter_by(id=uuid).first()
+    return f.render_template('admin/ip-logs-details.jinja', data=details)
+
 @admin_blueprint.route("/admin/delete-messages")
 @fl.login_required
 def delete_messages():

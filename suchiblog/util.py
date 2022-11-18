@@ -69,13 +69,22 @@ class Util:
         }
         requests.post(url, data=data)
 
-    def log_ip_access_process(ip, date, url, db, app, ip_logs):
-        item = ip_logs(ip=ip, url=url, date=date)
+    def log_ip_access_process(ip, other_information, date, url, db, app, ip_logs):
+        item = ip_logs(
+            ip=ip,
+            url=url,
+            date=date,
+            sec_ch_ua=other_information["HTTP_SEC_CH_UA"],
+            mobile=other_information["HTTP_SEC_CH_UA_MOBILE"],
+            platform=other_information["HTTP_SEC_CH_UA_PLATFORM"],
+            reference=other_information["HTTP_REFERER"],
+            user_agent=other_information["HTTP_USER_AGENT"]
+        )
         with app.app_context():
             db.session.add(item)
             db.session.commit()
 
-    def log_ip_access(ip, url, db, app, IP_Logs):
+    def log_ip_access(ip, other_information, url, db, app, IP_Logs):
         ignore = [
             '/session/get',
             'suchicodes.com/admin',
@@ -90,21 +99,14 @@ class Util:
             '.png'
         ]
 
-        ignore_ips = [
-                '77.51.27.234'
-        ]
-
         for i in ignore:
             if i in url:
-                return None
-
-        for i in ignore_ips:
-            if str(ip) == i:
                 return None
 
         date=datetime.datetime.now()
         threading.Thread(target=Util.log_ip_access_process, name='log-ip', args=[
             ip,
+            other_information,
             date,
             url,
             db,

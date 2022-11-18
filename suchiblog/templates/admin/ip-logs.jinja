@@ -2,6 +2,19 @@
 
 {% block content %}
   <div class="container">
+    <div class="modal" tabindex="-1" id="ip-details-modal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+
+          </div>
+          <div class="modal-footer">
+            <a class="delete-button btn btn-danger" data-id="">Delete</a>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <table class="table">
     <thead>
@@ -9,6 +22,7 @@
         <th scope="col">Date</th>
         <th scope="col">IP</th>
         <th scope="col">URL</th>
+        <th scope="col">Details</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +31,7 @@
             <td>{{log.date}}</td>
             <td>{{log.ip}}</td>
             <td>{{log.url}}</td>
+            <td><button data-bs-toggle="modal" data-bs-target="#ip-details-modal" data-uuid="{{log.id}}" class="btn btn-secondary details-button">Details</button></td>
             </tr>
         {% endfor %}
     </tbody>
@@ -37,3 +52,20 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block js %}
+<script>
+$(".details-button").on("click", function(){
+  let uuid = $(this).attr("data-uuid");
+  let url = `/admin/ip-logs-details/${uuid}`;
+  $("#ip-details-modal .modal-body").html("<h4>Loading</h4>");
+  $.ajax({
+    url: url,
+    type: "Get",
+    success: function(data){
+      $("#ip-details-modal .modal-body").html(data);
+    }
+  });
+});
+</script>
+{% endblock js %}

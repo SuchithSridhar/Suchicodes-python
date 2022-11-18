@@ -45,13 +45,14 @@ def create_app(config_class=Config):
                 ip = ip[:index]
             except ValueError:
                 pass
-        Util.log_ip_access(ip, f.request.url, db, app, IP_Logs)
+
+        other_information = f.request.environ
+
+        Util.log_ip_access(ip, other_information, f.request.url, db, app, IP_Logs)
 
     db.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
-
-    initialize_database(db=db, app=app)
 
     app.register_blueprint(main_blueprint)
     app.register_blueprint(projects_blueprint)
