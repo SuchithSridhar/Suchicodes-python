@@ -74,11 +74,11 @@ class Util:
             ip=ip,
             url=url,
             date=date,
-            sec_ch_ua=other_information["HTTP_SEC_CH_UA"],
-            mobile=other_information["HTTP_SEC_CH_UA_MOBILE"],
-            platform=other_information["HTTP_SEC_CH_UA_PLATFORM"],
-            reference=other_information["HTTP_REFERER"],
-            user_agent=other_information["HTTP_USER_AGENT"]
+            sec_ch_ua=other_information.get("HTTP_SEC_CH_UA", ""),
+            mobile=other_information.get("HTTP_SEC_CH_UA_MOBILE", ""),
+            platform=other_information.get("HTTP_SEC_CH_UA_PLATFORM", ""),
+            reference=other_information.get("HTTP_REFERER", ""),
+            user_agent=other_information.get("HTTP_USER_AGENT", "")
         )
         with app.app_context():
             db.session.add(item)

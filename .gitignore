@@ -1,10 +1,6 @@
 *__pycache__*
 site.db
-*message-data.txt*
-*message-data.json*
-*ip-logs-csv*
 *uploaded-data*
 server-ip-address.txt
-*logs*
 suchiblog/config/ip_blacklist                                                                                                       
 suchiblog/config/message_blacklist   

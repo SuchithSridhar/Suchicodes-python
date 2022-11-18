@@ -1,0 +1,206 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 137-689-495
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:18] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:31:19] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:33:26] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:34:53] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:02] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:35:18] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:36:55] "[35m[1mGET /admin/ip-logs HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:36:55] "GET /admin/ip-logs?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:36:55] "GET /admin/ip-logs?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:36:56] "GET /admin/ip-logs?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:36:56] "[36mGET /admin/ip-logs?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:15] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:16] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:50] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:50] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:50] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:50] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:51] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:51] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:51] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:37:51] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:22] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:38:23] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:36] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:40:37] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:41:45] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:43:18] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:17] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:46:18] "GET /admin/ip-logs-details/%3Cuuid%3E HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:01] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:01] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:01] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:01] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:02] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:02] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:02] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:03] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:47:04] "[35m[1mGET /admin/ip-logs-details/a7f3cd6e-d489-4257-9949-1e4c661cf556 HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/suchi/Sync/Programming/Suchicodes/suchiblog/controllers/admin/routes.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 137-689-495
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:16] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:17] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:17] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:17] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:17] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:17] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:18] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:19] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:48:20] "[35m[1mGET /admin/ip-logs-details/9b90ea35-2449-4b4a-89ce-4d71f8bc7190 HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/suchi/Sync/Programming/Suchicodes/suchiblog/controllers/admin/routes.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 137-689-495
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:23] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:24] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:24] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:24] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:24] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:24] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:25] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:25] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:49:27] "GET /admin/ip-logs-details/55d70e1b-8def-420d-a77e-2f13ea31aa9e HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:31] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:31] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:31] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:31] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:32] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:32] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:32] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:33] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:35] "GET /admin/ip-logs-details/1b0e8923-ec22-4684-8780-354dd1758400 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:48] "GET /admin/ip-logs-details/9c6be517-e83c-4561-b275-5d3af4ac0a87 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:50:56] "GET /admin/ip-logs-details/2af6bab8-edc3-40b0-8794-92cb3da577ed HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:01] "GET /admin/ip-logs-details/da69a3e7-212a-4ef6-be24-4aced1ca6ec0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:05] "GET /admin/ip-logs-details/e85c3d9c-800f-4378-a29c-7809f1c9d524 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:08] "GET /admin/ip-logs-details/fe1fa223-5567-4713-8446-e5c383ea80e9 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:32] "GET /admin/ip-logs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:33] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:33] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:33] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:33] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:33] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:34] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:35] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:36] "GET /admin/ip-logs-details/88ec6979-b2b8-4edf-a585-9cb61d688b0e HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:40] "GET /admin/ip-logs-details/f9d0ecb7-2658-43b6-82a6-4cebdf11b37f HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:42] "GET /admin/ip-logs-details/0ea3f5e4-4460-44b2-a872-3a485cf4542b HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Nov/2022 23:51:47] "GET /admin/ip-logs-details/02910aec-f8d9-42f9-8a9f-8cd39398dbf7 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:08:33] "GET /admin/ip-logs-details/88ec6979-b2b8-4edf-a585-9cb61d688b0e HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/suchi/Sync/Programming/Suchicodes/suchiblog/util.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 137-689-495
+INFO:werkzeug: * Detected change in '/home/suchi/Sync/Programming/Suchicodes/suchiblog/util.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 137-689-495
+INFO:werkzeug: * Detected change in '/home/suchi/Sync/Programming/Suchicodes/suchiblog/util.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 137-689-495
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "[36mGET /static/js/skills-tabs.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:47] "[36mGET /static/js/responsive-main.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:48] "GET /static/assets/suchi.png HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:48] "[36mGET /static/styles/components/skills-tabs.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:48] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:48] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:48] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:49] "[36mGET /static/assets/dots-light.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:53] "GET /resources/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/styles/resources.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/styles/base.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/styles/colors.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/js/mode-toggler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/js/resources-handler.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/styles/footer.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:54] "[36mGET /static/styles/components/navbar.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:55] "[36mGET /static/styles/components/mode-toggler.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:17:56] "[36mGET /static/assets/icon.svg HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [18/Nov/2022 00:21:12] "GET /session/set/dark HTTP/1.1" 200 -
