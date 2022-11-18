@@ -1,15 +1,17 @@
-from multiprocessing.sharedctypes import Value
 import flask as f
 import flask_login as fl
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from .config import Config
 
 db = SQLAlchemy()
 login_manager = fl.LoginManager()
 login_manager.login_view = 'admin.login'
+migrate = Migrate()
 
 def initialize_database(db, app):
-    db.create_all(app=app)
+    with app.app_context():
+        db.create_all()
 
 def create_app(config_class=Config):
     global LOCALE
@@ -47,6 +49,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     login_manager.init_app(app)
+    migrate.init_app(app, db)
 
     initialize_database(db=db, app=app)
 
