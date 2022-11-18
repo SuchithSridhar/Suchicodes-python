@@ -2,6 +2,7 @@ import json
 import flask as f
 import flask_login as fl
 import datetime
+import adminUtil
 from .adminUtil import re_compute_markdowns
 from ...models import Admin, IP_Logs, URL_Redirection, Contact
 from ...util import Util
@@ -48,7 +49,7 @@ def server_public_ip_set():
     password = f.request.form['pass']
     ip = f.request.form['ip']
 
-    if Util.hash_password(password) != b'GXvrIyBnEWnqW_Dvq3nUvC7ywy7yWZxxCMYc91JeI_58H0-J-Ovv_ouDCxLEz4exgsTMkOaWjB3gqUCnyyXt5Q==':
+    if Util.hash_password(password) != Config.SUCHI_SERVER_PASS_HASH:
         f.abort(403)
         return
 
@@ -56,6 +57,17 @@ def server_public_ip_set():
         file.write(ip);
 
     return "The ip address has been set"
+
+@admin_blueprint.route("/admin/server-checkin", methods=['post'])
+def server_checkin():
+    password = f.request.form['pass']
+    status = f.request.form['status']
+
+    if Util.hash_password(password) != Config.SUCHI_SERVER_PASS_HASH:
+        f.abort(403)
+        return
+
+    adminUtil.server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
 
 
 @admin_blueprint.route("/admin/server-ip")
