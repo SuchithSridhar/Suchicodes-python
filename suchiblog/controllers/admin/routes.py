@@ -2,7 +2,7 @@ import json
 import flask as f
 import flask_login as fl
 import datetime
-import adminUtil
+from .adminUtil import server_checkin
 from .adminUtil import re_compute_markdowns
 from ...models import Admin, IP_Logs, URL_Redirection, Contact
 from ...util import Util
@@ -67,7 +67,7 @@ def server_checkin():
         f.abort(403)
         return
 
-    adminUtil.server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
+    server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
 
 
 @admin_blueprint.route("/admin/server-ip")
