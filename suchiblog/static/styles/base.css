@@ -48,6 +48,10 @@ body {
     color: var(--color-foreground);
 }
 
+.modal-content {
+  background-color: var(--color-background);
+}
+
 .table {
   color: var(--color-foreground);
 }
