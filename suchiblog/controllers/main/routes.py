@@ -34,6 +34,11 @@ def url_redirection(keyword):
     return f.redirect(url.url_out)
 
 
+@main_blueprint.route("/calendar")
+def calendar():
+    return f.render_template('main/calendar.jinja', title="Calendar | Suchicodes")
+
+
 @main_blueprint.route("/contact", methods=['get','post'])
 def contact():
     alert = False
