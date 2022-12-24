@@ -24,6 +24,7 @@ def create_app(config_class=Config):
     from .controllers.admin.routes import admin_blueprint
     from .controllers.resources.routes import resources_blueprint
     from .models import IP_Logs
+    from .commands.scheduled_tasks import cli_blueprint
 
     GLOBAL_DATA = Util.get_pre_render_data(flask=None, lang='en')
 
@@ -65,5 +66,6 @@ def create_app(config_class=Config):
     app.register_blueprint(projects_blueprint)
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(resources_blueprint)
+    app.register_blueprint(cli_blueprint)
 
     return app

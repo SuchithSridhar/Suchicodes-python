@@ -41,6 +41,13 @@ class Util:
     def create_uuid():
         return str(uuid.uuid4())
 
+    def send_notification_to_IFFF(message):
+        if (Config.SUCHICODES_ENV != "production"):
+            print(f"DEBUG: Trying to send notification \"{message}\"")
+        url = Config.NOTIFY_URL
+        data = {'value1': f"SC: {message}"}
+        requests.post(url, data=data)
+
     def log_contact_message(subject, message, ip, app, db, ContactModel):
         d = datetime.datetime.now()
 
@@ -54,11 +61,9 @@ class Util:
             db.session.add(item)
             db.session.commit()
 
-        url = Config.NOTIFY_URL
-        data = {
-            'value1': f"New message on suchicodes.com - {subject[:10]}"
-        }
-        requests.post(url, data=data)
+        Util.send_notification_to_IFFF(
+            f"Msg - {subject[:10]}"
+        )
 
     def log_ip_access_process(
             ip,

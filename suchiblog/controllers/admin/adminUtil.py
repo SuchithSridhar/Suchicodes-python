@@ -32,6 +32,9 @@ def server_checkin_background(status: str, file: str):
     mode = 'w'
     new_line = ""
 
+    if (os.path.isfile(Config.SUCHI_SERVER_VAIDATION)):
+        os.remove(Config.SUCHI_SERVER_VAIDATION)
+
     if (os.path.isfile(file)):
         mode = 'a'
         new_line = "\n"
