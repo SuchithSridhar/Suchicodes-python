@@ -8,6 +8,7 @@ import requests
 import threading
 from .config import Config
 
+
 class Util:
     def hash_password(password):
         hasher = hashlib.sha512()
@@ -34,7 +35,7 @@ class Util:
             data = json.loads(data)
         except FileNotFoundError:
             data = {}
-        
+
         return data
 
     def create_uuid():
@@ -53,13 +54,20 @@ class Util:
             db.session.add(item)
             db.session.commit()
 
-        url = f"https://maker.ifttt.com/trigger/notify/with/key/{Config.NOTIFY_KEY}"
+        url = Config.NOTIFY_URL
         data = {
             'value1': f"New message on suchicodes.com - {subject[:10]}"
         }
         requests.post(url, data=data)
 
-    def log_ip_access_process(ip, other_information, date, url, db, app, ip_logs):
+    def log_ip_access_process(
+            ip,
+            other_information,
+            date,
+            url,
+            db,
+            app,
+            ip_logs):
         item = ip_logs(
             ip=ip,
             url=url,
@@ -93,13 +101,8 @@ class Util:
             if i in url:
                 return None
 
-        date=datetime.datetime.now()
-        threading.Thread(target=Util.log_ip_access_process, name='log-ip', args=[
-            ip,
-            other_information,
-            date,
-            url,
-            db,
-            app,
-            IP_Logs
-        ]).start()
+        date = datetime.datetime.now()
+        threading.Thread(
+            target=Util.log_ip_access_process,
+            name='log-ip',
+            args=[ip, other_information, date, url, db, app, IP_Logs]).start()

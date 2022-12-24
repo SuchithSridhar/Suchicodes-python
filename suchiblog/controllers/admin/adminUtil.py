@@ -5,6 +5,7 @@ import threading
 import datetime
 import os
 
+
 def re_compute_markdowns(app, db):
     proc = Process(target=re_compute, args=(app, db))
     proc.start()
@@ -20,7 +21,13 @@ def re_compute(app, db):
 
 
 def server_checkin(status: str, file: str):
-    threading.Thread(target=server_checkin_background, name="server-checkin", args=[status, file]).start()
+    threading.Thread(
+        target=server_checkin_background,
+        name="server-checkin",
+        args=[
+            status,
+            file]).start()
+
 
 def server_checkin_background(status: str, file: str):
     mode = 'w'

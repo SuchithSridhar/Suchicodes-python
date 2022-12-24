@@ -9,9 +9,11 @@ login_manager = fl.LoginManager()
 login_manager.login_view = 'admin.login'
 migrate = Migrate()
 
+
 def initialize_database(db, app):
     with app.app_context():
         db.create_all()
+
 
 def create_app(config_class=Config):
     global LOCALE
@@ -27,7 +29,6 @@ def create_app(config_class=Config):
 
     app = f.Flask(__name__)
     app.config.from_object(Config)
-
 
     @app.context_processor
     def pre_render():
@@ -48,7 +49,13 @@ def create_app(config_class=Config):
 
         other_information = f.request.environ
 
-        Util.log_ip_access(ip, other_information, f.request.url, db, app, IP_Logs)
+        Util.log_ip_access(
+            ip,
+            other_information,
+            f.request.url,
+            db,
+            app,
+            IP_Logs)
 
     db.init_app(app)
     login_manager.init_app(app)

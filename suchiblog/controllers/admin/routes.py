@@ -1,4 +1,3 @@
-import json
 import flask as f
 import flask_login as fl
 import datetime
@@ -29,10 +28,12 @@ def login():
         unhashed_password = f.request.form['password']
         password = Util.hash_password(unhashed_password)
         user = Admin.query.filter_by(email=email).first()
-        if user and (user.password == password or user.password == unhashed_password):
+        if user and (user.password == password or user.password ==
+                     unhashed_password):
             fl.login_user(user)
             next_page = f.request.args.get('next')
-            return f.redirect(next_page) if next_page else f.redirect(f.url_for('main.index'))
+            return f.redirect(next_page) if next_page else f.redirect(
+                f.url_for('main.index'))
 
     return f.render_template('admin/login.jinja', title='Login')
 
@@ -54,12 +55,13 @@ def server_public_ip_set():
         return
 
     with open('server-ip-address.txt', 'w') as file:
-        file.write(ip);
+        file.write(ip)
 
     return "The ip address has been set"
 
+
 @admin_blueprint.route("/admin/server-checkin", methods=['post'])
-def server_checkin():
+def server_checkin_api():
     password = f.request.form['pass']
     status = f.request.form['status']
 
@@ -75,6 +77,7 @@ def server_checkin():
 def server_public_ip_get():
     return open('server-ip-address.txt').read()
 
+
 @admin_blueprint.route("/admin/re_compute_markdowns")
 @fl.login_required
 def re_compute_markdowns_endpoint():
@@ -86,7 +89,10 @@ def re_compute_markdowns_endpoint():
 @fl.login_required
 def messages():
     data = Contact.query.order_by(Contact.date.desc()).paginate(per_page=20)
-    return f.render_template('admin/messages.jinja', title='Messages', data=data)
+    return f.render_template(
+        'admin/messages.jinja',
+        title='Messages',
+        data=data)
 
 
 @admin_blueprint.route("/admin/blacklist")
@@ -115,7 +121,7 @@ def blacklist():
                 fin.write(ip)
 
         return f"{ip} has been added to the blacklist"
-    
+
     elif block == 'message':
         message = f.request.args.get('message')
         has_data_flag = False
@@ -126,7 +132,7 @@ def blacklist():
                     if (not has_data_flag) and len(line.strip()) > 0:
                         has_data_flag = True
                     if message in line:
-                        return f"Message already present in the blacklist"
+                        return "Message already present in the blacklist"
 
         except FileNotFoundError:
             pass
@@ -139,9 +145,8 @@ def blacklist():
 
         return "Message has been added to blacklist"
 
-
-
     return "Invalid type for blacklist"
+
 
 @admin_blueprint.route("/admin/url-redirects", methods=['GET', 'POST'])
 @fl.login_required
@@ -156,7 +161,11 @@ def url_redirects():
 
     if f.request.method == 'GET':
         urls = URL_Redirection.query.paginate(per_page=20)
-        return f.render_template('admin/url-redirects.jinja', title='URL Redirects', urls=urls)
+        return f.render_template(
+            'admin/url-redirects.jinja',
+            title='URL Redirects',
+            urls=urls)
+
 
 @admin_blueprint.route("/admin/url-redirects/delete/<id>")
 @fl.login_required
@@ -170,17 +179,20 @@ def url_redirects_delete(id):
     db.session.commit()
     return "URL Redirect deleted."
 
+
 @admin_blueprint.route("/admin/ip-logs")
 @fl.login_required
 def ip_logs():
     logs = IP_Logs.query.order_by(IP_Logs.date.desc()).paginate(per_page=20)
     return f.render_template('admin/ip-logs.jinja', title='IP-logs', logs=logs)
 
+
 @admin_blueprint.route("/admin/ip-logs-details/<uuid>")
 @fl.login_required
 def ip_log_details(uuid):
     details = IP_Logs.query.filter_by(id=uuid).first()
     return f.render_template('admin/ip-logs-details.jinja', data=details)
+
 
 @admin_blueprint.route("/admin/delete-logs")
 @fl.login_required
@@ -191,8 +203,9 @@ def delete_ip_logs():
             fin.write(f"{log.date}, {log.ip}, {log.url}\n")
 
     try:
-        num_rows_deleted = db.session.query(IP_Logs).delete()
+        db.session.query(IP_Logs).delete()
         db.session.commit()
-    except:
+    except BaseException:
         db.session.rollback()
+
     return "Ip logs have been deleted."

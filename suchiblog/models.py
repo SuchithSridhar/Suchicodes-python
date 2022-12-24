@@ -1,4 +1,4 @@
-from . import db, login_manager;
+from . import db, login_manager
 from .util import Util
 import flask_login as fl
 
@@ -12,6 +12,7 @@ class Admin(db.Model, fl.UserMixin):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     email = db.Column(db.String(40), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+
     def __repr__(self):
         return f"User('{self.id}, {self.email}')"
 
@@ -19,8 +20,8 @@ class Admin(db.Model, fl.UserMixin):
 class Projects(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     title = db.Column(db.String)
-    html = db.Column(db.Text) # This is HTML content
-    markdown = db.Column(db.Text) # This is markdown content
+    html = db.Column(db.Text)  # This is HTML content
+    markdown = db.Column(db.Text)  # This is markdown content
     url = db.Column(db.String)
     brief = db.Column(db.String)
     img = db.Column(db.String)
@@ -38,8 +39,8 @@ class Blog(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     date = db.Column(db.DateTime)
     title = db.Column(db.String)
-    html = db.Column(db.Text) # This is HTML content
-    markdown = db.Column(db.Text) # This is markdown content
+    html = db.Column(db.Text)  # This is HTML content
+    markdown = db.Column(db.Text)  # This is markdown content
     brief = db.Column(db.String)
     category = db.Column(db.String)
 
@@ -54,6 +55,7 @@ class IP_Logs(db.Model):
     platform = db.Column(db.String)
     reference = db.Column(db.String)
     user_agent = db.Column(db.String)
+
 
 class Contact(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
