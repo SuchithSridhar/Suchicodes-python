@@ -1,6 +1,7 @@
 from multiprocessing import Process
 from ...models import Blog
 from ...controllers.resources.res_util import ResUtil
+from ...config import Config
 import threading
 import datetime
 import os
@@ -36,7 +37,7 @@ def server_checkin_background(status: str, file: str):
         new_line = "\n"
 
     status = status.replace(",", "<comma>")
-    date = datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+    date = datetime.datetime.now().strftime(Config.DATETIME_COMPLETE_FORMAT)
     new_line += f"{date},{status}"
 
     with open(file, mode) as f:
