@@ -13,7 +13,7 @@ class Util:
     def hash_password(password):
         hasher = hashlib.sha512()
         hasher.update(password.encode())
-        return base64.urlsafe_b64encode(hasher.digest())
+        return base64.urlsafe_b64encode(hasher.digest()).decode('UTF-8')
 
     def get_pre_render_data(flask, lang="en"):
         stream = open(f'suchiblog/config/locales/{lang}.yml')

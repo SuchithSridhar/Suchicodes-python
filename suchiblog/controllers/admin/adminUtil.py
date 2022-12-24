@@ -24,9 +24,7 @@ def server_checkin(status: str, file: str):
     threading.Thread(
         target=server_checkin_background,
         name="server-checkin",
-        args=[
-            status,
-            file]).start()
+        args=[status, file]).start()
 
 
 def server_checkin_background(status: str, file: str):

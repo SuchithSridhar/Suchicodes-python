@@ -70,6 +70,7 @@ def server_checkin_api():
         return
 
     server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
+    return "Checkin Complete"
 
 
 @admin_blueprint.route("/admin/server-ip")
