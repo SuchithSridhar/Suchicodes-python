@@ -28,7 +28,7 @@ def login():
         unhashed_password = f.request.form['password']
         password = Util.hash_password(unhashed_password)
         user = Admin.query.filter_by(email=email).first()
-        if user and (user.password == password or user.password ==
+        if user and (user.password.decode("UTF-8") == password or user.password ==
                      unhashed_password):
             fl.login_user(user)
             next_page = f.request.args.get('next')
