@@ -28,8 +28,11 @@ def login():
         unhashed_password = f.request.form['password']
         password = Util.hash_password(unhashed_password)
         user = Admin.query.filter_by(email=email).first()
-        if user and (user.password.decode("UTF-8") == password or user.password ==
-                     unhashed_password):
+
+        if (user and
+            (user.password.decode("UTF-8") == password or
+             user.password == unhashed_password)):
+
             fl.login_user(user)
             next_page = f.request.args.get('next')
             return f.redirect(next_page) if next_page else f.redirect(
@@ -43,6 +46,33 @@ def login():
 def logout():
     fl.logout_user()
     return f.redirect(f.url_for('main.index'))
+
+
+@admin_blueprint.route("/admin/view_suchi_server_logs")
+@fl.login_required
+def view_suchi_server_logs():
+    filename = Config.SUCHI_SERVER_CHECKIN_FILE
+    try:
+        with open(filename, 'r') as f:
+            lines = f.readlines()
+    except FileNotFoundError:
+        return "Server checkin file was not found on the system."
+
+    lines.reverse()
+    lines = lines[:5]
+
+    html = '<table class="table"><tr><th>Date</th><th>Status</th><tr>\n'
+    for line in lines:
+        html += '  <tr>\n'
+        for index, cell in enumerate(line.split(',')):
+            if index == 0:
+                html += f'    <td><strong>{cell}</strong></td>\n'
+            else:
+                html += f'    <td>{cell}</td>\n'
+        html += '  </tr>\n'
+
+    html += '</table>\n'
+    return html
 
 
 @admin_blueprint.route("/admin/server-set-ip", methods=['post'])
