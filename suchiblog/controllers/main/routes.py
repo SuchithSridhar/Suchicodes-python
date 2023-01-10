@@ -27,6 +27,11 @@ def index():
         skills=Util.get_skill_list())
 
 
+@main_blueprint.route("/support_me")
+def support_me():
+    return f.render_template('main/support_me.jinja', title="Support Me | Suchicodes")
+
+
 @main_blueprint.route("/about")
 def about():
     return f.render_template('main/about.jinja', title="About | Suchicodes")

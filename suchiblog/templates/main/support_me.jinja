@@ -1,0 +1,38 @@
+{% extends "layout.jinja" %}
+
+{% block metatags %}
+    <meta
+      name="description"
+      content="Support this website"
+    />
+    <meta property="og:title" content="Support Me" />
+    <meta property="og:url" content="https://suchicodes.com/support_me" />
+    <meta
+      property="og:description"
+      content="Support this website"
+    />
+{% endblock metatags %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/about.css">
+{% endblock headers %}
+
+
+{% block content %}
+  <section id="about" class="">
+    <hr class="nav-separator">
+    <div class=container>
+        <div class="row">
+        <div class="col-lg-8 col-md-10">
+        <h1 class="title">Support Me:</h1>
+        <p class="text">
+            Enjoy the notes and the website? Feel free to <a href="https://www.buymeacoffee.com/suchicodes">Buy me a coffee</a> to motivate and help me out!
+            <br>
+            <br>
+            Want to contribute to the project with code or other development related methods? Checkout out the <a href="https://github.com/SuchithSridhar/Suchicodes">GitHub project</a>. You can contact me about how you want to contribute!
+        </p>
+        </div>
+        </div>
+    </div>
+  </section>
+{% endblock content %}

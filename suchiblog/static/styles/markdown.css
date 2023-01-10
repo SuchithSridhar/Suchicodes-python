@@ -1,3 +1,9 @@
+#contribute p{
+    border: black 1px solid;
+    padding: 2%;
+    margin-top: 10px;
+}
+
 #markdown-container {
     padding: 2%;
     margin-top: 5%;

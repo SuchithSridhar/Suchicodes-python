@@ -22,6 +22,7 @@ home:
   sub_title_2: "A Student"
   sub_title_3: "A Learner"
   footer_text: "© 2021 Suchith Sridhar. All rights reserved."
+  footer_support: "<a href='/support_me'>Contribute to this website.</a>"
 
   about_title: "A little about me"
   about_text: "I'm a <b>Developer</b> - I enjoy building stuff on the web and otherwise :). I am currently pursuing my
