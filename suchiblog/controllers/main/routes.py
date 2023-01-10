@@ -54,7 +54,7 @@ def calendar():
         title="Calendar | Suchicodes")
 
 
-@main_blueprint.route("/contact", methods=['get', 'post'])
+@main_blueprint.route("/reach-me", methods=['get', 'post'])
 def contact():
     alert = False
     if f.request.method == 'POST':
