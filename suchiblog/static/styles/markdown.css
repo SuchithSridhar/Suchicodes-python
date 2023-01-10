@@ -1,5 +1,7 @@
 #contribute p{
-    border: black 1px solid;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-foreground);
     padding: 2%;
     margin-top: 10px;
 }
