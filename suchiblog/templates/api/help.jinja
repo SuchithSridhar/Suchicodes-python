@@ -1,0 +1,65 @@
+{% extends "layout.jinja" %}
+
+{% block metatags %}
+    <meta
+      name="description"
+      content="Information about the API for the notes."
+    />
+    <meta property="og:title" content="API Help" />
+    <meta property="og:url" content="https://suchicodes.com/api/" />
+    <meta
+      property="og:description"
+      content="Information about the API for the notes."
+    />
+{% endblock metatags %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/about.css">
+{% endblock headers %}
+
+
+{% block content %}
+  <section id="about" class="">
+    <hr class="nav-separator">
+    <div class=container>
+        <div class="row">
+        <div class="col-lg-8 col-md-10">
+        <h1 class="title">API Help</h1>
+        <p class="text">
+            These are some API documentations for if you wish to use the raw data of the notes. Make sure to use the endpoints sparingly for if the bandwidth is used too much I'm going to have to limit the number of requests. Try to cache the data that's requested so that there aren't too many requests made.
+        </p>
+        </div>
+        </div>
+    </div>
+  </section>
+
+  <div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Endpoint</th>
+        <th scope="col">Parameter</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">/api/resources/categories</th>
+        <td>-</td>
+        <td>Get all the categories under resources.</td>
+      </tr>
+      <tr>
+        <th scope="row">/api/resources/blogs/&lt;id&gt;</th>
+        <td>Category Id</td>
+        <td>Get all the blogs under a particular category.</td>
+      </tr>
+      <tr>
+        <th scope="row">/api/resources/blog/&lt;id&gt;</th>
+        <td>Blog Id</td>
+        <td>Get all the data associated with a blog.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+{% endblock content %}
