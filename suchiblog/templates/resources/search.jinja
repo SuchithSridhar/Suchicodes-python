@@ -1,0 +1,76 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+<link rel="stylesheet" href="/static/styles/resources/search.css">
+{% endblock headers %}
+
+{% block content %}
+
+<div class="container">
+    <hr class="nav-separator">
+</div>
+
+<section id="search-container">
+<div class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+            <div class="search">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control" placeholder="Search Blogs">
+                <button class="btn-custom">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="results">
+<div class="container">
+    <!--
+    <div class="result-item">
+        <div class="blog-path">Resources > Dal Notes > Win 2023 > CSCI 1120</div>
+        <div class="blog-title">Lecture Notes</div>
+        <div class="matched-line">"This was the matched line in the search"</div>
+    </div>
+    -->
+
+    {% for result in results %}
+        <div class="result-item" data-blog-id="{{result['blog_id']}}" tabindex="0" role="button">
+            <div class="blog-path">{{result['blog_path']}}</div>
+            <div class="blog-title">{{result['blog_title']}}</div>
+            <div class="matched-line">{{result['matched_line']}}</div>
+        </div>
+    {% endfor %}
+</section>
+</div>
+
+
+{% endblock content %}
+
+{% block js %}
+<script>
+    perform_search = () => {
+        url = "/resources/search"
+        search = $('.search input');
+        string = search.val().trim();
+        if (string != "") {
+            string = `?query=${string}`
+            string = encodeURI(string)
+            window.location.href = url + string;
+        }
+    };
+    $(".search input").on('keypress', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            perform_search();
+        }
+    });
+    search_button = $('.search button').on("click", perform_search);
+
+    $(".result-item").on('click', (e) => {
+        blog_id = e.currentTarget.getAttribute("data-blog-id");
+        url = `/resources/blog/${blog_id}`;
+        window.location.href = url;
+    })
+
+</script>
+{% endblock js %}

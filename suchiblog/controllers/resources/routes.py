@@ -11,9 +11,16 @@ from .res_util import ResUtil
 resources_blueprint = f.Blueprint('resources', __name__)
 
 
-@resources_blueprint.route("/resources")
 @resources_blueprint.route("/resources/")
 def index():
+    return f.render_template(
+        "resources/index.jinja",
+        title="Resources | Suchicodes"
+    )
+
+
+@resources_blueprint.route("/resources/categories/")
+def get_categories():
     categories = Category.query.all()
     blogs = Blog.query.all()
     categories_json = []
@@ -37,8 +44,38 @@ def index():
         blogs_json.append(new)
 
     return f.render_template(
-        "resources/index.jinja", title="Resources | Suchicodes",
+        "resources/all-categories.jinja",
+        title="Resources - Categories | Suchicodes",
         categories=json.dumps(categories_json), blogs=json.dumps(blogs_json)
+    )
+
+
+@resources_blueprint.route("/resources/search")
+def search_blogs():
+    # Setting number of results ot return
+    item_count = 10;
+
+    search_query = f.request.args.get("query", default="", type=str).strip()
+    results = []
+    if search_query != "":
+        cut_off = 50 # cut off for match result
+        fuzz_search = ResUtil.perform_fuzzy_search(search_query, item_count)
+        fuzz_search = reversed(sorted(fuzz_search, key=lambda k: k['ratio']))
+        for result in fuzz_search:
+            if result['ratio'] < cut_off:
+                break;
+            path = " > ".join((x[1] for x in ResUtil.get_category_path(result['category'])))
+            results.append({
+                "blog_id": result['blog_id'][:6],
+                "blog_title": result["blog_title"],
+                "blog_path": path,
+                "matched_line": result["line"]
+            })
+
+    return f.render_template(
+        "resources/search.jinja",
+        title = "Search Blogs | Suchicodes",
+        results=results
     )
 
 

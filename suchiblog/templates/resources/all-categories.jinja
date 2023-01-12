@@ -1,0 +1,28 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/static/styles/resources/all-categories.css">
+{% endblock headers %}
+
+{% block content %}
+
+<div class="container">
+    <hr class="nav-separator">
+    <div class="list-container">
+        <ul id="top-level-list" class="top-level">
+        </ul>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <script src="/static/js/resources-handler.js">
+    </script>
+    <script>
+        $(document).ready( function () {
+            setCategories({{categories}});
+            setBlogs({{blogs}});
+        })
+    </script>
+{% endblock js %}

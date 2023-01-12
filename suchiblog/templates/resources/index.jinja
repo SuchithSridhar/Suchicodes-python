@@ -1,29 +1,22 @@
 {% extends "layout.jinja" %}
 
 {% block headers %}
-    <link rel="stylesheet" href="/static/styles/resources.css">
+    <link rel="stylesheet" href="/static/styles/resources/index.css">
 {% endblock headers %}
 
 {% block content %}
 
 <div class="container">
     <hr class="nav-separator">
-    <div class="list-container">
-        <ul id="top-level-list" class="top-level">
-        </ul>
+    <div class="button-list">
+        <a href="/resources/categories"><div class="button-box">Categories</div></a>
+        <a href="/resources/search"><div class="button-box">Search</div></a>
     </div>
 </div>
 
 {% endblock content %}
 
 {% block js %}
-    <script src="/static/js/resources-handler.js">
-    </script>
-    <script>
-        $(document).ready( function () {
-            setCategories({{categories}});
-            setBlogs({{blogs}});
-        })
-    </script>
+<script>
+</script>
 {% endblock js %}
-

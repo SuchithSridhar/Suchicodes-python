@@ -18,6 +18,7 @@ requests = ">=2.27"
 markdown = ">=3.3.0"
 numpy = ">=1.22.0"
 flask-migrate = "*"
+rapidfuzz = "*"
 
 [dev-packages]
 
