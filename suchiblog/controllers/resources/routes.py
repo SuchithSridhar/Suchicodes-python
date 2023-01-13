@@ -1,8 +1,8 @@
 import json
 import os
+from datetime import datetime
 import flask as f
 import flask_login as fl
-from datetime import datetime
 from ... import db
 from ...models import Category, Blog
 from ...util import Util
@@ -53,18 +53,19 @@ def get_categories():
 @resources_blueprint.route("/resources/search")
 def search_blogs():
     # Setting number of results ot return
-    item_count = 10;
+    item_count = 10
 
     search_query = f.request.args.get("query", default="", type=str).strip()
     results = []
     if search_query != "":
-        cut_off = 50 # cut off for match result
+        cut_off = 50  # cut off for match result
         fuzz_search = ResUtil.perform_fuzzy_search(search_query, item_count)
         fuzz_search = reversed(sorted(fuzz_search, key=lambda k: k['ratio']))
         for result in fuzz_search:
             if result['ratio'] < cut_off:
-                break;
-            path = " > ".join((x[1] for x in ResUtil.get_category_path(result['category'])))
+                break
+            path = (x[1] for x in ResUtil.get_category_path(result['category']))
+            path = " > ".join(path)
             results.append({
                 "blog_id": result['blog_id'][:6],
                 "blog_title": result["blog_title"],
@@ -74,7 +75,7 @@ def search_blogs():
 
     return f.render_template(
         "resources/search.jinja",
-        title = "Search Blogs | Suchicodes",
+        title="Search Blogs | Suchicodes",
         results=results
     )
 
