@@ -20,3 +20,4 @@ class Config:
     IP_BLACKLIST = './suchiblog/config/ip_blacklist'
     MESSAGE_BLACKLIST = './suchiblog/config/message_blacklist'
     DATETIME_COMPLETE_FORMAT = "%Y-%m-%d_%H-%M-%S"
+    DELETED_CATEGORY_ID = 999999

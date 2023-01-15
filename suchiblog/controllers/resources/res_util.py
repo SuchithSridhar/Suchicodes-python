@@ -5,6 +5,7 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
 from ...models import Category
 from ...models import Blog
+from ...config import Config
 
 
 class ResUtil:
@@ -20,9 +21,13 @@ class ResUtil:
 
     def perform_fuzzy_search(query: str, count: int, category_id: str = None):
         all_blogs = Blog.query.all()
+        deleted_category_uuid = Category.query.filter_by(id=Config.DELETED_CATEGORY_ID).first().uuid
         results = []
         top_ratios = []
         for blog in all_blogs:
+            if blog.category == deleted_category_uuid:
+                continue
+
             if category_id is not None and category_id != blog.category:
                 continue
 

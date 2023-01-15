@@ -52,7 +52,7 @@ def get_categories():
 
 @resources_blueprint.route("/resources/search")
 def search_blogs():
-    # Setting number of results ot return
+    # Number of results to return
     item_count = 10
 
     search_query = f.request.args.get("query", default="", type=str).strip()
