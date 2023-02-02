@@ -10,14 +10,14 @@ from ...config import Config
 
 class ResUtil:
     @staticmethod
-    def get_category_path(category_uuid: str):
+    def get_category_path(category_id: int):
         tree = []
-        category = Category.query.filter_by(uuid=category_uuid).first()
-        while (category.parent_id != 0):
-            tree = [(category.uuid, category.name)] + tree
+        category = Category.query.filter_by(id=category_id).first()
+        while (category is not None and category.parent_id is not None):
+            tree = [(category.id, category.name)] + tree
             category = Category.query.filter_by(id=category.parent_id).first()
 
-        tree = [(category.uuid, category.name)] + tree
+        tree = [(category.id, category.name)] + tree
         return tree
 
     @staticmethod
