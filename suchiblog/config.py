@@ -9,7 +9,7 @@ class Config:
     SUCHI_SERVER_PASS_HASH = os.environ.get('SUCHI_SERVER_PASS_HASH')
     SUCHI_SERVER_CHECKIN_FILE = os.environ.get('SUCHI_SERVER_CHECKIN_FILE')
     SUCHI_SERVER_VAIDATION = os.environ.get('SUCHI_SERVER_VALIDATION')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESOURCES_DIR = 'data'
     PROJECTS_UPLOAD_FOLDER = './suchiblog/static/uploaded-data'
