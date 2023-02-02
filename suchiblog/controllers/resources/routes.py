@@ -25,10 +25,15 @@ def get_categories():
     blogs = Blog.query.all()
     categories_json = []
     for item in categories:
+        if item.parent_id is None:
+            parent_id = 0
+        else:
+            parent_id = item.parent_id
+
         new = {
             "id": item.id,
-            "parent": item.parent_id,
-            "category": item.category,
+            "parent": parent_id,
+            "name": item.name,
             "uuid": item.uuid
         }
         categories_json.append(new)
@@ -39,7 +44,7 @@ def get_categories():
             "id": item.id,
             "title": item.title,
             "brief": item.brief,
-            "category": item.category
+            "category": item.category_id
         }
         blogs_json.append(new)
 
@@ -127,7 +132,7 @@ def create_blog():
             )
 
             start = md_edited.find(file.filename)
-            open_brace = ResUtil.find_open_brace(md_edited, start)
+            open_brace = ResUtil.find_open_parenthesis(md_edited, start)
             close_brace = md_edited.find(")", start)
             md_edited = md_edited[:open_brace + 1] + \
                 new_file_name + md_edited[close_brace:]
@@ -136,16 +141,25 @@ def create_blog():
         brief = f.request.form['brief']
         date = datetime.now()
         category = (f.request.form.get('category'))
+
+        if category is not None:
+            if category == '':
+                category = None
+
+            else:
+                category = int(category)
+
         html = ResUtil.to_html(md_edited)
         item = Blog(title=title, date=date, brief=brief,
-                    category=category, markdown=md_edited, html=html)
+                    category_id=category, markdown=md_edited, html=html)
         db.session.add(item)
         db.session.commit()
 
     return f.render_template(
         'resources/create.jinja',
         title="Create Blog",
-        categories=ResUtil.get_categories())
+        categories=ResUtil.get_categories_ids()
+    )
 
 
 @resources_blueprint.route("/admin/edit_blog/<uuid>", methods=['get', 'post'])
@@ -175,7 +189,7 @@ def edit(uuid):
             )
 
             start = md_edited.find(file.filename)
-            open_brace = ResUtil.find_open_brace(md_edited, start)
+            open_brace = ResUtil.find_open_parenthesis(md_edited, start)
             close_brace = md_edited.find(")", start)
             md_edited = md_edited[:open_brace + 1] + \
                 new_file_name + md_edited[close_brace:]
@@ -187,8 +201,17 @@ def edit(uuid):
 
         blog.title = title
         blog.brief = brief
-        if category in ResUtil.get_categories().values():
-            blog.category = category
+
+        if category is not None:
+            if category == '':
+                category = None
+
+            else:
+                category = int(category)
+
+        if category in list(ResUtil.get_categories_ids().values()):
+            blog.category_id = category
+
         blog.markdown = md_edited
         blog.html = html
 
@@ -197,7 +220,7 @@ def edit(uuid):
     return f.render_template(
         'resources/create.jinja',
         title="Edit Blog",
-        categories=ResUtil.get_categories(),
+        categories=ResUtil.get_categories_ids(),
         blog=blog)
 
 
@@ -207,12 +230,21 @@ def create_category():
     if f.request.method == 'POST':
         id = f.request.form['id']
         title = f.request.form['title']
-        parent = int(f.request.form.get('category'))
+        parent = f.request.form.get('category')
+
+        # If $parent is none, it's a top level category
+        if parent is not None:
+            if parent == '':
+                parent = None
+
+            else:
+                parent = int(parent)
+
         uuid = Util.create_uuid()[0:6]
         item = Category(
             id=int(id),
             parent_id=parent,
-            category=title,
+            name=title,
             uuid=uuid)
         db.session.add(item)
         db.session.commit()
@@ -220,7 +252,8 @@ def create_category():
     return f.render_template(
         'resources/create-category.jinja',
         title="Create Category",
-        categories=ResUtil.get_categories_with_id())
+        categories=ResUtil.get_categories_ids()
+    )
 
 
 @resources_blueprint.route("/admin/edit_category/<id>",
@@ -235,12 +268,17 @@ def edit_category(id):
     if f.request.method == 'POST':
         id = f.request.form['id']
         title = f.request.form['title']
-        try:
-            parent = int(f.request.form.get('category'))
-        except ValueError:
-            parent = 0
+        parent = f.request.form.get('category')
 
-        category.category = title
+        # If $parent is none, it's a top level category
+        if parent is not None:
+            if parent == '':
+                parent = None
+
+            else:
+                parent = int(parent)
+
+        category.name = title
         category.id = int(id)
         category.parent_id = parent
 
@@ -249,8 +287,9 @@ def edit_category(id):
     return f.render_template(
         'resources/create-category.jinja',
         title="Edit Category",
-        categories=ResUtil.get_categories_with_id(),
-        category=category)
+        categories=ResUtil.get_categories_ids(),
+        category=category
+    )
 
 
 @resources_blueprint.route("/admin/view_categories")
@@ -260,4 +299,5 @@ def view_category():
     return f.render_template(
         'resources/view-categories.jinja',
         title="View Category",
-        categories=categories)
+        categories=categories
+    )

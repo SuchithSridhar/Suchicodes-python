@@ -11,10 +11,26 @@
     <a href="/admin/projects" class="m-3 btn btn-dark">Projects</a>
     <a href="/admin/messages" class="m-3 btn btn-dark">Messages</a>
     <a href="/admin/ip-logs" class="m-3 btn btn-dark">IP Logs</a>
-    <a href="/admin/delete-logs" class="m-3 btn btn-dark">Delete IP Logs</a>
-    <a href="/admin/re_compute_markdowns" class="m-3 btn btn-dark">Re-Compute Markdowns</a>
+    <a id='delete-logs' data-dest="/admin/delete-logs" class="m-3 btn btn-dark">Delete IP Logs</a>
+    <a id='re-compute-markdown' data-dest="/admin/re_compute_markdowns" class="m-3 btn btn-dark">Re-Compute Markdowns</a>
     <a href="/admin/url-redirects" class="m-3 btn btn-dark">URL Redirects</a>
     <a href="/admin/logout" class="m-3 btn btn-dark">Logout</a>
 </div>
 
 {% endblock content %}
+
+{% block js %}
+<script>
+$('#delete-logs').on('click', e => {
+        e.preventDefault();
+        alert("This button has been deprecated.");
+});
+
+$('#re-compute-markdown').on('click', e => {
+        e.preventDefault();
+        if (confirm("Are you sure you want to recompute markdowns?")){
+                window.location = e.target.getAttribute('data-dest');
+        }
+});
+</script>
+{% endblock js%}

@@ -9,26 +9,27 @@ from ...config import Config
 
 
 class ResUtil:
+    @staticmethod
     def get_category_path(category_uuid: str):
         tree = []
         category = Category.query.filter_by(uuid=category_uuid).first()
         while (category.parent_id != 0):
-            tree = [(category.uuid, category.category)] + tree
+            tree = [(category.uuid, category.name)] + tree
             category = Category.query.filter_by(id=category.parent_id).first()
 
-        tree = [(category.uuid, category.category)] + tree
+        tree = [(category.uuid, category.name)] + tree
         return tree
 
-    def perform_fuzzy_search(query: str, count: int, category_id: str = None):
+    @staticmethod
+    def perform_fuzzy_search(query: str, count: int, category_id: str = ''):
         all_blogs = Blog.query.all()
-        deleted_category_uuid = Category.query.filter_by(id=Config.DELETED_CATEGORY_ID).first().uuid
         results = []
         top_ratios = []
         for blog in all_blogs:
-            if blog.category == deleted_category_uuid:
+            if blog.category_id == Config.DELETED_CATEGORY_ID:
                 continue
 
-            if category_id is not None and category_id != blog.category:
+            if category_id != '' and category_id != blog.category_id:
                 continue
 
             for index, line in enumerate(blog.markdown.split("\n")):
@@ -41,7 +42,7 @@ class ResUtil:
                         "ratio": ratio,
                         "line": line,
                         "blog_title": blog.title,
-                        "category": blog.category
+                        "category": blog.category_id
                     }
                     results.append(result_item)
                     top_ratios.append(ratio)
@@ -53,7 +54,7 @@ class ResUtil:
                         "ratio": ratio,
                         "line": line,
                         "blog_title": blog.title,
-                        "category": blog.category
+                        "category": blog.category_id
                     }
                     index = top_ratios.index(min(top_ratios))
                     top_ratios[index] = ratio
@@ -61,16 +62,19 @@ class ResUtil:
 
         return results
 
-    def get_categories():
+    @staticmethod
+    def get_categories_uuids():
         cats = Category.query.all()
-        cats_dict = {x.category: x.uuid for x in cats}
+        cats_dict = {x.name: x.uuid for x in cats}
         return cats_dict
 
-    def get_categories_with_id():
+    @staticmethod
+    def get_categories_ids():
         cats = Category.query.all()
-        cats_dict = {x.category: x.id for x in cats}
+        cats_dict = {x.name: x.id for x in cats}
         return cats_dict
 
+    @staticmethod
     def to_html(md):
         md = md.replace('\r\n', '\n') + "\n\n\n[TOC]"
         html = markdown.markdown(
@@ -82,8 +86,9 @@ class ResUtil:
                 FencedCodeExtension()])
         return html
 
-    def find_open_brace(md, start):
-        if md[start] == "(":
-            return start
-        else:
-            return ResUtil.find_open_brace(md, start - 1)
+    @staticmethod
+    def find_open_parenthesis(md, start):
+        index = start
+        while (md[index] != "("):
+            index -= 1
+        return index

@@ -14,7 +14,7 @@ class Admin(db.Model, fl.UserMixin):
     password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
-        return f"User('{self.id}, {self.email}')"
+        return f"<User '{self.id}': '{self.email}'>"
 
 
 class Projects(db.Model):
@@ -26,23 +26,37 @@ class Projects(db.Model):
     brief = db.Column(db.String)
     img = db.Column(db.String)
 
+    def __repr__(self):
+        return f"<Project '{self.id}': '{self.title}'>"
+
 
 class Category(db.Model):
     # if the parent id=0 then it's a top level category
     id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(db.Integer, nullable=False, default=0)
-    category = db.Column(db.String)
+    parent_id = db.Column(
+            db.Integer, db.ForeignKey('category.id'), nullable=True
+    )
+    blogs = db.relationship('Blog', backref='category')
+    name = db.Column(db.String)
     uuid = db.Column(db.String)
+
+    def __repr__(self):
+        return f"<Category '{self.id}': '{self.name}'>"
 
 
 class Blog(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
+    category_id = db.Column(
+            db.Integer, db.ForeignKey('category.id'), nullable=False
+    )
     date = db.Column(db.DateTime)
     title = db.Column(db.String)
     html = db.Column(db.Text)  # This is HTML content
     markdown = db.Column(db.Text)  # This is markdown content
     brief = db.Column(db.String)
-    category = db.Column(db.String)
+
+    def __repr__(self):
+        return f"<Blog '{self.id}': '{self.title}'>"
 
 
 class IP_Logs(db.Model):
@@ -56,6 +70,9 @@ class IP_Logs(db.Model):
     reference = db.Column(db.String)
     user_agent = db.Column(db.String)
 
+    def __repr__(self):
+        return f"<IP-Log '{self.date}': '{self.ip}'>"
+
 
 class Contact(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
@@ -64,8 +81,14 @@ class Contact(db.Model):
     message = db.Column(db.String)
     ip = db.Column(db.String)
 
+    def __repr__(self):
+        return f"<Contact '{self.date}': '{self.subject}'>"
+
 
 class URL_Redirection(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     keyword_in = db.Column(db.String)
     url_out = db.Column(db.String)
+
+    def __repr__(self):
+        return f"<URL-Redirect '{self.keyword_in}': '{self.url_out}'>"

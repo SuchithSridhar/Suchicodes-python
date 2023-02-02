@@ -1,36 +1,44 @@
 
+function get_category_html(css_class, id, name, uuid) {
+    return (
+        `
+        <li>
+            <a class='${css_class}' href="#category-${id}" role="button"
+                aria-expanded="false" aria-controls="collapseExample" data-bs-toggle="collapse">
+                <i class="list-style fas fa-angle-right"></i>
+                ${name}
+            </a>
+            <ul id='category-${id}' data-category-id='${id}' class="list collapse"></ul>
+        </li>
+
+        `
+    )
+}
+
 function setCategories(categories){
     let top_level = $('#top-level-list');
     let parent = null;
     let html = '';
+    let top_level_css_class = 'upper-list-header'
+    let list_level_css_class = 'list-header'
 
     categories.forEach(item => {
-        if (item.category != "deleted" && item.parent == 0) {
+        if (item.name != "deleted" && item.parent == 0) {
            html = top_level.html();
-           top_level.html(html +
-               `<li>
-                    <a class='upper-list-header' href="#category-${item.id}" role="button"
-                        aria-expanded="false" aria-controls="collapseExample" data-bs-toggle="collapse">
-                        <i class="list-style fas fa-angle-right"></i>
-                        ${item.category}
-                    </a>
-                    <ul id='category-${item.id}' data-uuid='${item.uuid}' class="list collapse"></ul>
-                </li>`);
+           top_level.html(
+               html +
+               get_category_html(top_level_css_class, item.id, item.name, item.uuid)
+           );
         }
     });
     categories.forEach(item => {
         if (item.parent != 0) {
            parent = $(`#category-${item.parent}`);
            html = parent.html();
-           parent.html(html + 
-            `<li>
-                <a class='list-header' data-bs-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="collapseExample" href="#category-${item.id}">
-                    <i class="list-style fas fa-angle-right"></i>
-                    ${item.category}
-                </a>
-                <ul class="collapse list" data-uuid='${item.uuid}' id='category-${item.id}'></ul>
-            </li>`);
+           parent.html(
+               html +
+               get_category_html(list_level_css_class, item.id, item.name, item.uuid)
+           );
         }
     });
 }
@@ -38,10 +46,13 @@ function setCategories(categories){
 function setBlogs(blogs){
     let parent = null;
     let html = '';
+    let deleted_category_id = 999999;
 
-    console.log(blogs);
     blogs.forEach(item => {
-        parent = $('ul').find(`[data-uuid='${item.category}']`);
+        // ignore blogs in deleted category
+        if (item.category == deleted_category_id) return;
+
+        parent = $('ul').find(`[data-category-id='${item.category}']`);
         html = parent.html();
         parent.html(html + 
         `<li>
