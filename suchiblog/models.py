@@ -49,7 +49,8 @@ class Blog(db.Model):
     category_id = db.Column(
             db.Integer, db.ForeignKey('category.id'), nullable=False
     )
-    date = db.Column(db.DateTime)
+    date_created = db.Column(db.DateTime)
+    date_updated = db.Column(db.DateTime)
     title = db.Column(db.String)
     html = db.Column(db.Text)  # This is HTML content
     markdown = db.Column(db.Text)  # This is markdown content
