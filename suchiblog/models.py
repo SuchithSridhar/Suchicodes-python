@@ -53,7 +53,8 @@ class Blog(db.Model):
     title = db.Column(db.String)
     html = db.Column(db.Text)  # This is HTML content
     markdown = db.Column(db.Text)  # This is markdown content
-    brief = db.Column(db.String)
+    brief = db.Column(db.Text)
+    picture_map = db.Column(db.Text)
 
     def __repr__(self):
         return f"<Blog '{self.id}': '{self.title}'>"
