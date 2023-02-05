@@ -12,7 +12,7 @@ class ApiUtil:
     BLOG_ID = 'id'
 
     @staticmethod
-    def verify_blog_config(config) -> tuple[bool, str]:
+    def verify_blog_config(config) -> tuple:
         '''
         Checks all the required fields for a blog upload.
         If a required field is not present it will return:
