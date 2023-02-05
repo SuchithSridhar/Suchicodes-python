@@ -95,26 +95,39 @@ def upload_blog():
     email = f.request.form.get('email', '')
     password = f.request.form.get('password', '')
     user = AdminUtil.verify_admin_user(email, password)
+    status_str = "status"
+    error_str = "error"
 
     if user is None:
-        return "Credentials invalid.\n"
+        return jsonify(
+            {status_str: 'failure', error_str: 'Invalid Credentials'}
+        )
 
     uploaded_files = dict(f.request.files.lists()).get("files[]", [])
     files = ApiUtil.categorize_files(uploaded_files)
 
     if files['config'] is None:
-        return "Config file not included in files."\
+        error = "Config file not included in files."\
                f" Please include a '{Config.NOTES_CONFIG_FILENAME}'"\
                " in the list of files uploaded.\n"
+        return jsonify(
+            {status_str: 'failure', error_str: error}
+        )
 
     config = json.load(files['config'])
     verified, missing_field = ApiUtil.verify_blog_config(config)
 
     if not verified:
-        return f"Config was missing field: {missing_field}\n"
+        error = f"Config was missing field: {missing_field}\n"
+        return jsonify(
+            {status_str: 'failure', error_str: error}
+        )
 
     if files['markdown'] is None:
-        return "Markdown file missing from upload.\n"
+        error = "Markdown file missing from upload.\n"
+        return jsonify(
+            {status_str: 'failure', error_str: error}
+        )
 
     markdown = files['markdown'].read().decode("UTF-8")
 
@@ -122,7 +135,10 @@ def upload_blog():
     if config.get(ApiUtil.BLOG_ID, None) is not None:
         blog = Blog.query.filter_by(id=config.get(ApiUtil.BLOG_ID)).first()
         if blog is None:
-            return "Blog with blog_id not found\n"
+            error = "Blog with blog_id not found\n"
+            return jsonify(
+                {status_str: 'failure', error_str: error}
+            )
 
         picture_map = json.loads(blog.picture_map)
     else:
@@ -147,7 +163,7 @@ def upload_blog():
 
     # Update existing blog
     if blog is not None:
-        status = "Updated existing blog"
+        status = "update"
         blog.html = html
         blog.markdown = markdown
         blog.brief = brief
@@ -158,7 +174,7 @@ def upload_blog():
 
     # Create new blog
     else:
-        status = "Created new blog"
+        status = "create"
         blog = Blog(
             html=html,
             markdown=markdown,
