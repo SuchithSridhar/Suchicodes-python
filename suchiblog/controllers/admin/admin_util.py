@@ -10,7 +10,7 @@ import os
 class AdminUtil:
 
     @staticmethod
-    def verify_admin_user(email: str, password: str) -> Admin | None:
+    def verify_admin_user(email: str, password: str):
         '''Get the user based on email and password.
         Returns None if user is not found.'''
 
