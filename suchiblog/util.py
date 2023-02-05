@@ -10,11 +10,13 @@ from .config import Config
 
 
 class Util:
-    def hash_password(password):
+    @staticmethod
+    def hash_password(password: str):
         hasher = hashlib.sha512()
         hasher.update(password.encode())
         return base64.urlsafe_b64encode(hasher.digest()).decode('UTF-8')
 
+    @staticmethod
     def get_pre_render_data(flask, lang="en"):
         stream = open(f'suchiblog/config/locales/{lang}.yml')
         lang = yaml.load(stream, Loader=yaml.Loader)
@@ -29,6 +31,7 @@ class Util:
         }
         return data
 
+    @staticmethod
     def get_skill_list():
         try:
             data = open('suchiblog/data/skills.json').read()
@@ -38,9 +41,11 @@ class Util:
 
         return data
 
+    @staticmethod
     def create_uuid():
         return str(uuid.uuid4())
 
+    @staticmethod
     def send_notification_to_IFFF(message):
         if (Config.SUCHICODES_ENV != "production"):
             print(f"DEBUG: Trying to send notification \"{message}\"")
@@ -48,6 +53,7 @@ class Util:
         data = {'value1': f"SC: {message}"}
         requests.post(url, data=data)
 
+    @staticmethod
     def log_contact_message(subject, message, ip, app, db, ContactModel):
         d = datetime.datetime.now()
 
@@ -65,6 +71,7 @@ class Util:
             f"Msg - {subject[:10]}"
         )
 
+    @staticmethod
     def log_ip_access_process(
             ip,
             other_information,
@@ -87,6 +94,7 @@ class Util:
             db.session.add(item)
             db.session.commit()
 
+    @staticmethod
     def log_ip_access(ip, other_information, url, db, app, IP_Logs):
         ignore = [
             '/session/get',

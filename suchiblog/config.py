@@ -21,3 +21,5 @@ class Config:
     MESSAGE_BLACKLIST = './suchiblog/config/message_blacklist'
     DATETIME_COMPLETE_FORMAT = "%Y-%m-%d_%H-%M-%S"
     DELETED_CATEGORY_ID = 999999
+    NOTES_CONFIG_FILENAME = 'suchicodes-config.json'
+    UPLOAD_DIR_URL = "/static/uploaded-data"

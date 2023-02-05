@@ -1,9 +1,7 @@
 import flask as f
 import flask_login as fl
-import datetime
-from .adminUtil import server_checkin
-from .adminUtil import re_compute_markdowns
-from ...models import Admin, IP_Logs, URL_Redirection, Contact
+from .admin_util import AdminUtil
+from ...models import IP_Logs, URL_Redirection, Contact
 from ...util import Util
 from ...config import Config
 from ... import db
@@ -25,18 +23,16 @@ def login():
 
     if f.request.method == 'POST':
         email = f.request.form['email']
-        unhashed_password = f.request.form['password']
-        password = Util.hash_password(unhashed_password)
-        user = Admin.query.filter_by(email=email).first()
+        password = f.request.form['password']
 
-        if (user and
-            (user.password.decode("UTF-8") == password or
-             user.password == unhashed_password)):
+        user = AdminUtil.verify_admin_user(email, password)
+        if user is None:
+            return "Invalid Credentials"
 
-            fl.login_user(user)
-            next_page = f.request.args.get('next')
-            return f.redirect(next_page) if next_page else f.redirect(
-                f.url_for('main.index'))
+        fl.login_user(user)
+        next_page = f.request.args.get('next')
+        return f.redirect(next_page) if next_page else f.redirect(
+            f.url_for('main.index'))
 
     return f.render_template('admin/login.jinja', title='Login')
 
@@ -52,6 +48,9 @@ def logout():
 @fl.login_required
 def view_suchi_server_logs():
     filename = Config.SUCHI_SERVER_CHECKIN_FILE
+    if filename is None:
+        return "SUCHI_SERVER_CHECKIN_FILE not set"
+
     try:
         with open(filename, 'r') as f:
             lines = f.readlines()
@@ -82,7 +81,6 @@ def server_public_ip_set():
 
     if Util.hash_password(password) != Config.SUCHI_SERVER_PASS_HASH:
         f.abort(403)
-        return
 
     with open('server-ip-address.txt', 'w') as file:
         file.write(ip)
@@ -97,9 +95,11 @@ def server_checkin_api():
 
     if Util.hash_password(password) != Config.SUCHI_SERVER_PASS_HASH:
         f.abort(403)
-        return
 
-    server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
+    if Config.SUCHI_SERVER_CHECKIN_FILE is None:
+        return "SUCHI_SERVER_CHECKIN_FILE not set"
+
+    AdminUtil.server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
     return "Checkin Complete"
 
 
@@ -112,7 +112,7 @@ def server_public_ip_get():
 @admin_blueprint.route("/admin/re_compute_markdowns")
 @fl.login_required
 def re_compute_markdowns_endpoint():
-    re_compute_markdowns(f.current_app, db)
+    AdminUtil.recompute_markdowns(f.current_app, db)
     return "Markdowns will be recomputed."
 
 
@@ -132,7 +132,7 @@ def blacklist():
     block = f.request.args.get('type')
 
     if block == 'ip':
-        ip = f.request.args.get('ip')
+        ip = f.request.args.get('ip', '')
         has_data_flag = False
         try:
             with open(Config.IP_BLACKLIST) as fin:
@@ -154,7 +154,7 @@ def blacklist():
         return f"{ip} has been added to the blacklist"
 
     elif block == 'message':
-        message = f.request.args.get('message')
+        message = f.request.args.get('message', '')
         has_data_flag = False
 
         try:
@@ -204,7 +204,6 @@ def url_redirects_delete(id):
     url = URL_Redirection.query.filter_by(id=id).first()
     if not url:
         f.abort(404)
-        return
 
     db.session.delete(url)
     db.session.commit()
@@ -223,20 +222,3 @@ def ip_logs():
 def ip_log_details(uuid):
     details = IP_Logs.query.filter_by(id=uuid).first()
     return f.render_template('admin/ip-logs-details.jinja', data=details)
-
-
-@admin_blueprint.route("/admin/delete-logs")
-@fl.login_required
-def delete_ip_logs():
-    date = datetime.datetime.now().strftime('%y-%m-%d')
-    with open(Config.IP_LOGS_FILE_BASE.format(date), 'a') as fin:
-        for log in IP_Logs.query.all():
-            fin.write(f"{log.date}, {log.ip}, {log.url}\n")
-
-    try:
-        db.session.query(IP_Logs).delete()
-        db.session.commit()
-    except BaseException:
-        db.session.rollback()
-
-    return "Ip logs have been deleted."

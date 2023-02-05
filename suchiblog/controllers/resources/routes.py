@@ -101,7 +101,6 @@ def view_blog(selector):
 
     if not blog:
         f.abort(404)
-        return
 
     return f.render_template(
         'resources/blog.jinja',
@@ -119,6 +118,7 @@ def create_blog():
         uuids = f.request.form['uuids'].split(',')
         md = f.request.form['markdown']
         md_edited = md
+        picture_map = {}
 
         for file in uploaded_files:
             if not file.filename:
@@ -131,6 +131,7 @@ def create_blog():
                              )
             )
 
+            picture_map[file.filename] = uuid
             start = md_edited.find(file.filename)
             open_brace = ResUtil.find_open_parenthesis(md_edited, start)
             close_brace = md_edited.find(")", start)
@@ -150,8 +151,16 @@ def create_blog():
                 category = int(category)
 
         html = ResUtil.to_html(md_edited)
-        item = Blog(title=title, date=date, brief=brief,
-                    category_id=category, markdown=md_edited, html=html)
+        item = Blog(
+            title=title,
+            date_created=date,
+            date_updated=date,
+            brief=brief,
+            category_id=category,
+            markdown=md_edited,
+            html=html,
+            picture_map=json.dumps(picture_map)
+        )
         db.session.add(item)
         db.session.commit()
 
@@ -168,8 +177,8 @@ def edit(uuid):
     blog = Blog.query.filter_by(id=uuid).first()
     if not blog:
         f.abort(404)
-        return
 
+    picture_map = json.loads(blog.picture_map)
     if f.request.method == 'POST':
         uploaded_files = f.request.files.getlist("file[]")
         uuids = f.request.form['uuids'].split(',')
@@ -188,6 +197,7 @@ def edit(uuid):
                              )
             )
 
+            picture_map[file.filename] = uuid
             start = md_edited.find(file.filename)
             open_brace = ResUtil.find_open_parenthesis(md_edited, start)
             close_brace = md_edited.find(")", start)
@@ -214,6 +224,8 @@ def edit(uuid):
 
         blog.markdown = md_edited
         blog.html = html
+        blog.picture_map = json.dumps(picture_map)
+        blog.date_updated = datetime.now()
 
         db.session.commit()
 
