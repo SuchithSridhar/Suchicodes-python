@@ -43,6 +43,8 @@ class ApiUtil:
             if file.filename is None:
                 continue
 
+            file.filename = os.path.basename(file.filename)
+
             if (file.filename.endswith('.png') or
                     file.filename.endswith('.jpg')):
 
