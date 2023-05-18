@@ -76,6 +76,27 @@ class IP_Logs(db.Model):
         return f"<IP-Log '{self.date}': '{self.ip}'>"
 
 
+class Extern_Messages(db.Model):
+    id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
+    timestamp = db.Column(db.DateTime)
+    tags = db.Column(db.String)
+    user = db.Column(db.String)
+    message = db.Column(db.String)
+    
+    def tags_contains(self, tag: str):
+        return f"#{tag}$" in self.tags
+
+    def clean_tags(self):
+        return ", ".join(self.tags_array())
+    
+    def tags_array(self):
+        return list(map(lambda x: x[1:-1], self.tags.split(",")))
+
+    @staticmethod
+    def create_tags(tags: list):
+        return ",".join(map(lambda item: f"#{item}$", tags))
+
+
 class Contact(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
     date = db.Column(db.DateTime)

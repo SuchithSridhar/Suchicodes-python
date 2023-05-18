@@ -1,13 +1,13 @@
+from datetime import datetime
 import flask as f
 import flask_login as fl
 from .admin_util import AdminUtil
-from ...models import IP_Logs, URL_Redirection, Contact
+from ...models import IP_Logs, URL_Redirection, Contact, Extern_Messages
 from ...util import Util
 from ...config import Config
-from ... import db
+from ... import db, logger
 
 admin_blueprint = f.Blueprint('admin', __name__)
-
 
 @admin_blueprint.route("/admin/")
 @admin_blueprint.route("/admin")
@@ -44,69 +44,90 @@ def logout():
     return f.redirect(f.url_for('main.index'))
 
 
-@admin_blueprint.route("/admin/view_suchi_server_logs")
+@admin_blueprint.route("/admin/view-external-messages")
 @fl.login_required
-def view_suchi_server_logs():
-    filename = Config.SUCHI_SERVER_CHECKIN_FILE
-    if filename is None:
-        return "SUCHI_SERVER_CHECKIN_FILE not set"
+def view_external_messages():
 
-    try:
-        with open(filename, 'r') as f:
-            lines = f.readlines()
-    except FileNotFoundError:
-        return "Server checkin file was not found on the system."
+    filter_tag = f.request.args.get("tag", default="", type=str).strip()
+    if (filter_tag != ""):
+        data = Extern_Messages.query \
+                .filter(Extern_Messages.tags.like(f'%#{filter_tag}$%')) \
+                .order_by(Extern_Messages.timestamp.desc()).paginate(per_page=20)
+    else:
+        data = Extern_Messages.query \
+                .order_by(Extern_Messages.timestamp.desc()).paginate(per_page=20)
 
-    lines.reverse()
-    lines = lines[:5]
-
-    html = '<table class="table"><tr><th>Date</th><th>Status</th><tr>\n'
-    for line in lines:
-        html += '  <tr>\n'
-        for index, cell in enumerate(line.split(',')):
-            if index == 0:
-                html += f'    <td><strong>{cell}</strong></td>\n'
-            else:
-                html += f'    <td>{cell}</td>\n'
-        html += '  </tr>\n'
-
-    html += '</table>\n'
-    return html
+    return f.render_template(
+        'admin/external-messages.jinja',
+        title='Extern-Messages',
+        data=data
+    )
 
 
-@admin_blueprint.route("/admin/server-set-ip", methods=['post'])
-def server_public_ip_set():
+def server_checkin_callback(message: Extern_Messages):
+    servers = [Config.ASTRAX_SERVER_TAG, Config.BERNUM_SERVER_TAG]
+
+    for server in servers:
+        if (message.tags_contains(server)):
+
+            data = Extern_Messages.query \
+                    .filter(Extern_Messages.tags.like(f'%#{server}$%')) \
+                    .filter(Extern_Messages.tags.like(f'%#{Config.SERVER_OFFLINE_TAG}$%')) \
+                    .first()
+
+            if data != None:
+                # Server has come back alive and is no longer offline
+                db.session.delete(data)
+                db.session.commit()
+                return
+
+
+@admin_blueprint.route("/admin/log-external-message", methods=['post'])
+def log_external_message():
+    '''
+    End point for external messages such as local server
+    logs and local server status reports.
+    '''
+
+    '''
+    Example cURL call:
+        curl -X POST -F "pass=testpass" -F "user=suchi"
+        -F "message=asdg" -F "tags=tags"
+        http://localhost:5000/admin/log-external-message
+    '''
     password = f.request.form['pass']
-    ip = f.request.form['ip']
 
-    if Util.hash_password(password) != Config.SUCHI_SERVER_PASS_HASH:
+    if Util.hash_password(password) != Config.SECRET_PASS_HASH:
         f.abort(403)
 
-    with open('server-ip-address.txt', 'w') as file:
-        file.write(ip)
+    id = Util.create_uuid()
+    timestamp = datetime.now()
+    user = f.request.form['user']
+    message = f.request.form['message']
+    tags = f.request.form['tags'].split(",")
+    tags = ",".join(map(lambda item: f"#{item}$", tags))
 
-    return "The ip address has been set"
+    item = Extern_Messages(
+        id = id,
+        user=user,
+        message=message,
+        timestamp=timestamp,
+        tags=tags
+    )
 
+    db.session.add(item)
+    db.session.commit()
 
-@admin_blueprint.route("/admin/server-checkin", methods=['post'])
-def server_checkin_api():
-    password = f.request.form['pass']
-    status = f.request.form['status']
+    callbacks = {
+        Config.SERVER_CHECKIN_TAG: [server_checkin_callback]
+    }
 
-    if Util.hash_password(password) != Config.SUCHI_SERVER_PASS_HASH:
-        f.abort(403)
+    for tag, func_list in callbacks.items():
+        if item.tags_contains(tag):
+            for function in func_list:
+                function(item)
 
-    if Config.SUCHI_SERVER_CHECKIN_FILE is None:
-        return "SUCHI_SERVER_CHECKIN_FILE not set"
-
-    AdminUtil.server_checkin(status, Config.SUCHI_SERVER_CHECKIN_FILE)
-    return "Checkin Complete"
-
-
-@admin_blueprint.route("/admin/server-ip")
-@fl.login_required
-def server_public_ip_get():
-    return open('server-ip-address.txt').read()
+    return f"Message added with uuid: {id}"
 
 
 @admin_blueprint.route("/admin/re_compute_markdowns")

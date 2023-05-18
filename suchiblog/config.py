@@ -6,9 +6,7 @@ class Config:
     SUCHICODES_ENV = \
         os.environ.get('SUCHICODES_ENV') if os.environ.get('SUCHICODES_ENV') \
         else 'development'
-    SUCHI_SERVER_PASS_HASH = os.environ.get('SUCHI_SERVER_PASS_HASH')
-    SUCHI_SERVER_CHECKIN_FILE = os.environ.get('SUCHI_SERVER_CHECKIN_FILE')
-    SUCHI_SERVER_VAIDATION = os.environ.get('SUCHI_SERVER_VALIDATION')
+    SECRET_PASS_HASH = os.environ.get('SECRET_PASS_HASH')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESOURCES_DIR = 'data'
@@ -23,3 +21,13 @@ class Config:
     DELETED_CATEGORY_ID = 999999
     NOTES_CONFIG_FILENAME = 'suchicodes-config.json'
     UPLOAD_DIR_URL = "/static/uploaded-data"
+
+    LOGGING_FORMAT = "%(asctime)s :: %(levelname)s :: %(message)s"
+    LOGGING_FILE = "suchiblog/logs/logs.log"
+    INTERNAL_USER = "internal"
+
+    ASTRAX_SERVER_TAG = "astrax"
+    BERNUM_SERVER_TAG = "bernum"
+    SERVER_CHECKIN_TAG = "server-checkin"
+    SERVER_OFFLINE_TAG = "server-offline"
+

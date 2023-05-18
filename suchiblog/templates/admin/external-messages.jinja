@@ -1,0 +1,45 @@
+{% extends "layout.jinja" %}
+
+{% block content %}
+  <div class="container">
+
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Time</th>
+        <th scope="col">User</th>
+        <th scope="col">Message</th>
+        <th scope="col">Tags</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for message in data.items %}
+        <tr>
+          <td>{{message.id[:6]}}</td>
+          <td>{{message.timestamp}}</td>
+          <td>{{message.user}}</td>
+          <td>{{message.message}}</td>
+          <td>{{message.clean_tags()}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+
+    <div class=pagination>
+      {% for page in data.iter_pages() %}
+        {% if page %}
+          {% if page != data.page %}
+            <a class="btn m-1 btn-primary" href="{{ url_for('admin.view_external_messages', page=page) }}">{{ page }}</a>
+          {% else %}
+            <a class="btn m-1 btn-dark">{{ page }}</a>
+          {% endif %}
+        {% else %}
+          <span class=ellipsis>…</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock content %}
+

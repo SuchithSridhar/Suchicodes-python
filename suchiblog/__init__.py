@@ -3,11 +3,13 @@ import flask_login as fl
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from .config import Config
+from .logging_formatter import get_logger
 
 db = SQLAlchemy()
 login_manager = fl.LoginManager()
 login_manager.login_view = 'admin.login'
 migrate = Migrate()
+logger = get_logger()
 
 
 def initialize_database(db, app):

@@ -47,8 +47,6 @@ class Util:
 
     @staticmethod
     def send_notification_to_IFFF(message):
-        if (Config.SUCHICODES_ENV != "production"):
-            print(f"DEBUG: Trying to send notification \"{message}\"")
         url = Config.NOTIFY_URL
         data = {'value1': f"SC: {message}"}
         requests.post(url, data=data)
