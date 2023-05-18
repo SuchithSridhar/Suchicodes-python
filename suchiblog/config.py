@@ -30,4 +30,5 @@ class Config:
     BERNUM_SERVER_TAG = "bernum"
     SERVER_CHECKIN_TAG = "server-checkin"
     SERVER_OFFLINE_TAG = "server-offline"
+    CHECKIN_LIMIT = 20
 

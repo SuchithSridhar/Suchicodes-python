@@ -33,10 +33,19 @@ def server_checkin_task():
             # Server already marked as offline
             continue
 
-        last_message = Extern_Messages.query \
+        data_list = Extern_Messages.query \
                    .filter(Extern_Messages.tags.like(f'%#{server}$%')) \
                    .filter(Extern_Messages.tags.like(f'%#{Config.SERVER_CHECKIN_TAG}$%')) \
-                   .order_by(Extern_Messages.timestamp.desc()).first()
+                   .order_by(Extern_Messages.timestamp.desc())
+        
+        last_message = data_list.first()
+
+        # Delete messages over the checkin limit
+        to_delete = data_list[Config.CHECKIN_LIMIT:]
+        for item in to_delete:
+            db.session.delete(item)
+
+        db.session.commit()
 
         # No logs yet - server hasn't reported once
         if last_message is None:
