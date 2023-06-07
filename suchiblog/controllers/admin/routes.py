@@ -185,7 +185,7 @@ def log_external_message():
             for function in func_list:
                 lines.append(function(item))
 
-    return f"Message added with uuid: {id}\n\n" + "\n".join(lines)
+    return f"Message added with uuid: {id}<br>" + "<br>".join(lines)
 
 
 @admin_blueprint.route("/admin/re_compute_markdowns")
