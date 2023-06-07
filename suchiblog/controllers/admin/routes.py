@@ -100,7 +100,7 @@ def server_checkin_callback(message: Extern_Messages):
                     user=Config.INTERNAL_USER,
                     message=f"{return_string}| sent",
                     timestamp=timestamp,
-                    tags=Extern_Messages.create_tags([Config.INTERNAL_USER, "oplog"])
+                    tags=Extern_Messages.create_tags([Config.INTERNAL_USER, "oplog", server])
                 )
 
                 db.session.add(item)
@@ -185,7 +185,7 @@ def log_external_message():
             for function in func_list:
                 lines.append(function(item))
 
-    return f"Message added with uuid: {id}"
+    return f"Message added with uuid: {id}\n" + "\n".join(lines)
 
 
 @admin_blueprint.route("/admin/re_compute_markdowns")
