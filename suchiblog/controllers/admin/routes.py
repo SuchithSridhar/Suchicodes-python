@@ -1,4 +1,5 @@
 from datetime import datetime
+from os import kill
 import flask as f
 import flask_login as fl
 from .admin_util import AdminUtil
@@ -8,6 +9,13 @@ from ...config import Config
 from ... import db, logger
 
 admin_blueprint = f.Blueprint('admin', __name__)
+
+# A way to communicate to the physical servers
+# Format: "serverid: [operations]"
+server_messages_queue = {
+    Config.ASTRAX_SERVER_TAG: [],
+    Config.BERNUM_SERVER_TAG: []
+}
 
 @admin_blueprint.route("/admin/")
 @admin_blueprint.route("/admin")
@@ -67,6 +75,8 @@ def view_external_messages():
 def server_checkin_callback(message: Extern_Messages):
     servers = [Config.ASTRAX_SERVER_TAG, Config.BERNUM_SERVER_TAG]
 
+    return_string = ""
+
     for server in servers:
         if (message.tags_contains(server)):
 
@@ -79,7 +89,52 @@ def server_checkin_callback(message: Extern_Messages):
                 # Server has come back alive and is no longer offline
                 db.session.delete(data)
                 db.session.commit()
-                return
+
+            if len(server_messages_queue[server]) > 0:
+                return_string = server_messages_queue[server].pop()
+
+                timestamp = datetime.now()
+                id = Util.create_uuid()
+                item = Extern_Messages(
+                    id = id,
+                    user=Config.INTERNAL_USER,
+                    message=f"{return_string}| sent",
+                    timestamp=timestamp,
+                    tags=Extern_Messages.create_tags([Config.INTERNAL_USER, "oplog"])
+                )
+
+                db.session.add(item)
+                db.session.commit()
+
+            break
+
+    return return_string
+
+
+
+@admin_blueprint.route("/admin/add-server-command", methods=['post'])
+def add_server_command():
+    '''
+    End point for adding commands to the server_messages_queue
+    '''
+
+    '''
+    Example cURL call:
+        curl -X POST -F "pass=testpass" -F "op=restart -F "server=astrax"
+        http://localhost:5000/admin/add-server-command
+    '''
+    password = f.request.form['pass']
+
+    if Util.hash_password(password) != Config.SECRET_PASS_HASH:
+        f.abort(403)
+
+    op = f.request.form['op']
+    server = f.request.form['server']
+    if op is None or len(op) == 0 or server is None:
+        return "Invalid call to endpoint\n"
+
+    server_messages_queue[server].append(f"operation: {op}")
+    return "Added the operation to the queue.\n"
 
 
 @admin_blueprint.route("/admin/log-external-message", methods=['post'])
@@ -118,14 +173,17 @@ def log_external_message():
     db.session.add(item)
     db.session.commit()
 
+
+    # Callbacks must return strings.
     callbacks = {
         Config.SERVER_CHECKIN_TAG: [server_checkin_callback]
     }
 
+    lines = []
     for tag, func_list in callbacks.items():
         if item.tags_contains(tag):
             for function in func_list:
-                function(item)
+                lines.append(function(item))
 
     return f"Message added with uuid: {id}"
 
