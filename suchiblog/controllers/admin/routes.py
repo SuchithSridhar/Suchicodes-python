@@ -137,6 +137,29 @@ def add_server_command():
     return "Added the operation to the queue.\n"
 
 
+@admin_blueprint.route("/admin/server-commands", methods=['get', 'post'])
+@fl.login_required
+def add_server_command_ui():
+    '''
+    Web UI for adding server commands to control remote servers.
+    '''
+    
+    if f.request.method == 'POST':
+        op = f.request.form['op']
+        server = f.request.form['server']
+        if op is None or len(op) == 0 or server is None:
+            return "Invalid call to endpoint\n"
+
+        server_messages_queue[server].append(f"operation: {op}")
+
+    return f.render_template (
+        'admin/server-commands.jinja',
+        title='Server Commands',
+        server_messages_queue=server_messages_queue,
+        available_commands=Config.AVAILABLE_SERVER_COMMANDS
+    )
+
+
 @admin_blueprint.route("/admin/log-external-message", methods=['post'])
 def log_external_message():
     '''

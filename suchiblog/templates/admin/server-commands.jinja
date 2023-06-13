@@ -1,0 +1,86 @@
+{% extends "layout.jinja" %}
+
+{% block headers %}
+<style>
+input[type='radio'] { display:none; }
+label, button {
+  display:inline-block;
+  padding:3px;
+  border:1px solid #e0e0e0;
+  border-radius:3px;
+  background-color:#F0F0F0;
+  width:10em;
+  text-align:center;
+}
+
+button:hover {
+  background-color: #d0d0d0;
+}
+
+input[type='radio']:checked + label { background-color:#a0a0a0; }
+</style>
+{% endblock headers %}
+
+{% block content %}
+  <div class="container">
+    <div>Current Commands:</div>
+    <ul>
+      {% for item in server_messages_queue %}
+        <li><strong>{{item}}</strong></li>
+        <ul>
+        {% for command in server_messages_queue[item] %}
+          <li>{{command}}</li>
+        {% endfor %}
+        </ul>
+      {% endfor %}
+    </ul>
+
+    <div>
+      Server: <br>
+      <input type="radio" name="server-selector" value="astrax" id="astrax">
+      <label for="astrax">Astrax</label>
+      <input type="radio" name="server-selector" value="bernum" id="bernum">
+      <label for="bernum">Bernum</label>
+    </div>
+    <br>
+    <div>
+      Command: <br>
+      {% for command in available_commands %}
+      <input type="radio" name="command-selector" value="{{ command }}" id="{{ command }}">
+      <label for="{{ command }}">{{ command }}</label>
+      {% endfor %}
+    </div>
+
+    <br><br>
+    <button id="send">Send</button>
+  </div>
+{% endblock content %}
+
+{% block js %}
+
+<script>
+function initialize() {
+  $("button#send").click(e => {
+    server = $('input[name=server-selector]:checked').val()
+    op = $('input[name=command-selector]:checked').val()
+    if (server == undefined || op == undefined) alert("Select all options.");
+    if (!confirm(`Are you sure for: ${server} | ${op}`)){
+      return
+    }
+    url = "/admin/server-commands"
+    $.post(url, {
+      server: server,
+      op: op
+    }, (data, status) => {
+      location.reload()
+    })
+  })
+}
+ 
+$(document).ready(() => {
+  initialize();
+});
+
+</script>
+
+{% endblock js %}

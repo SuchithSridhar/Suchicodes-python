@@ -30,5 +30,6 @@ class Config:
     BERNUM_SERVER_TAG = "bernum"
     SERVER_CHECKIN_TAG = "server-checkin"
     SERVER_OFFLINE_TAG = "server-offline"
+    AVAILABLE_SERVER_COMMANDS = ['restart', 'ssh-restart']
     CHECKIN_LIMIT = 20
 
