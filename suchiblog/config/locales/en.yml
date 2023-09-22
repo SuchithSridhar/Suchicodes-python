@@ -58,5 +58,4 @@ contact:
   send: "Send"
   message: "Message"
   subject: "Subject"
-  message_subtext: "Please include your contact information if you wish to reach out.
-    <br>Please do not include \"https\" in your message. Such messages will be treated as spam."
+  message_subtext: "Please include your contact information if you wish to reach out."
