@@ -18,7 +18,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESOURCES_DIR = 'data'
     PROJECTS_UPLOAD_FOLDER = './suchiblog/static/uploaded-data'
-    NOTIFY_KEY = os.environ.get('SUCHICODES_NOTIFY_KEY')
     NOTIFY_URL = os.environ.get('SUCHICODES_NOTIFY_URL')
     MESSAGE_FILE = './suchiblog/data/message-data.json'
     IP_BLACKLIST = './suchiblog/config/ip_blacklist'
