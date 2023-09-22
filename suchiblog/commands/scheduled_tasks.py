@@ -7,6 +7,7 @@ from .. import db, logger
 
 cli_blueprint = f.Blueprint('cli_commands', __name__)
 
+
 @cli_blueprint.cli.command()
 def server_checkin_task():
     """
@@ -18,9 +19,8 @@ def server_checkin_task():
     # 20 mins in seconds
     THRESHOLD = 20 * 60
     cur_date = datetime.now()
-    servers = [ Config.ASTRAX_SERVER_TAG, Config.BERNUM_SERVER_TAG]
+    servers = [Config.ASTRAX_SERVER_TAG, Config.BERNUM_SERVER_TAG]
     logger.info('Starting server_checkin_task')
-
 
     for server in servers:
         data = Extern_Messages.query \
@@ -28,7 +28,7 @@ def server_checkin_task():
                 .filter(Extern_Messages.tags.like(f'%#{Config.SERVER_OFFLINE_TAG}$%')) \
                 .first()
 
-        if data != None:
+        if data is not None:
             logger.info('Server %s already marked offline', server)
             # Server already marked as offline
             continue
@@ -37,7 +37,7 @@ def server_checkin_task():
                    .filter(Extern_Messages.tags.like(f'%#{server}$%')) \
                    .filter(Extern_Messages.tags.like(f'%#{Config.SERVER_CHECKIN_TAG}$%')) \
                    .order_by(Extern_Messages.timestamp.desc())
-        
+
         last_message = data_list.first()
 
         # Delete messages over the checkin limit
@@ -66,17 +66,22 @@ def server_checkin_task():
 
         id = Util.create_uuid()
         offline_message = Extern_Messages(
-            id = id,
-            user = Config.INTERNAL_USER,
-            message = f"{server} is offline",
-            timestamp = cur_date,
-            tags = Extern_Messages.create_tags([server, Config.SERVER_OFFLINE_TAG])
+            id=id,
+            user=Config.INTERNAL_USER,
+            message=f"{server} is offline",
+            timestamp=cur_date,
+            tags=Extern_Messages.create_tags(
+                [server, Config.SERVER_OFFLINE_TAG])
         )
 
         db.session.add(offline_message)
         db.session.commit()
 
         logger.warn('Server %s not reporting, alert sent out.', server)
-        Util.send_notification_to_IFFF(f"{server} not reporting.")
+        Util.send_notification(
+            f"Suchicodes: {server} status",
+            f"Server seems to be offline. Last message at: {last_date}.",
+            priority=8
+        )
 
     logger.info('server_checkin_task complete.')

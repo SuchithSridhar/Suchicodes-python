@@ -78,6 +78,7 @@ def server_checkin_callback(message: Extern_Messages):
     return_string = ""
 
     for server in servers:
+        timestamp = datetime.now()
         if (message.tags_contains(server)):
 
             data = Extern_Messages.query \
@@ -85,15 +86,19 @@ def server_checkin_callback(message: Extern_Messages):
                     .filter(Extern_Messages.tags.like(f'%#{Config.SERVER_OFFLINE_TAG}$%')) \
                     .first()
 
-            if data != None:
+            if data is not None:
                 # Server has come back alive and is no longer offline
+                Util.send_notification(
+                    f"Suchicodes: {server} status",
+                    f"Server is back online. Checkin at: {timestamp}.",
+                    priority=8
+                )
                 db.session.delete(data)
                 db.session.commit()
 
             if len(server_messages_queue[server]) > 0:
                 return_string = server_messages_queue[server].pop()
 
-                timestamp = datetime.now()
                 id = Util.create_uuid()
                 item = Extern_Messages(
                     id = id,

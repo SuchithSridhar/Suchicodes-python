@@ -1,19 +1,25 @@
 import os
 
 
+def value_or_default(item1, item2):
+    if item1 is not None and item1 != "":
+        return item1
+    else:
+        return item2
+
+
 class Config:
     SECRET_KEY = os.environ.get('SUCHICODES_SECRET_KEY')
-    SUCHICODES_ENV = \
-        os.environ.get('SUCHICODES_ENV') if os.environ.get('SUCHICODES_ENV') \
-        else 'development'
+    SUCHICODES_ENV = value_or_default(
+        os.environ.get('SUCHICODES_ENV'), "development"
+    )
     SECRET_PASS_HASH = os.environ.get('SECRET_PASS_HASH')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../instance/site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESOURCES_DIR = 'data'
     PROJECTS_UPLOAD_FOLDER = './suchiblog/static/uploaded-data'
     NOTIFY_KEY = os.environ.get('SUCHICODES_NOTIFY_KEY')
-    NOTIFY_URL = f"https://maker.ifttt.com/trigger"\
-                 f"/notify/with/key/{NOTIFY_KEY}"
+    NOTIFY_URL = os.environ.get('SUCHICODES_NOTIFY_URL')
     MESSAGE_FILE = './suchiblog/data/message-data.json'
     IP_BLACKLIST = './suchiblog/config/ip_blacklist'
     MESSAGE_BLACKLIST = './suchiblog/config/message_blacklist'

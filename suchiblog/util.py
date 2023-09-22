@@ -46,10 +46,14 @@ class Util:
         return str(uuid.uuid4())
 
     @staticmethod
-    def send_notification_to_IFFF(message):
+    def send_notification(title: str, message: str, priority: int = 7) -> bool:
         url = Config.NOTIFY_URL
-        data = {'value1': f"SC: {message}"}
+        if (url is None):
+            return False
+
+        data = {'title': title, 'message': message, 'priority': str(priority)}
         requests.post(url, data=data)
+        return True
 
     @staticmethod
     def log_contact_message(subject, message, ip, app, db, ContactModel):
@@ -65,8 +69,10 @@ class Util:
             db.session.add(item)
             db.session.commit()
 
-        Util.send_notification_to_IFFF(
-            f"Msg - {subject[:10]}"
+        Util.send_notification(
+            "Message on Suchicodes",
+            f"{(subject+': '+message)[:20]}",
+            priority=3
         )
 
     @staticmethod
