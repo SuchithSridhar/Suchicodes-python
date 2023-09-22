@@ -293,7 +293,7 @@ def blacklist():
             else:
                 fin.write(message)
 
-        return "Message has been added to blacklist"
+        return f"{message} has been added to blacklist"
 
     return "Invalid type for blacklist"
 
