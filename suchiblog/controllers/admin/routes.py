@@ -276,6 +276,9 @@ def blacklist():
         message = f.request.args.get('message', '')
         has_data_flag = False
 
+        if message.strip() == "":
+            return "Empty message, skipped."
+
         try:
             with open(Config.MESSAGE_BLACKLIST) as fin:
                 for line in fin.readlines():

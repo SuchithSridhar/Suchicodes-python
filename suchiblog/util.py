@@ -73,7 +73,7 @@ class Util:
 
         Util.send_notification(
             "Message on Suchicodes",
-            f"{(subject+': '+message)[:20]}",
+            f"{(subject+': '+message)[:100]}",
             priority=3
         )
 
