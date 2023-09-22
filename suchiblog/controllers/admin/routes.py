@@ -233,6 +233,18 @@ def messages():
         data=data)
 
 
+@admin_blueprint.route("/admin/message/delete/<id>")
+@fl.login_required
+def delete_message(id):
+    message = Contact.query.filter_by(id=id).first()
+    if not message:
+        f.abort(404)
+
+    db.session.delete(message)
+    db.session.commit()
+    return "Message was deleted."
+
+
 @admin_blueprint.route("/admin/blacklist")
 @fl.login_required
 def blacklist():
@@ -270,7 +282,7 @@ def blacklist():
                     if (not has_data_flag) and len(line.strip()) > 0:
                         has_data_flag = True
                     if message in line:
-                        return "Message already present in the blacklist"
+                        return f"{message} already present in the blacklist."
 
         except FileNotFoundError:
             pass

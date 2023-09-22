@@ -86,7 +86,6 @@ function initialize() {
     let subject = $(`.message-row[data-id='${id}'] [data-type='message-subject']`).text();
     let message = $(`.message-row[data-id='${id}'] [data-type='message-body']`).text();
     let domains = extractDomains(`${subject} ${message}`);
-    let url = `/admin/blacklist?type=ip&ip=${ip}`;
 
     if (confirm(`Are you sure you want to black list the this IP and domains: ${domains}`)){
       domains.forEach(domain => {
@@ -98,12 +97,20 @@ function initialize() {
           },
         });
       })
+      let url = `/admin/blacklist?type=ip&ip=${ip}`;
       $.ajax({
         url: url,
         success: (result) => {
           alert(result);
         },
       });
+      $.ajax({
+      url: `/admin/message/delete/${id}`,
+      success: (result) => {
+        alert(result);
+        window.location.reload();
+      }
+      })
     }
   });
 
