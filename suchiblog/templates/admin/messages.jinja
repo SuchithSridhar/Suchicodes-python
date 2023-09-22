@@ -14,11 +14,11 @@
     </thead>
     <tbody>
       {% for message in data.items %}
-        <tr>
+        <tr class='message-row' data-id="{{message.id}}" >
           <td>{{message.date}}</td>
-          <td>{{message.ip}}<br><button data-ip="{{message.ip}}" class="block-button btn btn-secondary">Block</button></td>
-          <td>{{message.subject}}</td>
-          <td>{{message.message}}</td>
+          <td>{{message.ip}}<br><button data-ip="{{message.ip}}" data-id="{{message.id}}" class="block-button btn btn-secondary">Block</button></td>
+          <td data-type="message-subject">{{message.subject}}</td>
+          <td data-type="message-body">{{message.message}}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -50,13 +50,54 @@
 {% block js %}
 
 <script>
+
+function extractDomains(text) {
+    // Regular expression to match domain names ending with .info, .com, .net, or .org
+    const domainPattern = /\b([a-zA-Z0-9.-]+(?:\.info|\.com|\.net|\.org))\b/g;
+
+    const httpPattern =  /https?:\/\/(?:www\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b)(?:[-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    
+    // Domains to exclude
+    const excludeList = ["suchicodes.com", "google.com"];
+    
+    let domains = [];
+    let match;
+
+    // Extract domains
+    while ((match = domainPattern.exec(text)) !== null) {
+        domains.push(match[1]);
+    }
+
+    while ((match = httpPattern.exec(text)) !== null) {
+        domains.push(match[1]);
+    }
+
+    // Remove duplicates and exclude specific domains
+    domains = [...new Set(domains)].filter(domain => !excludeList.includes(domain));
+
+    return domains;
+}
+
 function initialize() {
   $('.block-button').click(e => {
     let target = $(e.currentTarget);
     let ip = target.attr('data-ip');
+    let id = target.attr('data-id');
+    let subject = $(`.message-row[data-id='${id}'] [data-type='message-subject']`).text();
+    let message = $(`.message-row[data-id='${id}'] [data-type='message-body']`).text();
+    let domains = extractDomains(`${subject} ${message}`);
     let url = `/admin/blacklist?type=ip&ip=${ip}`;
 
-    if (confirm("Are you sure you want to black list the this IP?")){
+    if (confirm(`Are you sure you want to black list the this IP and domains: ${domains}`)){
+      domains.forEach(domain => {
+        let url = `/admin/blacklist?type=message&message=${domain}`;
+        $.ajax({
+          url: url,
+          success: (result) => {
+            alert(result);
+          },
+        });
+      })
       $.ajax({
         url: url,
         success: (result) => {
