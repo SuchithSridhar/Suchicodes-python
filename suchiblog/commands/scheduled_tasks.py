@@ -12,12 +12,11 @@ cli_blueprint = f.Blueprint('cli_commands', __name__)
 def server_checkin_task():
     """
     Task to check if server reporting correctly.
-    To be called every 20 mins: flask cli_commands server-checkin-task
+    To be called every THRESHOLD_MINS : flask cli_commands server-checkin-task
     using cronjobs.
     """
 
-    # 20 mins in seconds
-    THRESHOLD = 20 * 60
+    THRESHOLD = Config.THRESHOLD_MINS * 60
     cur_date = datetime.now()
     servers = [Config.ASTRAX_SERVER_TAG, Config.BERNUM_SERVER_TAG]
     logger.info('Starting server_checkin_task')
