@@ -68,6 +68,7 @@ def view_external_messages():
     return f.render_template(
         'admin/external-messages.jinja',
         title='Extern-Messages',
+        current_time=str(datetime.now()),
         data=data
     )
 
