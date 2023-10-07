@@ -1,12 +1,11 @@
 from datetime import datetime
-from os import kill
 import flask as f
 import flask_login as fl
 from .admin_util import AdminUtil
 from ...models import IP_Logs, URL_Redirection, Contact, Extern_Messages
 from ...util import Util
 from ...config import Config
-from ... import db, logger
+from ... import db
 
 admin_blueprint = f.Blueprint('admin', __name__)
 
@@ -16,6 +15,7 @@ server_messages_queue = {
     Config.ASTRAX_SERVER_TAG: [],
     Config.BERNUM_SERVER_TAG: []
 }
+
 
 @admin_blueprint.route("/admin/")
 @admin_blueprint.route("/admin")
@@ -59,11 +59,11 @@ def view_external_messages():
     filter_tag = f.request.args.get("tag", default="", type=str).strip()
     if (filter_tag != ""):
         data = Extern_Messages.query \
-                .filter(Extern_Messages.tags.like(f'%#{filter_tag}$%')) \
-                .order_by(Extern_Messages.timestamp.desc()).paginate(per_page=20)
+            .filter(Extern_Messages.tags.like(f'%#{filter_tag}$%')) \
+            .order_by(Extern_Messages.timestamp.desc()).paginate(per_page=20)
     else:
         data = Extern_Messages.query \
-                .order_by(Extern_Messages.timestamp.desc()).paginate(per_page=20)
+            .order_by(Extern_Messages.timestamp.desc()).paginate(per_page=20)
 
     return f.render_template(
         'admin/external-messages.jinja',
@@ -83,9 +83,10 @@ def server_checkin_callback(message: Extern_Messages):
         if (message.tags_contains(server)):
 
             data = Extern_Messages.query \
-                    .filter(Extern_Messages.tags.like(f'%#{server}$%')) \
-                    .filter(Extern_Messages.tags.like(f'%#{Config.SERVER_OFFLINE_TAG}$%')) \
-                    .first()
+                .filter(Extern_Messages.tags.like(f'%#{server}$%')) \
+                .filter(Extern_Messages.tags.like(
+                    f'%#{Config.SERVER_OFFLINE_TAG}$%')) \
+                .first()
 
             if data is not None:
                 # Server has come back alive and is no longer offline
@@ -102,11 +103,12 @@ def server_checkin_callback(message: Extern_Messages):
 
                 id = Util.create_uuid()
                 item = Extern_Messages(
-                    id = id,
+                    id=id,
                     user=Config.INTERNAL_USER,
                     message=f"{return_string}| sent",
                     timestamp=timestamp,
-                    tags=Extern_Messages.create_tags([Config.INTERNAL_USER, "oplog", server])
+                    tags=Extern_Messages.create_tags(
+                        [Config.INTERNAL_USER, "oplog", server])
                 )
 
                 db.session.add(item)
@@ -115,7 +117,6 @@ def server_checkin_callback(message: Extern_Messages):
             break
 
     return return_string
-
 
 
 @admin_blueprint.route("/admin/add-server-command", methods=['post'])
@@ -149,7 +150,7 @@ def add_server_command_ui():
     '''
     Web UI for adding server commands to control remote servers.
     '''
-    
+
     if f.request.method == 'POST':
         op = f.request.form['op']
         server = f.request.form['server']
@@ -158,7 +159,7 @@ def add_server_command_ui():
 
         server_messages_queue[server].append(f"operation: {op}")
 
-    return f.render_template (
+    return f.render_template(
         'admin/server-commands.jinja',
         title='Server Commands',
         server_messages_queue=server_messages_queue,
@@ -192,7 +193,7 @@ def log_external_message():
     tags = ",".join(map(lambda item: f"#{item}$", tags))
 
     item = Extern_Messages(
-        id = id,
+        id=id,
         user=user,
         message=message,
         timestamp=timestamp,
@@ -201,7 +202,6 @@ def log_external_message():
 
     db.session.add(item)
     db.session.commit()
-
 
     # Callbacks must return strings.
     callbacks = {
@@ -253,49 +253,51 @@ def blacklist():
 
     if block == 'ip':
         ip = f.request.args.get('ip', '')
-        has_data_flag = False
+        new_line_present = False
         try:
             with open(Config.IP_BLACKLIST) as fin:
                 data = fin.read()
                 if ip in data:
                     return f"{ip} already present in the blacklist"
-                if len(data.strip()) > 0:
-                    has_data_flag = True
+
+                # If the last line has a '\n' then don't add one later
+                new_line_present = data[-1] == '\n'
 
         except FileNotFoundError:
             pass
 
         with open(Config.IP_BLACKLIST, 'a') as fin:
-            if has_data_flag:
-                fin.write("\n" + ip)
-            else:
+            if new_line_present:
                 fin.write(ip)
+            else:
+                fin.write("\n" + ip)
 
         return f"{ip} has been added to the blacklist"
 
     elif block == 'message':
         message = f.request.args.get('message', '')
-        has_data_flag = False
 
         if message.strip() == "":
             return "Empty message, skipped."
 
+        new_line_present = False
         try:
             with open(Config.MESSAGE_BLACKLIST) as fin:
                 for line in fin.readlines():
-                    if (not has_data_flag) and len(line.strip()) > 0:
-                        has_data_flag = True
                     if message in line:
                         return f"{message} already present in the blacklist."
+
+                    # If the last line has a '\n' then don't add one later
+                    new_line_present = line[-1] == '\n'
 
         except FileNotFoundError:
             pass
 
         with open(Config.MESSAGE_BLACKLIST, 'a') as fin:
-            if has_data_flag:
-                fin.write("\n" + message)
-            else:
+            if new_line_present:
                 fin.write(message)
+            else:
+                fin.write("\n" + message)
 
         return f"{message} has been added to blacklist"
 

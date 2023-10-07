@@ -85,7 +85,7 @@ def contact():
         try:
             with open(Config.MESSAGE_BLACKLIST) as fin:
                 for line in fin.readlines():
-                    if line.strip() in message:
+                    if line.strip() != "" and line.strip() in message:
                         return "No"
         except FileNotFoundError:
             pass
