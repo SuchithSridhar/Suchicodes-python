@@ -93,7 +93,7 @@ def server_checkin_callback(message: Extern_Messages):
                 Util.send_notification(
                     f"Suchicodes: {server} status",
                     f"Server is back online. Checkin at: {timestamp}.",
-                    priority=8
+                    priority=9
                 )
                 db.session.delete(data)
                 db.session.commit()

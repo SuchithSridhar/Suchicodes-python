@@ -46,7 +46,7 @@ class Util:
         return str(uuid.uuid4())
 
     @staticmethod
-    def send_notification(title: str, message: str, priority: int = 7) -> bool:
+    def send_notification(title: str, message: str, priority: int = 9) -> bool:
         url = Config.NOTIFY_URL
         if (url is None):
             return False
@@ -74,7 +74,7 @@ class Util:
         Util.send_notification(
             "Message on Suchicodes",
             f"{(subject+': '+message)[:100]}",
-            priority=3
+            priority=5
         )
 
     @staticmethod

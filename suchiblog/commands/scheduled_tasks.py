@@ -80,7 +80,7 @@ def server_checkin_task():
         Util.send_notification(
             f"Suchicodes: {server} status",
             f"Server seems to be offline. Last message at: {last_date}.",
-            priority=8
+            priority=9
         )
 
     logger.info('server_checkin_task complete.')

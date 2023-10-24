@@ -37,6 +37,7 @@ def about():
     return f.render_template('main/about.jinja', title="About | Suchicodes")
 
 
+@main_blueprint.route("/u/<keyword>")
 @main_blueprint.route("/url/<keyword>")
 def url_redirection(keyword):
     url = URL_Redirection.query.filter_by(keyword_in=keyword).first()
