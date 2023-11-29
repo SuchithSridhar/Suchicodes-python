@@ -11,7 +11,7 @@ def value_or_default(item1, item2):
 
 class Config:
     SECRET_KEY = os.environ.get('SUCHICODES_SECRET_KEY')
-    PERMANENT_SESSION_LIFETIME = datetime.timedelta(year=1)
+    PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=365)
     SUCHICODES_ENV = value_or_default(
         os.environ.get('SUCHICODES_ENV'), "development"
     )
