@@ -15,6 +15,7 @@ def get_session():
 
 @main_blueprint.route("/session/set/<value>")
 def set_session(value):
+    f.session.permanent = True
     f.session['value'] = value
     return 'Session set'
 
