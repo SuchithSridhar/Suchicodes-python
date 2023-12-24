@@ -1,4 +1,6 @@
 import flask as f
+import os
+from datetime import datetime
 from ...util import Util
 from ...models import URL_Redirection, Contact
 from ...config import Config
@@ -37,6 +39,23 @@ def support_me():
 def about():
     return f.render_template('main/about.jinja', title="About | Suchicodes")
 
+
+@main_blueprint.route("/picture-dropoff", methods=['GET', 'POST'])
+def picture_dropoff():
+    if f.request.method == 'POST':
+        uploader = f.request.form['uploader']
+        uploaded_files = f.request.files.getlist("file[]")
+
+        for file in uploaded_files:
+            date = datetime.now()
+            if not file.filename:
+                file.filename = "nofilename"
+
+            file.filename = f"{uploader}__{date}__{file.filename}"
+            file.save(os.path.join(f.current_app.config['DATA_DIRECTORY'],
+                                   file.filename))
+
+    return f.render_template('misc/picture-dropoff.jinja', title="Upload Pictures | Suchicodes")
 
 @main_blueprint.route("/u/<keyword>")
 @main_blueprint.route("/url/<keyword>")

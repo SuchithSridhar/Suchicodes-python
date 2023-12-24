@@ -22,6 +22,7 @@ class Config:
     PROJECTS_UPLOAD_FOLDER = './suchiblog/static/uploaded-data'
     NOTIFY_URL = os.environ.get('SUCHICODES_NOTIFY_URL')
     MESSAGE_FILE = './suchiblog/data/message-data.json'
+    DATA_DIRECTORY = './suchiblog/data'
     IP_BLACKLIST = './suchiblog/config/ip_blacklist'
     MESSAGE_BLACKLIST = './suchiblog/config/message_blacklist'
     DATETIME_COMPLETE_FORMAT = "%Y-%m-%d_%H-%M-%S"
