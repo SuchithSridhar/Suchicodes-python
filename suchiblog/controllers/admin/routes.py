@@ -119,6 +119,28 @@ def server_checkin_callback(message: Extern_Messages):
     return return_string
 
 
+def server_restart_callback(message: Extern_Messages) -> str:
+    '''
+    Handle external message when Config.SERVER_RESTART_TAG is present
+    in the tags. Function reports to user.
+
+    Returns a string to be returned in HTTP request.
+    '''
+    servers = [Config.ASTRAX_SERVER_TAG, Config.BERNUM_SERVER_TAG]
+
+    for server in servers:
+        timestamp = datetime.now()
+        if (message.tags_contains(server)):
+            # Server restarted, alert user
+            Util.send_notification(
+                f"Suchicodes: {server} restarted",
+                f"Reported at: {timestamp}.",
+                priority=9
+            )
+
+    return ""
+
+
 @admin_blueprint.route("/admin/add-server-command", methods=['post'])
 def add_server_command():
     '''
@@ -180,16 +202,16 @@ def log_external_message():
         -F "message=asdg" -F "tags=tags"
         http://localhost:5000/admin/log-external-message
     '''
-    password = f.request.form['pass']
+    password = f.request.form.get('pass', '')
 
     if Util.hash_password(password) != Config.SECRET_PASS_HASH:
         f.abort(403)
 
     id = Util.create_uuid()
     timestamp = datetime.now()
-    user = f.request.form['user']
-    message = f.request.form['message']
-    tags = f.request.form['tags'].split(",")
+    user = f.request.form.get('user', '')
+    message = f.request.form.get('message', '')
+    tags = f.request.form.get('tags', '').split(",")
     tags = ",".join(map(lambda item: f"#{item}$", tags))
 
     item = Extern_Messages(
@@ -205,14 +227,17 @@ def log_external_message():
 
     # Callbacks must return strings.
     callbacks = {
-        Config.SERVER_CHECKIN_TAG: [server_checkin_callback]
+        Config.SERVER_CHECKIN_TAG: [server_checkin_callback],
+        Config.SERVER_RESTART_TAG: [server_restart_callback]
     }
 
     lines = []
     for tag, func_list in callbacks.items():
         if item.tags_contains(tag):
             for function in func_list:
-                lines.append(function(item))
+                returned_string = function(item)
+                if (len(returned_string) != 0):
+                    lines.append(returned_string)
 
     return f"Message added with uuid: {id}<br>" + "<br>".join(lines)
 

@@ -37,6 +37,7 @@ class Config:
     ASTRAX_SERVER_TAG = "astrax"
     BERNUM_SERVER_TAG = "bernum"
     SERVER_CHECKIN_TAG = "server-checkin"
+    SERVER_RESTART_TAG = "server-restart"
     SERVER_OFFLINE_TAG = "server-offline"
     AVAILABLE_SERVER_COMMANDS = ['restart', 'ssh-restart']
     CHECKIN_LIMIT = 5  # Number of logs kept for each server
