@@ -39,6 +39,7 @@ class Config:
     SERVER_CHECKIN_TAG = "server-checkin"
     SERVER_RESTART_TAG = "server-restart"
     SERVER_OFFLINE_TAG = "server-offline"
-    AVAILABLE_SERVER_COMMANDS = ['restart', 'ssh-start', 'ssh-stop']
+    AVAILABLE_SERVER_COMMANDS = ['restart',
+                                 'ssh-start', 'ssh-stop', 'high-poll']
     CHECKIN_LIMIT = 5  # Number of logs kept for each server
     THRESHOLD_MINS = 10  # Mins before server marked as offline
