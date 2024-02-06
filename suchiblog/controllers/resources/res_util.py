@@ -3,6 +3,8 @@ import markdown
 from markdown.extensions.toc import TocExtension
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.fenced_code import FencedCodeExtension
+from markdown.extensions.sane_lists import SaneListExtension
+from markdown.extensions.tables import TableExtension
 from ...models import Category
 from ...models import Blog
 from ...config import Config
@@ -81,6 +83,8 @@ class ResUtil:
             md,
             extensions=[
                 TocExtension(),
+                TableExtension(),
+                SaneListExtension(),
                 CodeHiliteExtension(
                     guess_lang=False),
                 FencedCodeExtension()])
