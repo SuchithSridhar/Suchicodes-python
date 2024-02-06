@@ -17,7 +17,7 @@ def initialize_database(db, app):
         db.create_all()
 
 
-def create_app(config_class=Config):
+def create_app(config_class=Config) -> f.Flask:
     global LOCALE
 
     from .util import Util
@@ -27,7 +27,7 @@ def create_app(config_class=Config):
     from .controllers.resources.routes import resources_blueprint
     from .controllers.api.routes import api_blueprint
     from .models import IP_Logs
-    from .commands.scheduled_tasks import cli_blueprint
+    from .commands.cli_commands import cli_blueprint
 
     GLOBAL_DATA = Util.get_pre_render_data(flask=None, lang='en')
 

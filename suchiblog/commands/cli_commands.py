@@ -4,6 +4,9 @@ from ..config import Config
 from ..models import Extern_Messages
 from ..util import Util
 from .. import db, logger
+from .. import models
+from ..controllers.resources.res_util import ResUtil
+
 
 cli_blueprint = f.Blueprint('cli_commands', __name__)
 
@@ -84,3 +87,30 @@ def server_checkin_task():
         )
 
     logger.info('server_checkin_task complete.')
+
+
+@cli_blueprint.cli.command()
+def replace_math_string_markdown():
+    """
+    Function to replace the $$$ and $$ with $$ and $ respectively.
+    This is designed to only be called once. Ever.
+    """
+    def update_markdown(markdown: str) -> str:
+
+        placeholder = "#dhjwnecvyq#"
+        markdown = markdown.replace("$$$", placeholder)
+        markdown = markdown.replace("$$", "$")
+        markdown = markdown.replace(placeholder, "$$")
+        return markdown
+
+    blogs: list[models.Blog] = models.Blog.query.all()
+    for blog in blogs:
+        # If this substring is present then it needs to be updated
+        if "$$$" in blog.markdown:
+            blog.markdown = update_markdown(blog.markdown)
+            logger.warn(
+                f"Updated blog with ID: {blog.id[:6]}, and title: {blog.title}"
+            )
+            blog.html = ResUtil.to_html(blog.markdown)
+
+    db.session.commit()
