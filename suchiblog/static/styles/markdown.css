@@ -153,6 +153,11 @@
     left: 485px;
 }
 
+table.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: var(--color-dark-gray);
+    color: var(--color-foreground);
+}
+
 mjx-container[jax="CHTML"][display="true"] {
     display: block;
     text-align: center;
