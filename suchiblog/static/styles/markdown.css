@@ -154,7 +154,7 @@
 }
 
 table.table-striped>tbody>tr:nth-of-type(odd) {
-    --bs-table-accent-bg: var(--color-dark-gray);
+    --bs-table-accent-bg: var(--color-light-gray);
     color: var(--color-foreground);
 }
 
