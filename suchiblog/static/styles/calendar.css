@@ -2,3 +2,8 @@
     height: 800px;
     width: 100%;
 }
+
+.calendar-container iframe {
+    width: 100%;
+    height: 100%;
+}
