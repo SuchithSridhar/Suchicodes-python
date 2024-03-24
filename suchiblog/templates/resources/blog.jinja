@@ -68,6 +68,10 @@ MathJax = {
   // update the time to be user time zone
   $('.utc-time').each(function() {
     var utcTime = $(this).attr('datetime');
+    // UTC time ends with Z
+    if (!utcTime.endsWith('Z')) {
+      utcTime += 'Z';
+    }
     var localTime = new Date(utcTime);
     var formattedTime = localTime.toLocaleString('en-US', {
       year: 'numeric',
