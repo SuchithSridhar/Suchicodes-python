@@ -53,8 +53,7 @@ class Util:
 
         data = {'title': title, 'message': message, 'priority': str(priority)}
 
-        # Adding verify=False since SSL certification not verified for gotify.
-        requests.post(url, data=data, verify=False)
+        requests.post(url, data=data, verify=True)
         return True
 
     @staticmethod
