@@ -28,7 +28,7 @@
 }
 
 #markdown-container :is(p, li) {
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 #markdown-container .codehilite {
@@ -104,7 +104,7 @@
     background-color: var(--color-light-gray);
     font-family: monospace;
     padding-left: 2%;
-    padding-bottom: 1em;
+    padding-bottom: 1rem;
     margin-bottom: 15px;
     overflow-x: auto;
 }
