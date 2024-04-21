@@ -56,6 +56,7 @@ about:
 contact:
   message_title: "Send me a message:"
   send: "Send"
+  message_bot: "Do not fill this out if you are human."
   message: "Message"
   subject: "Subject"
   message_subtext: "Please include your contact information if you wish to reach out."

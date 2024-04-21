@@ -62,6 +62,10 @@
   color: var(--color-foreground);
 }
 
+.message-hpt {
+  display: none;
+}
+
 .subject {
   border-radius: 0;
   border: 1px solid var(--color-foreground);
