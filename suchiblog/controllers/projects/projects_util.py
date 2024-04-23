@@ -4,10 +4,12 @@ import markdown
 
 class ProjectUtil:
 
+    @staticmethod
     def get_images():
         items = os.listdir('./suchiblog/static/assets/programming-languages')
         return [os.path.basename(item) for item in items if '.svg' in item]
 
+    @staticmethod
     def to_html(md):
         md = md.replace('\r\n', '\n')
         ending = False

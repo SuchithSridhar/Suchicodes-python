@@ -154,7 +154,6 @@ def upload_blog():
     # Generate all the data
     markdown = ApiUtil.substitute_picute_paths(markdown, picture_map)
     html = ResUtil.to_html(markdown)
-    markdown = markdown
     brief = config[ApiUtil.BLOG_BRIEF]
     title = config[ApiUtil.BLOG_TITLE]
     category_id = int(config[ApiUtil.BLOG_CATEGORY])
