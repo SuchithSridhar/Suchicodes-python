@@ -90,11 +90,7 @@ def contact():
                 pass
 
         sub = f.escape(f.request.form['subject'])
-        message_bot = f.escape(f.request.form['message'])
-        message = f.escape(f.request.form['message-real'])
-
-        if (message_bot != ""):
-            return "You were marked as a non-human entitiy."
+        message = f.escape(f.request.form['message'])
 
         # Check blacklist of ip addresses
 
