@@ -65,13 +65,16 @@
         <h5>{{ln.contact.message_title}}</h5>
         <form class="" id="message-form" action="" method="post" enctype="multipart/form-data">
           <input class="form-control mt-4 subject" type="text" name="subject" id="subject-input" placeholder="{{ln.contact.subject}}"><br>
-          <div class="col-lg-3">
-          
-          </div>
-          <div class="col-lg-3"></div>
           <textarea class="form-control message" name="message" id="message" rows=7 placeholder="{{ln.contact.message}}"></textarea>
           <div class='text-muted message-subtext'>{{ln.contact.message_subtext}}</div>
+
+          <div class="form-group humantest">
+            <label for="humantest">{{ln.contact.human_test}}</label>
+            <input type="text" class="form-control" name="humantest" id="humantest">
+          </div>
+
           <button class="btn btn-custom btn-send" type="submit">{{ln.contact.send}}</button>
+
         </form>
       </div>
     </div>

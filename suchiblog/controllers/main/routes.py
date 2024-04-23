@@ -91,6 +91,10 @@ def contact():
 
         sub = f.escape(f.request.form['subject'])
         message = f.escape(f.request.form['message'])
+        human_test = f.escape(f.request.form['humantest'])
+
+        if human_test.strip() != "I am human":
+            return "You were classified as a bot."
 
         # Check blacklist of ip addresses
 

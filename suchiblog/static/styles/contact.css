@@ -79,6 +79,22 @@
   color: var(--color-foreground);
 }
 
+.humantest {
+  margin-bottom: 20px;
+}
+
+.humantest input {
+  border-radius: 0;
+  border: 1px solid var(--color-foreground);
+  background-color: transparent;
+  color: var(--color-foreground);
+}
+
+.humantest input:focus {
+  background-color: transparent;
+  color: var(--color-foreground);
+}
+
 .buttons-col {
   padding: 2%;
   padding-top: 0;

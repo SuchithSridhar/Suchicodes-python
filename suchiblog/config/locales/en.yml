@@ -59,3 +59,4 @@ contact:
   message: "Message"
   subject: "Subject"
   message_subtext: "Please include your contact information if you wish to reach out."
+  human_test: "<strong>Enter the text:</strong> I am human"
