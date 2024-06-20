@@ -27,6 +27,12 @@
     border-radius: 5px;
 }
 
+#markdown-container blockquote {
+    background-color: var(--color-light-gray);
+    padding: 0 0 0 30px;
+    border-left: 1px solid var(--color-foreground);
+}
+
 #markdown-container :is(p, li) {
     font-size: 1.1rem;
 }
