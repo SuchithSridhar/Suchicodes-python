@@ -21,6 +21,7 @@ rapidfuzz = "*"
 pymdown-extensions = "*"
 pygments = "*"
 markupsafe = "*"
+gunicorn = "*"
 
 [dev-packages]
 
