@@ -1,4 +1,5 @@
 import flask as f
+import markupsafe
 import os
 from datetime import datetime
 from ...util import Util
@@ -89,9 +90,9 @@ def contact():
             except ValueError:
                 pass
 
-        sub = f.escape(f.request.form['subject'])
-        message = f.escape(f.request.form['message'])
-        human_test = f.escape(f.request.form['humantest'])
+        sub = markupsafe.escape(f.request.form['subject'])
+        message = markupsafe.escape(f.request.form['message'])
+        human_test = markupsafe.escape(f.request.form['humantest'])
 
         if human_test.strip() != "I am human":
             return "You were classified as a bot."

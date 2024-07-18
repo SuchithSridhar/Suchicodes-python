@@ -20,6 +20,7 @@ flask-migrate = "*"
 rapidfuzz = "*"
 pymdown-extensions = "*"
 pygments = "*"
+markupsafe = "*"
 
 [dev-packages]
 
