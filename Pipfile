@@ -22,6 +22,7 @@ pymdown-extensions = "*"
 pygments = "*"
 markupsafe = "*"
 gunicorn = "*"
+cachetools = "*"
 
 [dev-packages]
 

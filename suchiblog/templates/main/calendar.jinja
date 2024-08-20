@@ -4,22 +4,90 @@
 {% endblock metatags %}
 
 {% block headers %}
-    <link rel="stylesheet" href="/static/styles/calendar.css">
 {% endblock headers %}
 
 {% block content %}
 <hr class="nav-separator">
-
-<div class="container calendar-container">
-
-</div>
-
+<div id='calendar' class="container calendar-container"></div>
 {% endblock content %}
 
 {% block js %}
-<script type="text/javascript">
-const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone 
-const html = `<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=${timezone}&mode=WEEK&showPrint=0&showTabs=1&showNav=1&showTitle=1&showDate=1&showCalendars=0&showTz=1&src=c3VjaGl0aHNyaWRoYXJAZ21haWwuY29t&color=%233F51B5" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>`
-document.querySelector('.calendar-container').innerHTML = html;
-</script>
+    <!-- Load FullCalendar -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <!-- Load ical.js for parsing the .ics file -->
+    <script src='https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js'></script>
+
+    <script defer async>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridWeek',
+            events: [], // We'll load events dynamically below
+        });
+
+        // Function to fetch and parse an ICS file
+        function fetchAndParseICS(url, cutoffDate, callback) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const jcalData = ICAL.parse(data);
+                    const comp = new ICAL.Component(jcalData);
+                    const vevents = comp.getAllSubcomponents('vevent');
+                    const events = [];
+
+                    vevents.forEach(vevent => {
+                        const event = new ICAL.Event(vevent);
+
+                        // Handle recurring events
+                        if (event.isRecurring()) {
+                            const expand = new ICAL.RecurExpansion({
+                                component: vevent,
+                                dtstart: event.startDate
+                            });
+
+                            while (expand.next() && expand.last.toJSDate() <= cutoffDate) {
+                                events.push({
+                                    title: event.summary,
+                                    start: expand.last.toJSDate(),
+                                    end: new Date(expand.last.toJSDate().getTime() + (event.endDate.toJSDate() - event.startDate.toJSDate())),
+                                    allDay: event.startDate.isDate
+                                });
+                            }
+                        } else {
+                            const eventEndDate = event.endDate ? event.endDate.toJSDate() : event.startDate.toJSDate();
+                            if (eventEndDate <= cutoffDate) {
+                                events.push({
+                                    title: event.summary,
+                                    start: event.startDate.toJSDate(),
+                                    end: eventEndDate,
+                                    allDay: event.startDate.isDate
+                                });
+                            }
+                        }
+                    });
+
+                    callback(events);
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing .ics file:', error);
+                });
+        }
+
+        // Define a cutoff date 8 weeks from now
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() + (8 * 7));
+
+        // Fetch and parse the first calendar
+        fetchAndParseICS('/proxy-calendar-public', cutoffDate, function(events) {
+            calendar.addEventSource(events);
+        });
+
+        // Fetch and parse the second calendar
+        fetchAndParseICS('/proxy-calendar-private', cutoffDate, function(events) {
+            calendar.addEventSource(events);
+        });
+
+        calendar.render();
+    });
+    </script>
 {% endblock js %}

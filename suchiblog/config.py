@@ -21,6 +21,10 @@ class Config:
     RESOURCES_DIR = 'data'
     PROJECTS_UPLOAD_FOLDER = './suchiblog/static/uploaded-data'
     NOTIFY_URL = os.environ.get('SUCHICODES_NOTIFY_URL')
+
+    PROTON_CAL_PRIVATE = os.environ.get('PROTON_CAL_PRIVATE')
+    PROTON_CAL_PUBLIC = os.environ.get('PROTON_CAL_PUBLIC')
+
     MESSAGE_FILE = './suchiblog/data/message-data.json'
     DATA_DIRECTORY = './suchiblog/data'
     IP_BLACKLIST = './suchiblog/config/ip_blacklist'

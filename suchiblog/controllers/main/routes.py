@@ -1,6 +1,8 @@
 import flask as f
 import markupsafe
+import requests
 import os
+from cachetools import cached, TTLCache
 from datetime import datetime
 from ...util import Util
 from ...models import URL_Redirection, Contact
@@ -9,6 +11,9 @@ from ... import db
 
 main_blueprint = f.Blueprint('main', __name__)
 contact_alert = False
+
+# Simple in-memory cache with a TTL of 5 minutes
+ics_cache = TTLCache(maxsize=1, ttl=300)
 
 
 @main_blueprint.route("/session/get")
@@ -58,6 +63,7 @@ def picture_dropoff():
 
     return f.render_template('misc/picture-dropoff.jinja', title="Upload Pictures | Suchicodes")
 
+
 @main_blueprint.route("/u/<keyword>")
 @main_blueprint.route("/url/<keyword>")
 def url_redirection(keyword):
@@ -74,6 +80,27 @@ def calendar():
     return f.render_template(
         'main/calendar.jinja',
         title="Calendar | Suchicodes")
+
+
+@cached(ics_cache)
+def fetch_ics_data(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.content
+    else:
+        f.abort(500, description="Failed to fetch calendar data")
+
+
+@main_blueprint.route("/proxy-calendar-private")
+def proxy_calendar_private():
+    ics_data = fetch_ics_data(Config.PROTON_CAL_PRIVATE)
+    return f.Response(ics_data, content_type='text/calendar')
+
+
+@main_blueprint.route("/proxy-calendar-public")
+def proxy_calendar_public():
+    ics_data = fetch_ics_data(Config.PROTON_CAL_PUBLIC)
+    return f.Response(ics_data, content_type='text/calendar')
 
 
 @main_blueprint.route("/contact", methods=['get', 'post'])
