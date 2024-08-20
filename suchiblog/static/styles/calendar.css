@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    .fc-toolbar { 
+        flex-wrap: wrap;
+        font-size: 0.5em;
+        align-items: center;
+    }
+    .fc-toolbar .fc-button-group {
+        margin-bottom: 10px;
+    }
+    .fc .fc-scroller {
+        font-size: 0.7em;
+    }
+}

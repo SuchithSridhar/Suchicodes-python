@@ -4,23 +4,7 @@
 {% endblock metatags %}
 
 {% block headers %}
-    <style>
-        /* Additional styling for mobile responsiveness */
-        .fc-toolbar-title {
-            font-size: 1.25rem; /* Adjust title size for mobile */
-        }
-        .fc-prev-button, .fc-next-button {
-            font-size: 0.9rem; /* Adjust button size for mobile */
-        }
-        @media (max-width: 768px) {
-            .fc-toolbar { 
-                flex-wrap: wrap; /* Allow toolbar to wrap on smaller screens */
-            }
-            .fc-toolbar .fc-button-group {
-                margin-bottom: 10px; /* Add space between toolbar buttons */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/static/styles/calendar.css">
 {% endblock headers %}
 
 {% block content %}
