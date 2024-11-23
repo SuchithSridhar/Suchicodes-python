@@ -9,22 +9,19 @@ from ..resources.res_util import ResUtil
 from ...config import Config
 from ... import db
 
-api_blueprint = f.Blueprint('api', __name__)
+api_blueprint = f.Blueprint("api", __name__)
 
 
 @api_blueprint.route("/api/")
 def api_help():
-    '''Help information about API.'''
+    """Help information about API."""
 
-    return f.render_template(
-        'api/help.jinja',
-        title="Api Help | Suchicodes"
-        )
+    return f.render_template("api/help.jinja", title="Api Help | Suchicodes")
 
 
 @api_blueprint.route("/api/resources/categories")
 def get_categories():
-    '''Get all categories defined under resources.'''
+    """Get all categories defined under resources."""
 
     categories = Category.query.all()
     response = []
@@ -32,18 +29,20 @@ def get_categories():
         if cat.name == "deleted":
             continue
 
-        response.append({
-            "id": cat.id,
-            "parent_id": cat.parent_id,
-            "name": cat.name,
-        })
+        response.append(
+            {
+                "id": cat.id,
+                "parent_id": cat.parent_id,
+                "name": cat.name,
+            }
+        )
 
     return jsonify(response)
 
 
 @api_blueprint.route("/api/resources/blogs/<category_id>")
 def get_blogs_in_category(category_id):
-    '''Api endpoint to get all blogs in a given category using its ID.'''
+    """Api endpoint to get all blogs in a given category using its ID."""
 
     category = Category.query.filter_by(id=int(category_id)).first()
     if category.name == "deleted":
@@ -56,20 +55,22 @@ def get_blogs_in_category(category_id):
         if blog.category_id != category.id:
             continue
 
-        response.append({
-            "id": blog.id,
-            "date": blog.date,
-            "title": blog.title,
-            "brief": blog.brief,
-            "markdown_length": len(blog.markdown)
-        })
+        response.append(
+            {
+                "id": blog.id,
+                "date": blog.date,
+                "title": blog.title,
+                "brief": blog.brief,
+                "markdown_length": len(blog.markdown),
+            }
+        )
 
     return jsonify(response)
 
 
 @api_blueprint.route("/api/resources/blog/<blog_id>")
 def get_blog_content(blog_id):
-    '''Get the data of a blog using its ID.'''
+    """Get the data of a blog using its ID."""
 
     blog = Blog.query.filter_by(id=blog_id).first()
     blog_category = Category.query.filter_by(id=blog.category_id).first()
@@ -78,67 +79,59 @@ def get_blog_content(blog_id):
         return jsonify({})
 
     blog_data = {
-                "id": blog.id,
-                "date": blog.date,
-                "title": blog.title,
-                "brief": blog.brief,
-                "markdown": blog.markdown,
-                "html": blog.html,
-                "category": blog_category.name
+        "id": blog.id,
+        "date": blog.date,
+        "title": blog.title,
+        "brief": blog.brief,
+        "markdown": blog.markdown,
+        "html": blog.html,
+        "category": blog_category.name,
     }
 
     return jsonify(blog_data)
 
 
-@api_blueprint.route("/api/admin/upload_blog", methods=['post'])
+@api_blueprint.route("/api/admin/upload_blog", methods=["post"])
 def upload_blog():
-    email = f.request.form.get('email', '')
-    password = f.request.form.get('password', '')
+    email = f.request.form.get("email", "")
+    password = f.request.form.get("password", "")
     user = AdminUtil.verify_admin_user(email, password)
     status_str = "status"
     error_str = "error"
 
     if user is None:
-        return jsonify(
-            {status_str: 'failure', error_str: 'Invalid Credentials'}
-        )
+        return jsonify({status_str: "failure", error_str: "Invalid Credentials"})
 
     uploaded_files = dict(f.request.files.lists()).get("files[]", [])
     files = ApiUtil.categorize_files(uploaded_files)
 
-    if files['config'] is None:
-        error = "Config file not included in files."\
-               f" Please include a '{Config.NOTES_CONFIG_FILENAME}'"\
-               " in the list of files uploaded.\n"
-        return jsonify(
-            {status_str: 'failure', error_str: error}
+    if files["config"] is None:
+        error = (
+            "Config file not included in files."
+            f" Please include a '{Config.NOTES_CONFIG_FILENAME}'"
+            " in the list of files uploaded.\n"
         )
+        return jsonify({status_str: "failure", error_str: error})
 
-    config = json.load(files['config'])
+    config = json.load(files["config"])
     verified, missing_field = ApiUtil.verify_blog_config(config)
 
     if not verified:
         error = f"Config was missing field: {missing_field}\n"
-        return jsonify(
-            {status_str: 'failure', error_str: error}
-        )
+        return jsonify({status_str: "failure", error_str: error})
 
-    if files['markdown'] is None:
+    if files["markdown"] is None:
         error = "Markdown file missing from upload.\n"
-        return jsonify(
-            {status_str: 'failure', error_str: error}
-        )
+        return jsonify({status_str: "failure", error_str: error})
 
-    markdown = files['markdown'].read().decode("UTF-8")
+    markdown = files["markdown"].read().decode("UTF-8")
 
     # Check if blog is being updated
     if config.get(ApiUtil.BLOG_ID, None) is not None:
         blog = Blog.query.filter_by(id=config.get(ApiUtil.BLOG_ID)).first()
         if blog is None:
             error = "Blog with blog_id not found\n"
-            return jsonify(
-                {status_str: 'failure', error_str: error}
-            )
+            return jsonify({status_str: "failure", error_str: error})
 
         picture_map = json.loads(blog.picture_map)
     else:
@@ -146,10 +139,7 @@ def upload_blog():
         picture_map = {}
 
     # Save the required files
-    picture_map = ApiUtil.save_required_files(
-        files['pictures'],
-        picture_map
-    )
+    picture_map = ApiUtil.save_required_files(files["pictures"], picture_map)
 
     # Generate all the data
     markdown = ApiUtil.substitute_picute_paths(markdown, picture_map)
@@ -182,14 +172,11 @@ def upload_blog():
             category_id=category_id,
             picture_map=picture_map_str,
             date_updated=date,
-            date_created=date
+            date_created=date,
         )
         db.session.add(blog)
     db.session.commit()
 
-    return_data = {
-        "id": blog.id,
-        "status": status
-    }
+    return_data = {"id": blog.id, "status": status}
 
     return jsonify(return_data)

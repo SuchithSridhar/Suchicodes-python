@@ -9,7 +9,7 @@ from ...models import URL_Redirection, Contact
 from ...config import Config
 from ... import db
 
-main_blueprint = f.Blueprint('main', __name__)
+main_blueprint = f.Blueprint("main", __name__)
 contact_alert = False
 
 # Simple in-memory cache with a TTL of 5 minutes
@@ -24,32 +24,31 @@ def get_session():
 @main_blueprint.route("/session/set/<value>")
 def set_session(value):
     f.session.permanent = True
-    f.session['value'] = value
-    return 'Session set'
+    f.session["value"] = value
+    return "Session set"
 
 
 @main_blueprint.route("/")
 def index():
     return f.render_template(
-        'main/index.jinja',
-        title="Home | Suchicodes",
-        skills=Util.get_skill_list())
+        "main/index.jinja", title="Home | Suchicodes", skills=Util.get_skill_list()
+    )
 
 
 @main_blueprint.route("/support_me")
 def support_me():
-    return f.render_template('main/support_me.jinja', title="Support Me | Suchicodes")
+    return f.render_template("main/support_me.jinja", title="Support Me | Suchicodes")
 
 
 @main_blueprint.route("/about")
 def about():
-    return f.render_template('main/about.jinja', title="About | Suchicodes")
+    return f.render_template("main/about.jinja", title="About | Suchicodes")
 
 
-@main_blueprint.route("/picture-dropoff", methods=['GET', 'POST'])
+@main_blueprint.route("/picture-dropoff", methods=["GET", "POST"])
 def picture_dropoff():
-    if f.request.method == 'POST':
-        uploader = f.request.form['uploader']
+    if f.request.method == "POST":
+        uploader = f.request.form["uploader"]
         uploaded_files = f.request.files.getlist("file[]")
 
         for file in uploaded_files:
@@ -58,10 +57,13 @@ def picture_dropoff():
                 file.filename = "nofilename"
 
             file.filename = f"{uploader}__{date}__{file.filename}"
-            file.save(os.path.join(f.current_app.config['DATA_DIRECTORY'],
-                                   file.filename))
+            file.save(
+                os.path.join(f.current_app.config["DATA_DIRECTORY"], file.filename)
+            )
 
-    return f.render_template('misc/picture-dropoff.jinja', title="Upload Pictures | Suchicodes")
+    return f.render_template(
+        "misc/picture-dropoff.jinja", title="Upload Pictures | Suchicodes"
+    )
 
 
 @main_blueprint.route("/u/<keyword>")
@@ -77,9 +79,7 @@ def url_redirection(keyword):
 
 @main_blueprint.route("/calendar")
 def calendar():
-    return f.render_template(
-        'main/calendar.jinja',
-        title="Calendar | Suchicodes")
+    return f.render_template("main/calendar.jinja", title="Calendar | Suchicodes")
 
 
 @cached(ics_cache)
@@ -94,32 +94,32 @@ def fetch_ics_data(url):
 @main_blueprint.route("/proxy-calendar-private")
 def proxy_calendar_private():
     ics_data = fetch_ics_data(Config.PROTON_CAL_PRIVATE)
-    return f.Response(ics_data, content_type='text/calendar')
+    return f.Response(ics_data, content_type="text/calendar")
 
 
 @main_blueprint.route("/proxy-calendar-public")
 def proxy_calendar_public():
     ics_data = fetch_ics_data(Config.PROTON_CAL_PUBLIC)
-    return f.Response(ics_data, content_type='text/calendar')
+    return f.Response(ics_data, content_type="text/calendar")
 
 
-@main_blueprint.route("/contact", methods=['get', 'post'])
+@main_blueprint.route("/contact", methods=["get", "post"])
 def contact():
     alert = False
-    if f.request.method == 'POST':
-        ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
+    if f.request.method == "POST":
+        ip = f.request.environ.get("HTTP_X_REAL_IP", f.request.remote_addr)
         if ip is None:
             ip = f.request.remote_addr
         else:
             try:
-                index = ip.index(',')
+                index = ip.index(",")
                 ip = ip[:index]
             except ValueError:
                 pass
 
-        sub = markupsafe.escape(f.request.form['subject'])
-        message = markupsafe.escape(f.request.form['message'])
-        human_test = markupsafe.escape(f.request.form['humantest'])
+        sub = markupsafe.escape(f.request.form["subject"])
+        message = markupsafe.escape(f.request.form["message"])
+        human_test = markupsafe.escape(f.request.form["humantest"])
 
         if human_test.strip() != "I am human":
             return "You were classified as a bot."
@@ -149,22 +149,19 @@ def contact():
             ip=ip,
             ContactModel=Contact,
             db=db,
-            app=f.current_app
+            app=f.current_app,
         )
         alert = True
 
     return f.render_template(
-        'main/contact.jinja',
-        title="Contact | Suchicodes",
-        alert=alert)
+        "main/contact.jinja", title="Contact | Suchicodes", alert=alert
+    )
 
 
-@main_blueprint.route('/resume.pdf')
-@main_blueprint.route('/resume')
+@main_blueprint.route("/resume.pdf")
+@main_blueprint.route("/resume")
 def send_pdf():
-    return f.send_from_directory(
-        f.current_app.config['RESOURCES_DIR'],
-        'resume.pdf')
+    return f.send_from_directory(f.current_app.config["RESOURCES_DIR"], "resume.pdf")
 
 
 @main_blueprint.app_errorhandler(404)
@@ -172,4 +169,4 @@ def page_not_found(e):
     if f.request.path.startswith("/api/"):
         return "Error 404, page not found. Invalid call to API.\n"
 
-    return f.render_template('error-pages/404.jinja'), 404
+    return f.render_template("error-pages/404.jinja"), 404

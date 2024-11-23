@@ -33,10 +33,8 @@ class Projects(db.Model):
 class Category(db.Model):
     # if the parent id=0 then it's a top level category
     id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(
-            db.Integer, db.ForeignKey('category.id'), nullable=True
-    )
-    blogs = db.relationship('Blog', backref='category')
+    parent_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=True)
+    blogs = db.relationship("Blog", backref="category")
     name = db.Column(db.String)
     uuid = db.Column(db.String)
 
@@ -46,9 +44,7 @@ class Category(db.Model):
 
 class Blog(db.Model):
     id = db.Column(db.String, primary_key=True, default=Util.create_uuid)
-    category_id = db.Column(
-            db.Integer, db.ForeignKey('category.id'), nullable=False
-    )
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
     date_created = db.Column(db.DateTime)
     date_updated = db.Column(db.DateTime)
     title = db.Column(db.String)
@@ -82,13 +78,13 @@ class Extern_Messages(db.Model):
     tags = db.Column(db.String)
     user = db.Column(db.String)
     message = db.Column(db.String)
-    
+
     def tags_contains(self, tag: str):
         return f"#{tag}$" in self.tags
 
     def clean_tags(self):
         return ", ".join(self.tags_array())
-    
+
     def tags_array(self):
         return list(map(lambda x: x[1:-1], self.tags.split(",")))
 

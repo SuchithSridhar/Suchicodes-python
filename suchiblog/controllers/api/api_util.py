@@ -6,38 +6,29 @@ from ...util import Util
 
 class ApiUtil:
 
-    BLOG_BRIEF = 'brief'
-    BLOG_TITLE = 'title'
-    BLOG_CATEGORY = 'category'
-    BLOG_ID = 'id'
+    BLOG_BRIEF = "brief"
+    BLOG_TITLE = "title"
+    BLOG_CATEGORY = "category"
+    BLOG_ID = "id"
 
     @staticmethod
     def verify_blog_config(config) -> tuple:
-        '''
-        Checks all the required fields for a blog upload.
+        """Checks all the required fields for a blog upload.
+
         If a required field is not present it will return:
         (False, <the missing field>).
         If all fields are present, returns: (True, '').
-        '''
-        required = (
-            ApiUtil.BLOG_BRIEF,
-            ApiUtil.BLOG_TITLE,
-            ApiUtil.BLOG_CATEGORY
-        )
+        """
+        required = (ApiUtil.BLOG_BRIEF, ApiUtil.BLOG_TITLE, ApiUtil.BLOG_CATEGORY)
         for element in required:
             if element not in config:
                 return (False, element)
 
-        return (True, '')
+        return (True, "")
 
     @staticmethod
     def categorize_files(uploaded_files) -> dict:
-        files = {
-                'other': [],
-                'pictures': [],
-                'config': None,
-                'markdown': None
-        }
+        files = {"other": [], "pictures": [], "config": None, "markdown": None}
 
         for file in uploaded_files:
             if file.filename is None:
@@ -45,16 +36,15 @@ class ApiUtil:
 
             file.filename = os.path.basename(file.filename)
 
-            if (file.filename.endswith('.png') or
-                    file.filename.endswith('.jpg')):
+            if file.filename.endswith(".png") or file.filename.endswith(".jpg"):
 
-                files['pictures'].append(file)
+                files["pictures"].append(file)
 
             if file.filename == Config.NOTES_CONFIG_FILENAME:
-                files['config'] = file
+                files["config"] = file
 
-            if file.filename.endswith('.md'):
-                files['markdown'] = file
+            if file.filename.endswith(".md"):
+                files["markdown"] = file
 
         return files
 
@@ -65,10 +55,7 @@ class ApiUtil:
             open_brace = ResUtil.find_open_parenthesis(markdown, start)
             close_brace = markdown.find(")", start)
             path = os.path.join(Config.UPLOAD_DIR_URL, path)
-            markdown = (
-                markdown[:open_brace + 1] +
-                path + markdown[close_brace:]
-            )
+            markdown = markdown[: open_brace + 1] + path + markdown[close_brace:]
 
         return markdown
 
@@ -83,9 +70,7 @@ class ApiUtil:
 
             uuid = Util.create_uuid()
             new_file_name = uuid + f"{os.path.splitext(file.filename)[1]}"
-            file.save(
-                os.path.join(Config.PROJECTS_UPLOAD_FOLDER, new_file_name)
-            )
+            file.save(os.path.join(Config.PROJECTS_UPLOAD_FOLDER, new_file_name))
             picture_map[file.filename] = new_file_name
 
         return picture_map

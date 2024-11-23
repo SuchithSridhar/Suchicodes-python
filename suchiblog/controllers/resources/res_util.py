@@ -16,7 +16,7 @@ class ResUtil:
     def get_category_path(category_id: int):
         tree = []
         category = Category.query.filter_by(id=category_id).first()
-        while (category is not None and category.parent_id is not None):
+        while category is not None and category.parent_id is not None:
             tree = [(category.id, category.name)] + tree
             category = Category.query.filter_by(id=category.parent_id).first()
 
@@ -24,7 +24,7 @@ class ResUtil:
         return tree
 
     @staticmethod
-    def perform_fuzzy_search(query: str, count: int, category_id: str = ''):
+    def perform_fuzzy_search(query: str, count: int, category_id: str = ""):
         all_blogs = Blog.query.all()
         results = []
         top_ratios = []
@@ -32,7 +32,7 @@ class ResUtil:
             if blog.category_id == Config.DELETED_CATEGORY_ID:
                 continue
 
-            if category_id != '' and category_id != blog.category_id:
+            if category_id != "" and category_id != blog.category_id:
                 continue
 
             for index, line in enumerate(blog.markdown.split("\n")):
@@ -45,7 +45,7 @@ class ResUtil:
                         "ratio": ratio,
                         "line": line,
                         "blog_title": blog.title,
-                        "category": blog.category_id
+                        "category": blog.category_id,
                     }
                     results.append(result_item)
                     top_ratios.append(ratio)
@@ -57,7 +57,7 @@ class ResUtil:
                         "ratio": ratio,
                         "line": line,
                         "blog_title": blog.title,
-                        "category": blog.category_id
+                        "category": blog.category_id,
                     }
                     index = top_ratios.index(min(top_ratios))
                     top_ratios[index] = ratio
@@ -79,7 +79,7 @@ class ResUtil:
 
     @staticmethod
     def to_html(md):
-        md = md.replace('\r\n', '\n') + "\n\n\n[TOC]"
+        md = md.replace("\r\n", "\n") + "\n\n\n[TOC]"
         html = markdown.markdown(
             md,
             extensions=[
@@ -89,13 +89,13 @@ class ResUtil:
                 CodeHiliteExtension(guess_lang=False),
                 FencedCodeExtension(),
                 ArithmatexExtension(generic=True),
-            ]
+            ],
         )
         return html
 
     @staticmethod
     def find_open_parenthesis(md, start):
         index = start
-        while (md[index] != "("):
+        while md[index] != "(":
             index -= 1
         return index

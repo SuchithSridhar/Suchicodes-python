@@ -7,7 +7,7 @@ from .logging_formatter import get_logger
 
 db = SQLAlchemy()
 login_manager = fl.LoginManager()
-login_manager.login_view = 'admin.login'
+login_manager.login_view = "admin.login"
 migrate = Migrate()
 logger = get_logger()
 
@@ -29,37 +29,31 @@ def create_app(config_class=Config) -> f.Flask:
     from .models import IP_Logs
     from .commands.cli_commands import cli_blueprint
 
-    GLOBAL_DATA = Util.get_pre_render_data(flask=None, lang='en')
+    GLOBAL_DATA = Util.get_pre_render_data(flask=None, lang="en")
 
     app = f.Flask(__name__)
     app.config.from_object(Config)
 
     @app.context_processor
     def pre_render():
-        GLOBAL_DATA = Util.get_pre_render_data(flask=f, lang='en')
+        GLOBAL_DATA = Util.get_pre_render_data(flask=f, lang="en")
         return GLOBAL_DATA
 
     @app.before_request
     def log_ip_address():
-        ip = f.request.environ.get('HTTP_X_REAL_IP', f.request.remote_addr)
+        ip = f.request.environ.get("HTTP_X_REAL_IP", f.request.remote_addr)
         if ip is None:
             ip = f.request.remote_addr
         else:
             try:
-                index = ip.index(',')
+                index = ip.index(",")
                 ip = ip[:index]
             except ValueError:
                 pass
 
         other_information = f.request.environ
 
-        Util.log_ip_access(
-            ip,
-            other_information,
-            f.request.url,
-            db,
-            app,
-            IP_Logs)
+        Util.log_ip_access(ip, other_information, f.request.url, db, app, IP_Logs)
 
     db.init_app(app)
     login_manager.init_app(app)

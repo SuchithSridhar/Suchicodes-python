@@ -14,27 +14,24 @@ class Util:
     def hash_password(password: str):
         hasher = hashlib.sha512()
         hasher.update(password.encode())
-        return base64.urlsafe_b64encode(hasher.digest()).decode('UTF-8')
+        return base64.urlsafe_b64encode(hasher.digest()).decode("UTF-8")
 
     @staticmethod
     def get_pre_render_data(flask, lang="en"):
-        stream = open(f'suchiblog/config/locales/{lang}.yml')
+        stream = open(f"suchiblog/config/locales/{lang}.yml")
         lang = yaml.load(stream, Loader=yaml.Loader)
         if flask is None:
-            mode = 'light'
+            mode = "light"
         else:
             mode = f'{flask.session.get("value")}'
 
-        data = {
-            'ln': lang,
-            'mode': mode
-        }
+        data = {"ln": lang, "mode": mode}
         return data
 
     @staticmethod
     def get_skill_list():
         try:
-            data = open('suchiblog/data/skills.json').read()
+            data = open("suchiblog/data/skills.json").read()
             data = json.loads(data)
         except FileNotFoundError:
             data = {}
@@ -48,10 +45,10 @@ class Util:
     @staticmethod
     def send_notification(title: str, message: str, priority: int = 9) -> bool:
         url = Config.NOTIFY_URL
-        if (url is None):
+        if url is None:
             return False
 
-        data = {'title': title, 'message': message, 'priority': str(priority)}
+        data = {"title": title, "message": message, "priority": str(priority)}
 
         requests.post(url, data=data, verify=True)
         return True
@@ -71,20 +68,11 @@ class Util:
             db.session.commit()
 
         Util.send_notification(
-            "Message on Suchicodes",
-            f"{(subject+': '+message)[:100]}",
-            priority=5
+            "Message on Suchicodes", f"{(subject+': '+message)[:100]}", priority=5
         )
 
     @staticmethod
-    def log_ip_access_process(
-            ip,
-            other_information,
-            date,
-            url,
-            db,
-            app,
-            ip_logs):
+    def log_ip_access_process(ip, other_information, date, url, db, app, ip_logs):
         item = ip_logs(
             ip=ip,
             url=url,
@@ -93,7 +81,7 @@ class Util:
             mobile=other_information.get("HTTP_SEC_CH_UA_MOBILE", ""),
             platform=other_information.get("HTTP_SEC_CH_UA_PLATFORM", ""),
             reference=other_information.get("HTTP_REFERER", ""),
-            user_agent=other_information.get("HTTP_USER_AGENT", "")
+            user_agent=other_information.get("HTTP_USER_AGENT", ""),
         )
         with app.app_context():
             db.session.add(item)
@@ -102,17 +90,17 @@ class Util:
     @staticmethod
     def log_ip_access(ip, other_information, url, db, app, IP_Logs):
         ignore = [
-            '/session/get',
-            'suchicodes.com/admin',
-            '/session/set/dark',
-            '/session/set/light',
-            '.css',
-            '.js',
-            '.ico',
-            '.svg',
-            '.gif',
-            '.mp4',
-            '.png'
+            "/session/get",
+            "suchicodes.com/admin",
+            "/session/set/dark",
+            "/session/set/light",
+            ".css",
+            ".js",
+            ".ico",
+            ".svg",
+            ".gif",
+            ".mp4",
+            ".png",
         ]
 
         for i in ignore:
@@ -122,5 +110,6 @@ class Util:
         date = datetime.datetime.now()
         threading.Thread(
             target=Util.log_ip_access_process,
-            name='log-ip',
-            args=[ip, other_information, date, url, db, app, IP_Logs]).start()
+            name="log-ip",
+            args=[ip, other_information, date, url, db, app, IP_Logs],
+        ).start()
