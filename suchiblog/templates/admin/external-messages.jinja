@@ -42,6 +42,9 @@
       {% endfor %}
     </div>
 
+    Note: A cronjob needs to run every THRESHOLD [10] mins so that the server can check if any of the secondary severs are offline.
+    If the cronjob doesn't run, there will be a build up of extern_messages.
+
   </div>
 {% endblock content %}
 

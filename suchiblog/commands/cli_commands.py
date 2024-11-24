@@ -17,6 +17,13 @@ def server_checkin_task():
 
     To be called every THRESHOLD_MINS : flask cli_commands server-checkin-task
     using cronjobs.
+
+    */10 * * * * /home/suchi/.local/bin/check-suchi-servers.sh
+
+    #!/bin/bash
+
+    cd /home/suchi/suchicodes-python/
+    pipenv run flask cli_commands server-checkin-task
     """
 
     THRESHOLD = Config.THRESHOLD_MINS * 60
