@@ -49,6 +49,10 @@
     margin: 0;
 }
 
+#markdown-container a {
+    overflow-wrap: anywhere;
+}
+
 #markdown-container code {
     border-radius: 4px;
     font-size: 0.9rem;
