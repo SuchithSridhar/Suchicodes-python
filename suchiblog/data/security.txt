@@ -1,0 +1,4 @@
+Contact: mailto:security@suchicodes.com
+Encryption: https://suchicodes.com/pgp-key.txt
+Disclosure: Responsible disclosure is appreciated.
+Expires: 2025-12-31T23:59:59Z

@@ -3,7 +3,7 @@
 site.db
 *uploaded-data*
 server-ip-address.txt
-suchiblog/config/ip_blacklist                                                                                                       
-suchiblog/config/message_blacklist   
+suchiblog/config/ip_blacklist
+suchiblog/config/message_blacklist
 suchiblog/logs
 .env

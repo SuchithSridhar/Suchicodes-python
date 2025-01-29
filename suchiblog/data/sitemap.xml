@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://suchicodes.com/</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>1.00</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/projects/</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/contact</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/about</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/resources/</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/resources/categories/</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.8</priority>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/resources/search</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://suchicodes.com/support_me</loc>
+  <lastmod>2025-01-29T16:00:10+00:00</lastmod>
+  <priority>0.30</priority>
+  <changefreq>monthly</changefreq>
+</url>
+</urlset>

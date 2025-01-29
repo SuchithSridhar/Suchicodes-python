@@ -1,7 +1,8 @@
 import flask as f
 import flask_login as fl
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+
 from .config import Config
 from .logging_formatter import get_logger
 
@@ -20,14 +21,15 @@ def initialize_database(db, app):
 def create_app(config_class=Config) -> f.Flask:
     global LOCALE
 
-    from .util import Util
+    from .commands.cli_commands import cli_blueprint
+    from .controllers.admin.routes import admin_blueprint
+    from .controllers.api.routes import api_blueprint
     from .controllers.main.routes import main_blueprint
     from .controllers.projects.routes import projects_blueprint
-    from .controllers.admin.routes import admin_blueprint
     from .controllers.resources.routes import resources_blueprint
-    from .controllers.api.routes import api_blueprint
+    from .controllers.well_known.routes import well_known_blueprint
     from .models import IP_Logs
-    from .commands.cli_commands import cli_blueprint
+    from .util import Util
 
     GLOBAL_DATA = Util.get_pre_render_data(flask=None, lang="en")
 
@@ -53,13 +55,16 @@ def create_app(config_class=Config) -> f.Flask:
 
         other_information = f.request.environ
 
-        Util.log_ip_access(ip, other_information, f.request.url, db, app, IP_Logs)
+        Util.log_ip_access(
+            ip, other_information, f.request.url, db, app, IP_Logs
+        )
 
     db.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
 
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(well_known_blueprint)
     app.register_blueprint(projects_blueprint)
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(resources_blueprint)

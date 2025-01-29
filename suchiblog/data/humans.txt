@@ -1,0 +1,10 @@
+/* TEAM */
+Developer: Sucith Sridhar
+Website: https://suchicodes.com
+GitHub: https://github.com/suchithsridhar
+
+/* THANKS */
+Special Thanks: Open-source contributors and the developer community
+
+/* LAST UPDATED */
+2025-01-29
