@@ -68,7 +68,16 @@ window.MathJax = {
     if (!img.attr('src').includes('static') && !img.attr('src').includes('https'))
       img.attr('src', '/static/uploaded-data/' + img.attr('src'));
   }
-  $('table').addClass('table table-striped');
+
+    $("table").each(function () {
+        $(this).addClass("table table-striped");
+
+        // Wrap the table if it's not already inside a .table-container
+        if (!$(this).parent().hasClass("table-container")) {
+            $(this).wrap("<div class='table-container'></div>");
+        }
+    });
+
 
   // update the time to be user time zone
   $('.utc-time').each(function() {
@@ -88,6 +97,8 @@ window.MathJax = {
     }) + " (local)";
     $(this).text(formattedTime);
   });
+
+
 
 </script>
 <script src="/static/js/extract-index.js"></script>

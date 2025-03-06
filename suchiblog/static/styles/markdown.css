@@ -162,9 +162,8 @@
     left: 485px;
 }
 
-table {
+.table-container {
     overflow-x: auto;
-    display: block;
 }
 
 table.table-striped>tbody>tr:nth-of-type(odd) {
