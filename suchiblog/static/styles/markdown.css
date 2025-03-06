@@ -164,6 +164,7 @@
 
 table {
     overflow-x: auto;
+    display: block;
 }
 
 table.table-striped>tbody>tr:nth-of-type(odd) {
